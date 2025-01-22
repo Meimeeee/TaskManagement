@@ -27,6 +27,8 @@ CREATE TABLE Project (
     create_at DATETIME DEFAULT GETDATE(),
     status VARCHAR(50),
     update_at DATETIME DEFAULT GETDATE(),
+    due_date DATE NULL,
+    link_submission VARCHAR(255) NULL;
     FOREIGN KEY (create_by) REFERENCES Account(account_id)
 );
 
