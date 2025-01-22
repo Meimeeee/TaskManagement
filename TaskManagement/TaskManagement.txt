@@ -1,0 +1,53 @@
+CREATE TABLE Account (
+    account_id INT IDENTITY(1,1) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50),
+    create_at DATETIME DEFAULT GETDATE(),
+    update_at DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Profile (
+    account_id INT PRIMARY KEY,
+    email VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone_number VARCHAR(15),
+    date_of_birth DATE,
+    create_at DATETIME DEFAULT GETDATE(),
+    update_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+);
+
+CREATE TABLE Project (
+    project_id INT IDENTITY(1,1) PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    create_by INT NOT NULL UNIQUE,
+    create_at DATETIME DEFAULT GETDATE(),
+    status VARCHAR(50),
+    update_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (create_by) REFERENCES Account(account_id)
+);
+
+CREATE TABLE Task (
+    task_id INT IDENTITY(1,1) PRIMARY KEY,
+    task_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    project_id INT NOT NULL,
+    assigned_to INT,
+    status VARCHAR(50),
+    create_at DATETIME DEFAULT GETDATE(),
+    update_at DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (project_id) REFERENCES Project(project_id),
+    FOREIGN KEY (assigned_to) REFERENCES Account(account_id)
+);
+
+CREATE TABLE Project_member (
+    project_member_id INT IDENTITY(1,1) PRIMARY KEY,
+    project_id INT NOT NULL,
+    account_id INT NOT NULL,
+    role_in_project VARCHAR(50),
+    FOREIGN KEY (project_id) REFERENCES Project(project_id),
+    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+);
