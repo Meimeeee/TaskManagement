@@ -23,12 +23,10 @@ CREATE TABLE Project (
     project_id INT IDENTITY(1,1) PRIMARY KEY,
     project_name VARCHAR(255) NOT NULL,
     description TEXT,
+    project_status VARCHAR(50),
     create_by INT NOT NULL UNIQUE,
     create_at DATETIME DEFAULT GETDATE(),
-    status VARCHAR(50),
     update_at DATETIME DEFAULT GETDATE(),
-    due_date DATE NULL,
-    link_submission VARCHAR(255) NULL;
     FOREIGN KEY (create_by) REFERENCES Account(account_id)
 );
 
@@ -38,9 +36,11 @@ CREATE TABLE Task (
     description TEXT,
     project_id INT NOT NULL,
     assigned_to INT,
-    status VARCHAR(50),
+    task_status VARCHAR(50),
     create_at DATETIME DEFAULT GETDATE(),
     update_at DATETIME DEFAULT GETDATE(),
+    due_date DATE NULL,
+    link_submission VARCHAR(255) NULL,
     FOREIGN KEY (project_id) REFERENCES Project(project_id),
     FOREIGN KEY (assigned_to) REFERENCES Account(account_id)
 );
@@ -53,3 +53,64 @@ CREATE TABLE Project_member (
     FOREIGN KEY (project_id) REFERENCES Project(project_id),
     FOREIGN KEY (account_id) REFERENCES Account(account_id)
 );
+
+
+
+--tạo trigger cho mỗi lần update đều lấy thời gian hiện tại
+
+CREATE TRIGGER trg_UpdateTaskTimestamp
+ON Task
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Cập nhật cột update_at với thời gian hiện tại
+    UPDATE Task
+    SET update_at = GETDATE()
+    FROM Task t
+    INNER JOIN inserted i ON t.task_id = i.task_id;
+END;
+
+CREATE TRIGGER trg_UpdateAccountTimestamp
+ON Account
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Cập nhật cột update_at với thời gian hiện tại
+    UPDATE Account
+    SET update_at = GETDATE()
+    FROM Account a
+    INNER JOIN inserted i ON a.account_id = i.account_id;
+END;
+
+CREATE TRIGGER trg_UpdateProfileTimestamp
+ON Profile
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Cập nhật cột update_at với thời gian hiện tại
+    UPDATE Profile
+    SET update_at = GETDATE()
+    FROM Profile p
+    INNER JOIN inserted i ON p.account_id = i.account_id;
+END;
+
+CREATE TRIGGER trg_UpdateProjectTimestamp
+ON Project
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Cập nhật cột update_at với thời gian hiện tại
+    UPDATE Project
+    SET update_at = GETDATE()
+    FROM Project p
+    INNER JOIN inserted i ON p.project_id = i.project_id;
+END;
+
