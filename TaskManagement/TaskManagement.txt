@@ -22,7 +22,7 @@ CREATE TABLE Profile (
 CREATE TABLE Project (
     project_id INT IDENTITY(1,1) PRIMARY KEY,
     project_name VARCHAR(255) NOT NULL,
-    description TEXT,
+    project_description TEXT,
     project_status VARCHAR(50),
     create_by INT NOT NULL UNIQUE,
     create_at DATETIME DEFAULT GETDATE(),
@@ -33,7 +33,7 @@ CREATE TABLE Project (
 CREATE TABLE Task (
     task_id INT IDENTITY(1,1) PRIMARY KEY,
     task_name VARCHAR(255) NOT NULL,
-    description TEXT,
+    task_description TEXT,
     project_id INT NOT NULL,
     assigned_to INT,
     task_status VARCHAR(50),
