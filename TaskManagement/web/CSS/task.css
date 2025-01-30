@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #e0e0e0;
+    color: #424242;
+}
+
+.project-container {
+    max-width: 800px;
+    margin: auto;
+    background: #999999;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #131313;
+    margin-bottom: 20px;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.task-item {
+    background: #d8d8d8;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #2b2b2b;
+    margin-bottom: 20px;
+}
+
+.task-infor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.task-id, .task-name {
+    font-weight: bold;
+    color: #000000;
+}
+
+/*nhập link*/
+.link-submission {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.link-submission p {
+    margin: 0;
+}
+
+.link-submission input {
+    max-width: 50%;
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.task-details p {
+    margin: 5px 0;
+}
+
+.task-members ul {
+    margin: 5px 0 0 15px;
+}
+
+.button-container {
+    margin-left: 20px;
+    text-align: right; /* Align button to the right */
+}
+
+/* Button Style */
+button {
+    margin-left: auto;
+    background-color: #666666;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #000000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
