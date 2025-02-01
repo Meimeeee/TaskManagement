@@ -23,11 +23,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TaskServlet extends HttpServlet {
 
+    private String TASK = "Task/task.jsp";
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            int projectId = Integer.parseInt(req.getParameter("projectId"));
             TaskDAO dao = TaskDAO.getInstance();
-            List<TaskDTO> tasks = dao.getList();
+            List<TaskDTO> tasks = dao.getList(projectId);
+            String projectName = dao.getProjectName(projectId);
+            req.setAttribute("projectName", projectName);
             req.setAttribute("tasks", tasks);
 
         } catch (SQLException ex) {
@@ -38,7 +43,7 @@ public class TaskServlet extends HttpServlet {
             Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        req.getRequestDispatcher("Task/task.jsp").forward(req, resp);
+        req.getRequestDispatcher(TASK).forward(req, resp);
     }
 
     @Override
@@ -64,7 +69,7 @@ public class TaskServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             req.setAttribute("error", ex.getMessage());
             Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
-            req.getRequestDispatcher("Task/task.jsp").forward(req, resp);
+            req.getRequestDispatcher(TASK).forward(req, resp);
         }
 
         resp.sendRedirect("task");

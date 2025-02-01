@@ -1,0 +1,69 @@
+/* Reset CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Style cho Accordion */
+.accordion {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+/* Tiêu đề Task */
+.accordion label {
+    display: block;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Ẩn input checkbox */
+.accordion input {
+    display: none;
+}
+
+/* Nội dung Task (ẩn mặc định) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    background: white;
+    padding: 0 10px;
+}
+
+/* Khi checkbox được chọn, hiển thị nội dung */
+.accordion input:checked~.accordion-content {
+    max-height: 300px;
+    padding: 10px;
+}
+
+/* Style cho Button */
+.task-actions {
+    margin-top: 10px;
+}
+
+.task-actions button {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.task-actions button:hover {
+    background: #333;
+}

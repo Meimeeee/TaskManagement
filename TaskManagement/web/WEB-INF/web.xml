@@ -4,9 +4,17 @@
         <servlet-name>TaskServlet</servlet-name>
         <servlet-class>Servlet.TaskServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TaskMemberServlet</servlet-name>
+        <servlet-class>Servlet.TaskMemberServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
         <url-pattern>/task</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaskMemberServlet</servlet-name>
+        <url-pattern>/task-member</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

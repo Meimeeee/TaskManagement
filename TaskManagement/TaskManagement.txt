@@ -1,4 +1,4 @@
-CREATE TABLE Account (
+CREATE TABLE account (
     account_id INT IDENTITY(1,1) PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE Account (
     update_at DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE Profile (
+CREATE TABLE profile (
     account_id INT PRIMARY KEY,
     email VARCHAR(255),
     first_name VARCHAR(255),
@@ -19,7 +19,7 @@ CREATE TABLE Profile (
     FOREIGN KEY (account_id) REFERENCES Account(account_id)
 );
 
-CREATE TABLE Project (
+CREATE TABLE project (
     project_id INT IDENTITY(1,1) PRIMARY KEY,
     project_name VARCHAR(255) NOT NULL,
     project_description TEXT,
@@ -30,7 +30,7 @@ CREATE TABLE Project (
     FOREIGN KEY (create_by) REFERENCES Account(account_id)
 );
 
-CREATE TABLE Task (
+CREATE TABLE task (
     task_id INT IDENTITY(1,1) PRIMARY KEY,
     task_name VARCHAR(255) NOT NULL,
     task_description TEXT,
@@ -45,7 +45,7 @@ CREATE TABLE Task (
     FOREIGN KEY (assigned_to) REFERENCES Account(account_id)
 );
 
-CREATE TABLE Project_member (
+CREATE TABLE project_member (
     project_member_id INT IDENTITY(1,1) PRIMARY KEY,
     project_id INT NOT NULL,
     account_id INT NOT NULL,
