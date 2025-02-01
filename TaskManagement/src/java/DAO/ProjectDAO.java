@@ -26,7 +26,7 @@ public class ProjectDAO {
     private static final String ADD_PROJECT = "INSET INTO Project(project_name, project_description, project_status, create_by, create_at, update_at) VALUES (?,?,?,?,?,?)";
     private static final String DELETE_PROJECT = "DELETE FROM Project WHERE project_id = ?";
     private static final String GET_PROJECT_BY_ID = "SELECT * FROM Project WHERE project_id = ?";
-    private static final String GET_PROJECT_LIST = "SELECT project_id, project_name, update_at, project_status FROM Project";
+    private static final String GET_PROJECT_LIST = "SELECT project_id, project_name, update_at, project_status FROM Project p INNER JOIN Account a ON p.create_by = a.?";
     
     public int addProject(Project project) {
         int result = 0;
@@ -95,12 +95,14 @@ public class ProjectDAO {
         return project;
     }
     
-    public ArrayList<ProjectDTO> getProjectList(int projectId) {
+    public ArrayList<ProjectDTO> getProjectList(int accountId) {
         ArrayList<ProjectDTO> projectList = new ArrayList<>();
         try(Connection conn = ConnectJDBC.getConnection();
                 PreparedStatement statement = conn.prepareStatement(GET_PROJECT_LIST)) {
+            statement.setInt(1, accountId);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
+                int projectId = result.getInt("project_id");
                 String projectName = result.getString("project_name");
                 LocalDate updateAt = result.getDate("update_at").toLocalDate();
                 String projectStatus = result.getString("project_status");
