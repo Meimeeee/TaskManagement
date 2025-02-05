@@ -6,7 +6,6 @@
 package DAO;
 
 import DTO.ProjectDTO;
-import entities.Project;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -25,10 +24,10 @@ import utils.ConnectJDBC;
 public class ProjectDAO {
     private static final String ADD_PROJECT = "INSET INTO Project(project_name, project_description, project_status, create_by, create_at, update_at) VALUES (?,?,?,?,?,?)";
     private static final String DELETE_PROJECT = "DELETE FROM Project WHERE project_id = ?";
-    private static final String GET_PROJECT_BY_ID = "SELECT * FROM Project WHERE project_id = ?";
+    private static final String GET_PROJECT_INFO = "SELECT * FROM Project WHERE project_id = ?";
     private static final String GET_PROJECT_LIST = "SELECT project_id, project_name, update_at, project_status FROM Project p INNER JOIN Account a ON p.create_by = a.?";
     
-    public int addProject(Project project) {
+    public int addProject(ProjectDTO project) {
         int result = 0;
         try (Connection conn = ConnectJDBC.getConnection();
                 PreparedStatement statement = conn.prepareStatement(ADD_PROJECT)) {
@@ -72,10 +71,10 @@ public class ProjectDAO {
         return result;
     }
     
-    public Project getProjectById(int projectId) {
-        Project project = null;
+    public ProjectDTO getProjectInfo(int projectId) {
+        ProjectDTO project = null;
         try(Connection conn = ConnectJDBC.getConnection();
-                PreparedStatement statement = conn.prepareStatement(GET_PROJECT_BY_ID)) {
+                PreparedStatement statement = conn.prepareStatement(GET_PROJECT_INFO)) {
             statement.setInt(1, projectId);
             ResultSet result = statement.executeQuery();
             
@@ -87,7 +86,7 @@ public class ProjectDAO {
                 LocalDate createAt = result.getDate("create_at").toLocalDate();
                 LocalDate updateAt = result.getDate("update_at").toLocalDate();
                 
-                project = new Project(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus);
+                project = new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus);
             }
         } catch (SQLException e) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);

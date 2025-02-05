@@ -10,13 +10,49 @@ package DTO;
  * @author Huynh Han Dong
  */
 public class ProjectMemberDTO {
+    private int projectMemberId;
+    private int projectId;
+    private int accountId;
     private String username;
+    private String role;
     
     public ProjectMemberDTO() {
     }
     
-    public ProjectMemberDTO(String username) {
+    public ProjectMemberDTO(int projectMemberId, int projectId, int accountId, String role) {
+        this.projectMemberId = projectMemberId;
+        this.projectId = projectId;
+        this.accountId = accountId;
+        this.role = role;
+    }
+    
+    public ProjectMemberDTO(String username, String role) {
         this.username = username;
+        this.role = role;
+    }
+    
+    public int getProjectMemberId() {
+        return projectMemberId;
+    }
+    
+    public void setProjectMemberId(int projectMemberId) {
+        this.projectMemberId = projectMemberId;
+    }
+    
+    public int getProjectId() {
+        return projectId;
+    }
+    
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+    
+    public int getAccountId() {
+        return accountId;
+    }
+    
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
     
     public String getUsername() {
@@ -25,5 +61,13 @@ public class ProjectMemberDTO {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
     }
 }

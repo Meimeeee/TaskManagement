@@ -20,7 +20,7 @@ import utils.ConnectJDBC;
  * @author Huynh Han Dong
  */
 public class ProjectMemberDAO {
-    private static final String GET_PROJECT_MEMBER_LIST = "SELECT username FROM Project_member m INNER JOIN Account a ON m.project_member_id = a.? WHERE project_id = ?";
+    private static final String GET_PROJECT_MEMBER_LIST = "SELECT username, role FROM Project_member m INNER JOIN Account a ON m.project_member_id = a.? WHERE project_id = ?";
     
     public ArrayList<ProjectMemberDTO> getProjectList(int accountId, int projectId) {
         ArrayList<ProjectMemberDTO> memberList = new ArrayList<>();
@@ -31,8 +31,9 @@ public class ProjectMemberDAO {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 String username = result.getString("username");
+                String role = result.getString("role");
                 
-                memberList.add(new ProjectMemberDTO(username));
+                memberList.add(new ProjectMemberDTO(username, role));
             }
         } catch (SQLException e) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
