@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.ProjectDTO;
+import JDBC.Connect;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,7 +16,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.ConnectJDBC;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ProjectDAO {
     
     public int addProject(ProjectDTO project) {
         int result = 0;
-        try (Connection conn = ConnectJDBC.getConnection();
+        try (Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(ADD_PROJECT)) {
             statement.setString(1, project.getProjectName());
             statement.setString(2, project.getProjectDescription());
@@ -47,7 +47,7 @@ public class ProjectDAO {
     public int updateProject(int projectId, LocalDate updateAt, String column ,String newValue) {
         int result = 0;
         String UPDATE_PROJECT = "UPDATE Project set " + column + "= " + newValue + ", update_at = ? WHERE = project_id = ?";
-        try (Connection conn = ConnectJDBC.getConnection();
+        try (Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(UPDATE_PROJECT)) {
             statement.setString(1, newValue);
             statement.setDate(2, Date.valueOf(updateAt));
@@ -61,7 +61,7 @@ public class ProjectDAO {
     
     public int deleteProject(int projectId) {
         int result = 0;
-        try (Connection conn = ConnectJDBC.getConnection();
+        try (Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(DELETE_PROJECT)) {
             statement.setInt(1, projectId);
             result = statement.executeUpdate();
@@ -73,7 +73,7 @@ public class ProjectDAO {
     
     public ProjectDTO getProjectInfo(int projectId) {
         ProjectDTO project = null;
-        try(Connection conn = ConnectJDBC.getConnection();
+        try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(GET_PROJECT_INFO)) {
             statement.setInt(1, projectId);
             ResultSet result = statement.executeQuery();
@@ -96,7 +96,7 @@ public class ProjectDAO {
     
     public ArrayList<ProjectDTO> getProjectList(int accountId) {
         ArrayList<ProjectDTO> projectList = new ArrayList<>();
-        try(Connection conn = ConnectJDBC.getConnection();
+        try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(GET_PROJECT_LIST)) {
             statement.setInt(1, accountId);
             ResultSet result = statement.executeQuery();

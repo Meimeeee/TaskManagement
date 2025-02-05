@@ -26,39 +26,27 @@ import javax.servlet.http.HttpSession;
 public class ProjectController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String id = req.getParameter("accountId");
-            int accountId = Integer.parseInt(id);
-            ProjectDAO projectDAO = new ProjectDAO();
-            List<ProjectDTO> projects = projectDAO.getProjectList(accountId);
-            req.setAttribute("projects", projects);
-        } catch (ClassNotFoundException ex) {
-            req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String id = req.getParameter("accountId");
+        int accountId = Integer.parseInt(id);
+        ProjectDAO projectDAO = new ProjectDAO();
+        List<ProjectDTO> projects = projectDAO.getProjectList(accountId);
+        req.setAttribute("projects", projects);
 
         req.getRequestDispatcher("Project/project.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String projectName = req.getParameter("projectName");
-            String projectDescription = req.getParameter("description");
-            String accountId = req.getParameter("accountId");
-            int createBy = Integer.parseInt(accountId);
-            LocalDate createAt = LocalDate.now();
-            LocalDate updateAt = LocalDate.now();
+        String projectName = req.getParameter("projectName");
+        String projectDescription = req.getParameter("description");
+        String accountId = req.getParameter("accountId");
+        int createBy = Integer.parseInt(accountId);
+        LocalDate createAt = LocalDate.now();
+        LocalDate updateAt = LocalDate.now();
 
-            ProjectDAO projectDAO = new ProjectDAO();
-            projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "In Progress"));
-
-        } catch (ClassNotFoundException ex) {
-            req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
-            req.getRequestDispatcher("Project/project.jsp").forward(req, resp);
-        }
-
+        ProjectDAO projectDAO = new ProjectDAO();
+        projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "In Progress"));
+        
         resp.sendRedirect("projects");
     }
 }

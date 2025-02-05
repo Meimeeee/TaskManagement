@@ -54,63 +54,17 @@ CREATE TABLE Project_member (
     FOREIGN KEY (account_id) REFERENCES Account(account_id)
 );
 
-
-
---tạo trigger cho mỗi lần update đều lấy thời gian hiện tại
-
-CREATE TRIGGER trg_UpdateTaskTimestamp
-ON Task
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Cập nhật cột update_at với thời gian hiện tại
-    UPDATE Task
-    SET update_at = GETDATE()
-    FROM Task t
-    INNER JOIN inserted i ON t.task_id = i.task_id;
-END;
-
-CREATE TRIGGER trg_UpdateAccountTimestamp
+GO
+CREATE TRIGGER trg_UpdateTimestamp
 ON Account
 AFTER UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
-
-    -- Cập nhật cột update_at với thời gian hiện tại
+    
     UPDATE Account
     SET update_at = GETDATE()
     FROM Account a
     INNER JOIN inserted i ON a.account_id = i.account_id;
 END;
-
-CREATE TRIGGER trg_UpdateProfileTimestamp
-ON Profile
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Cập nhật cột update_at với thời gian hiện tại
-    UPDATE Profile
-    SET update_at = GETDATE()
-    FROM Profile p
-    INNER JOIN inserted i ON p.account_id = i.account_id;
-END;
-
-CREATE TRIGGER trg_UpdateProjectTimestamp
-ON Project
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Cập nhật cột update_at với thời gian hiện tại
-    UPDATE Project
-    SET update_at = GETDATE()
-    FROM Project p
-    INNER JOIN inserted i ON p.project_id = i.project_id;
-END;
-
+GO

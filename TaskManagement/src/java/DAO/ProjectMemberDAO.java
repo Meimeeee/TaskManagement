@@ -6,6 +6,7 @@
 package DAO;
 
 import DTO.ProjectMemberDTO;
+import JDBC.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.ConnectJDBC;
 
 /**
  *
@@ -24,7 +24,7 @@ public class ProjectMemberDAO {
     
     public ArrayList<ProjectMemberDTO> getProjectList(int accountId, int projectId) {
         ArrayList<ProjectMemberDTO> memberList = new ArrayList<>();
-        try(Connection conn = ConnectJDBC.getConnection();
+        try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(GET_PROJECT_MEMBER_LIST)) {
             statement.setInt(1, accountId);
             statement.setInt(2, projectId);
