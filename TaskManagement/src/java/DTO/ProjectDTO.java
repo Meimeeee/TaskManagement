@@ -15,7 +15,8 @@ public class ProjectDTO {
     private int projectId;
     private String projectName;
     private String projectDescription;
-    private int createBy;
+    private int accountId;
+    private String createBy;
     private LocalDate createAt;
     private LocalDate updateAt;
     private String projectStatus;
@@ -23,20 +24,20 @@ public class ProjectDTO {
     public ProjectDTO() {  
     }
     
-    public ProjectDTO(int projectId, String projectName, String projectDescription, int createBy, LocalDate createAt, LocalDate updateAt, String projectStatus) {
+    public ProjectDTO(int projectId, String projectName, String projectDescription, int accountId, LocalDate createAt, LocalDate updateAt, String projectStatus) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectDescription = projectDescription;
-        this.createBy = createBy;
+        this.accountId = accountId;
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.projectStatus = projectStatus;
     }
     
-    public ProjectDTO(String projectName, String projectDescription, int createBy, LocalDate createAt, LocalDate updateAt, String projectStatus) {
+    public ProjectDTO(String projectName, String projectDescription, int accountId, LocalDate createAt, LocalDate updateAt, String projectStatus) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
-        this.createBy = createBy;
+        this.accountId = accountId;
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.projectStatus = projectStatus;
@@ -72,11 +73,19 @@ public class ProjectDTO {
         this.projectDescription = projectDescription;
     }
     
-    public int getCreateBy() {
+    public int getAccountId() {
+        return accountId;
+    }
+    
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+    
+    public String getCreateBy() {
         return createBy;
     }
     
-    public void setCreateBy(int createBy) {
+    public void setCreateBy(String createBy) {
         this.createBy = createBy;
     }
     

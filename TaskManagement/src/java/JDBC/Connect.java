@@ -20,9 +20,9 @@ public class Connect {
     private static final String username = "sa";
     private static final String password = "123123123";
     private static final String databaseName = "TaskManagement";
-    private static final String url = "jdbc:sqlserver://localhost:1433" + ";databaseName=" + databaseName + ";trustServerCertificate=true";
+    private static final String url = "jdbc:sqlserver://localhost:1433" + ";databaseName=" + databaseName + ";encrypt=true;trustServerCertificate=true";
     
-    public static Connection getConnect() {
+    public static Connection getConnect() throws ClassNotFoundException, SQLException {
         Connection con = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

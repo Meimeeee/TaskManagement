@@ -22,59 +22,68 @@ import java.util.logging.Logger;
  * @author Huynh Han Dong
  */
 public class ProjectDAO {
-    private static final String ADD_PROJECT = "INSET INTO Project(project_name, project_description, project_status, create_by, create_at, update_at) VALUES (?,?,?,?,?,?)";
-    private static final String DELETE_PROJECT = "DELETE FROM Project WHERE project_id = ?";
-    private static final String GET_PROJECT_INFO = "SELECT * FROM Project WHERE project_id = ?";
-    private static final String GET_PROJECT_LIST = "SELECT project_id, project_name, update_at, project_status FROM Project p INNER JOIN Account a ON p.create_by = a.?";
-    
-    public int addProject(ProjectDTO project) {
+    public int addProject(ProjectDTO project) throws SQLException, ClassNotFoundException {
         int result = 0;
+        String query = "INSET INTO Project(project_name, project_description, project_status, create_by, create_at, update_at) VALUES (?,?,?,?,?,?)";
         try (Connection conn = Connect.getConnect();
-                PreparedStatement statement = conn.prepareStatement(ADD_PROJECT)) {
+                PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setString(1, project.getProjectName());
             statement.setString(2, project.getProjectDescription());
             statement.setString(3, project.getProjectStatus());
-            statement.setInt(4, project.getCreateBy());
+            statement.setInt(4, project.getAccountId());
             statement.setDate(5, Date.valueOf(project.getCreateAt()));
             statement.setDate(6, Date.valueOf(project.getUpdateAt()));
             result = statement.executeUpdate();
+        } catch (ClassNotFoundException ex) {
+            System.out.println("DBUtils not found.");
         } catch (SQLException e) {
+            System.out.println("SQL Exception in adding project.");
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
     
-    public int updateProject(int projectId, LocalDate updateAt, String column ,String newValue) {
+    public int updateProject(ProjectDTO project) throws SQLException, ClassNotFoundException {
         int result = 0;
-        String UPDATE_PROJECT = "UPDATE Project set " + column + "= " + newValue + ", update_at = ? WHERE = project_id = ?";
+        String query = "UPDATE Project set project_name = ?, project_description = ?, project_status = ?, update_at = ? WHERE = project_id = ?";
         try (Connection conn = Connect.getConnect();
-                PreparedStatement statement = conn.prepareStatement(UPDATE_PROJECT)) {
-            statement.setString(1, newValue);
-            statement.setDate(2, Date.valueOf(updateAt));
-            statement.setInt(3, projectId);
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, project.getProjectName());
+            statement.setString(2, project.getProjectDescription());
+            statement.setString(3, project.getProjectStatus());
+            statement.setDate(4, Date.valueOf(project.getUpdateAt()));
+            statement.setInt(5, project.getProjectId());
             result = statement.executeUpdate();
+        } catch (ClassNotFoundException ex) {
+            System.out.println("DBUtils not found.");
         } catch (SQLException e) {
+            System.out.println("SQL Exception in updating project.");
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
     
-    public int deleteProject(int projectId) {
+    public int deleteProject(int projectId) throws SQLException, ClassNotFoundException {
         int result = 0;
+        String query = "DELETE FROM Project WHERE project_id = ?";
         try (Connection conn = Connect.getConnect();
-                PreparedStatement statement = conn.prepareStatement(DELETE_PROJECT)) {
+                PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, projectId);
             result = statement.executeUpdate();
+        } catch (ClassNotFoundException ex) {
+            System.out.println("DBUtils not found.");
         } catch (SQLException e) {
+            System.out.println("SQL Exception in deleting project.");
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return result;
     }
     
-    public ProjectDTO getProjectInfo(int projectId) {
+    public ProjectDTO getProjectInfo(int projectId) throws SQLException, ClassNotFoundException {
         ProjectDTO project = null;
+        String query = "SELECT * FROM Project WHERE project_id = ?";
         try(Connection conn = Connect.getConnect();
-                PreparedStatement statement = conn.prepareStatement(GET_PROJECT_INFO)) {
+                PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, projectId);
             ResultSet result = statement.executeQuery();
             
@@ -88,16 +97,22 @@ public class ProjectDAO {
                 
                 project = new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus);
             }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("DBUtils not found.");
+            throw ex;
         } catch (SQLException e) {
+            System.out.println("SQL Exception in getting project info.");
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
+            throw e;
         }
         return project;
     }
     
-    public ArrayList<ProjectDTO> getProjectList(int accountId) {
+    public ArrayList<ProjectDTO> getProjectList(int accountId) throws SQLException, ClassNotFoundException {
         ArrayList<ProjectDTO> projectList = new ArrayList<>();
+        String query = "SELECT project_id, project_name, update_at, project_status FROM Project WHERE create_by = ?";
         try(Connection conn = Connect.getConnect();
-                PreparedStatement statement = conn.prepareStatement(GET_PROJECT_LIST)) {
+                PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, accountId);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
@@ -108,8 +123,13 @@ public class ProjectDAO {
                 
                 projectList.add(new ProjectDTO(projectId, projectName, updateAt, projectStatus));
             }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("DBUtils not found.");
+            throw ex;
         } catch (SQLException e) {
+            System.out.println("SQL Exception in getting project list.");
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
+            throw e;
         }
         return projectList;
     }

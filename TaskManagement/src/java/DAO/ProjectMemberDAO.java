@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class ProjectMemberDAO {
     private static final String GET_PROJECT_MEMBER_LIST = "SELECT username, role FROM Project_member m INNER JOIN Account a ON m.project_member_id = a.? WHERE project_id = ?";
     
-    public ArrayList<ProjectMemberDTO> getProjectList(int accountId, int projectId) {
+    public ArrayList<ProjectMemberDTO> getProjectList(int accountId, int projectId) throws SQLException, ClassNotFoundException{
         ArrayList<ProjectMemberDTO> memberList = new ArrayList<>();
         try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(GET_PROJECT_MEMBER_LIST)) {

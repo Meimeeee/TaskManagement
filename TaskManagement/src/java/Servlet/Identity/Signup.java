@@ -4,6 +4,7 @@
  */
 package Servlet.Identity;
 
+import DTO.AccountDTO;
 import DTO.ProfileDTO;
 import Exceptions.ProfileException;
 import Services.ProfileServices;
