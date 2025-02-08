@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class ProjectDAO {
     public int addProject(ProjectDTO project) throws SQLException, ClassNotFoundException {
         int result = 0;
-        String query = "INSET INTO Project(project_name, project_description, project_status, create_by, create_at, update_at) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO Project(project_name, project_description, project_status, create_by, create_at, update_at) VALUES (?,?,?,?,?,?)";
         try (Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setString(1, project.getProjectName());

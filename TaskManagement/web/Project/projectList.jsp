@@ -31,6 +31,7 @@
         </c:otherwise>
     </c:choose>
     --%>
+    <!-- Show Project List -->
     <c:choose>
         <c:when test="${not empty projects}">
         <table>
@@ -41,26 +42,26 @@
                 <td>${project.updateAt}</td>
                 <%-- Phan quyen theo role
                 <c:choose>
-                <c:when test="${user.role == 'ProjectManager'}"> 
+                <c:when test="${sessionScope.role == 'ProjectManager'}"> 
                 --%> 
                     <td>
-                        <form action="Project" method="GET">
-                           <input type="hidden" name="action" value="prepare-edit">
+                        <form action="project" method="GET">
+                          <input type="hidden" name="action" value="prepare-edit">
                           <input type="hidden" name="productId" value="${project.projectId}">
                           <button type="submit">Edit</button>
                         </form>
                     </td> 
                     <td>
-                        <form action="Project" method="POST">
+                        <form action="project" method="POST">
                             <input type="hidden" name="action" value="delete-confirm">
                             <input type="hidden" name="productId" value="${project.projectId}">
                             <button type="submit">Delete</button>
                         </form>
+                    </td>
                 <%-- 
                 </c:when> 
                 </c:choose>
                 --%> 
-                </td>
             </tr>
             </c:forEach>
         </table>
@@ -69,15 +70,21 @@
             <h3>${error}</h3>
         </c:otherwise>
     </c:choose>
+    <!-- Add Project Button -->
     <%-- Phan quyen theo role
     <c:choose>
-    <c:when test="${user.role == 'ProjectManager'}"> 
+    <c:when test="${sessionScope.role == 'ProjectManager'}"> 
     --%>        
-        <br>
-        <form action="Project" method="GET">
-            <input type="hidden" name="action" value="prepare-add">
-            <button type="submit">Add</button>
+    <c:choose>
+    <c:when test="${not empty sessionScope.id}">
+        <form action="add-project" method="get">
+            <button type="submit">Add Project</button>
         </form>
+    </c:when>
+    <c:otherwise>
+        <h3>${error}</h3>
+    </c:otherwise>
+    </c:choose>
     <%-- 
     <c:/when> 
     <c:/choose>

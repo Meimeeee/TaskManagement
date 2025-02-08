@@ -24,7 +24,7 @@ CREATE TABLE project (
     project_name VARCHAR(255) NOT NULL,
     project_description TEXT,
     project_status VARCHAR(50),
-    create_by INT NOT NUL,
+    create_by INT NOT NULL,
     create_at DATETIME DEFAULT GETDATE(),
     update_at DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (create_by) REFERENCES account(account_id)
