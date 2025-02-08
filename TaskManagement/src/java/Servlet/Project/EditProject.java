@@ -28,6 +28,26 @@ public class EditProject extends HttpServlet {
     private final ProjectDAO projectDAO = new ProjectDAO();
     
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String id = req.getParameter("projectId");
+            int projectId = Integer.parseInt(id);
+            ProjectDTO project = projectDAO.getProjectById(projectId);
+            if (project != null) {
+                req.setAttribute("project", project);
+            } else {
+                throw new InvalidDataException("Cannot get project by id!");
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            req.setAttribute("error", e.getMessage());
+            Logger.getLogger(EditProject.class.getName()).log(Level.SEVERE, null, e);
+            req.getRequestDispatcher("Project/editProject.jsp").forward(req, resp);
+        }
+        req.getRequestDispatcher("Project/editProject.jsp").forward(req, resp);
+    }
+    
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String id = req.getParameter("projectId");
@@ -39,7 +59,7 @@ public class EditProject extends HttpServlet {
             String creatAtString = req.getParameter("createAt");
             LocalDate createAt = LocalDate.parse(creatAtString);
             LocalDate updateAt = LocalDate.now();
-            String projectStatus = req.getParameter("projectStatus");
+            String projectStatus = req.getParameter("status");
 
             int result = projectDAO.updateProject(new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus));
             if (result == 0) {
@@ -50,6 +70,6 @@ public class EditProject extends HttpServlet {
             Logger.getLogger(EditProject.class.getName()).log(Level.SEVERE, null, e);
             req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
+        resp.sendRedirect("project");
     }
 }

@@ -30,7 +30,7 @@ public class ProjectDAO {
             statement.setString(1, project.getProjectName());
             statement.setString(2, project.getProjectDescription());
             statement.setString(3, project.getProjectStatus());
-            statement.setInt(4, project.getAccountId());
+            statement.setInt(4, project.getCreateBy());
             statement.setDate(5, Date.valueOf(project.getCreateAt()));
             statement.setDate(6, Date.valueOf(project.getUpdateAt()));
             result = statement.executeUpdate();
@@ -45,7 +45,7 @@ public class ProjectDAO {
     
     public int updateProject(ProjectDTO project) throws SQLException, ClassNotFoundException {
         int result = 0;
-        String query = "UPDATE Project set project_name = ?, project_description = ?, project_status = ?, update_at = ? WHERE = project_id = ?";
+        String query = "UPDATE Project set project_name = ?, project_description = ?, project_status = ?, update_at = ? WHERE project_id = ?";
         try (Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setString(1, project.getProjectName());
@@ -79,7 +79,7 @@ public class ProjectDAO {
         return result;
     }
     
-    public ProjectDTO getProjectInfo(int projectId) throws SQLException, ClassNotFoundException {
+    public ProjectDTO getProjectById(int projectId) throws SQLException, ClassNotFoundException {
         ProjectDTO project = null;
         String query = "SELECT * FROM Project WHERE project_id = ?";
         try(Connection conn = Connect.getConnect();

@@ -40,6 +40,6 @@ public class DeleteProject extends HttpServlet {
             Logger.getLogger(DeleteProject.class.getName()).log(Level.SEVERE, null, e);
             req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
+        resp.sendRedirect("project");
     }
 }

@@ -30,9 +30,6 @@ public class AddProject extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        Integer id = (Integer) session.getAttribute("id");
-        req.setAttribute("id", id);
         req.getRequestDispatcher("Project/addProject.jsp").forward(req, resp);
     }
     

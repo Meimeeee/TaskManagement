@@ -45,16 +45,14 @@
                 <c:when test="${sessionScope.role == 'ProjectManager'}"> 
                 --%> 
                     <td>
-                        <form action="project" method="GET">
-                          <input type="hidden" name="action" value="prepare-edit">
-                          <input type="hidden" name="productId" value="${project.projectId}">
+                        <form action="edit-project" method="get">
+                          <input type="hidden" name="projectId" value="${project.projectId}">
                           <button type="submit">Edit</button>
                         </form>
                     </td> 
                     <td>
-                        <form action="project" method="POST">
-                            <input type="hidden" name="action" value="delete-confirm">
-                            <input type="hidden" name="productId" value="${project.projectId}">
+                        <form action="delete-project" method="POST">
+                            <input type="hidden" name="projectId" value="${project.projectId}">
                             <button type="submit">Delete</button>
                         </form>
                     </td>
