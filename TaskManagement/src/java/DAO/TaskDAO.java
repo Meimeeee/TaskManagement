@@ -31,7 +31,7 @@ public class TaskDAO {
         return instance;
     }
 
-    public List<TaskDTO> getList(int projectID) throws SQLException, SQLException, ClassNotFoundException {
+    public List<TaskDTO> getTask(int projectID) throws SQLException, SQLException, ClassNotFoundException {
         List<TaskDTO> tasks = new ArrayList<>();
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("SELECT \n"
@@ -61,19 +61,50 @@ public class TaskDAO {
         }
         return tasks;
     }
-    
-    public String getProjectName(int projectId) throws SQLException, ClassNotFoundException{
+
+    public TaskDTO getTaskByTaskId(int projectId, int taskId) throws SQLException, SQLException, ClassNotFoundException {
+        Connection connect = Connect.getConnect();
+        PreparedStatement ps = connect.prepareStatement("SELECT \n"
+                + "    t.*, \n"
+                + "    a.username AS assigned_username\n"
+                + "FROM \n"
+                + "    task t\n"
+                + "JOIN \n"
+                + "    account a \n"
+                + "ON \n"
+                + "    t.assigned_to = a.account_id "
+                + "WHERE t.project_id = ? AND t.task_id = ?");
+        ps.setInt(1, projectId);
+        ps.setInt(2, taskId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            TaskDTO t = new TaskDTO(rs.getInt("task_id"),
+                    rs.getString("task_name"),
+                    rs.getString("task_description"),
+                    rs.getInt("project_id"),
+                    rs.getString("assigned_username"),
+                    rs.getString("task_status"),
+                    rs.getTimestamp("create_at").toLocalDateTime(),
+                    rs.getTimestamp("update_at").toLocalDateTime(),
+                    rs.getDate("due_date") != null ? rs.getDate("due_date").toLocalDate() : null,
+                    rs.getString("link_submission"));
+            return t;
+        }
+        return null;
+    }
+
+    public String getProjectName(int projectId) throws SQLException, ClassNotFoundException {
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("SELECT project_name FROM project WHERE project_id = ?");
         ps.setInt(1, projectId);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
+        if (rs.next()) {
             return rs.getString("project_name");
         }
         return null;
     }
 
-    public void update(TaskDTO t) throws SQLException, ClassNotFoundException {
+    public void updateStatus(TaskDTO t) throws SQLException, ClassNotFoundException {
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("UPDATE task SET link_submission = ?, "
                 + "task_status = ? WHERE task_id = ?");
@@ -83,7 +114,7 @@ public class TaskDAO {
         ps.execute();
     }
 
-    public void add(TaskDTO t, String assigned) throws SQLException, ClassNotFoundException {
+    public void add(TaskDTO t, int assignedId) throws SQLException, ClassNotFoundException {
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("INSERT INTO task (\n"
                 + "    task_id, \n"
@@ -101,7 +132,7 @@ public class TaskDAO {
         ps.setString(2, t.getTaskName());
         ps.setString(3, t.getTaskDescription());
         ps.setInt(4, t.getProjectId());
-        ps.setString(5, assigned);
+        ps.setInt(5, assignedId);
         ps.setString(6, t.getTaskStatus());
         ps.setTimestamp(7, Timestamp.valueOf(t.getCreateAt()));
         ps.setTimestamp(8, Timestamp.valueOf(t.getUpdateAt()));
@@ -109,11 +140,28 @@ public class TaskDAO {
         ps.setString(10, t.getLinkSubmission());
         ps.execute();
     }
-    
-    public void delete(int taskId) throws SQLException, ClassNotFoundException{
+
+    public void delete(int taskId) throws SQLException, ClassNotFoundException {
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("DELETE FROM task WHERE task_id = ?");
-        ps.setInt(1, taskId); 
+        ps.setInt(1, taskId);
         ps.execute();
     }
+
+    public void edit(TaskDTO t, int assignedId) throws SQLException, ClassNotFoundException {
+        Connection connect = Connect.getConnect();
+        PreparedStatement ps = connect.prepareStatement("UPDATE task SET "
+                + "task_name = ?, task_description = ?, assigned_to = ?, update_at = ?"
+                + ", due_date = ? WHERE task_id = ?");
+        ps.setString(1, t.getTaskName());
+        ps.setString(2, t.getTaskDescription());
+        ps.setInt(3, assignedId);
+        ps.setTimestamp(4, Timestamp.valueOf(t.getUpdateAt()));
+        ps.setDate(5, java.sql.Date.valueOf(t.getDueDate()));
+        ps.setInt(6, t.getTaskId());
+        ps.execute();
+    }
+    
+    //getAccount 
+     
 }
