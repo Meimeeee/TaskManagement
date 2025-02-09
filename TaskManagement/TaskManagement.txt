@@ -53,3 +53,18 @@ CREATE TABLE project_member (
     FOREIGN KEY (project_id) REFERENCES Project(project_id),
     FOREIGN KEY (account_id) REFERENCES Account(account_id)
 );
+
+GO
+CREATE TRIGGER trg_UpdateTimestamp
+ON Account
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE Account
+    SET update_at = GETDATE()
+    FROM Account a
+    INNER JOIN inserted i ON a.account_id = i.account_id;
+END;
+GO
