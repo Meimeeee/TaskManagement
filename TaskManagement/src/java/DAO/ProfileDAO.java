@@ -10,28 +10,29 @@ import JDBC.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author DELL
  */
 public class ProfileDAO {
-    public static void create(ProfileDTO profile) 
+
+    public static void create(ProfileDTO profile)
             throws SQLException, ProfileException, ClassNotFoundException {
-        String query = "INSERT INTO profile(email, first_name, last_name, phone_number, date_of_birth) VALUES (?, ?, ?, ?, ?)";
-        try(Connection con = Connect.getConnect()){
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, profile.getEmail());
-            stmt.setString(2, profile.getFirstName());
-            stmt.setString(3, profile.getLastName());
-            stmt.setString(4, profile.getPhoneNumber());
-            stmt.setDate(5, java.sql.Date.valueOf(profile.getDateOfBirth()));
+        String query = "INSERT INTO profile(account_id, email, first_name, last_name, phone_number, date_of_birth) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, profile.getAccountId());
+            stmt.setString(2, profile.getEmail());
+            stmt.setString(3, profile.getFirstName());
+            stmt.setString(4, profile.getLastName());
+            stmt.setString(5, profile.getPhoneNumber());
+            stmt.setDate(6, profile.getDateOfBirth());
+
             int row = stmt.executeUpdate();
             if (row == 0) {
-                throw new ProfileException("Can't create new profile");
+                throw new ProfileException("Failed to insert profile.");
             }
-        } 
+        }                
     }
 }

@@ -10,46 +10,34 @@ package Utils;
  */
 import Exceptions.AccountException;
 import java.util.Base64;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AccountUtils {
+    private static String USERNAME_REGEX = "[A-Za-z]{8,}";
+    private static String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
 
     public static String EncryptPassword(String password) throws AccountException {
         // Check conditions of the password
         if (password == null || password.isEmpty()) {
             throw new AccountException("Password can't be empty");
         }
-        if (!validatePassword(password)) {
-            throw new AccountException("Password is weak. Password must contains at least 1 uppercase"
-                    + ", 1 character, 1 special character, 1 number.");
+        if (!isValidPassword(password)) {
+            throw new AccountException("Password is weak.");
         }
 
         // Encode the string into Base64
         password = Base64.getEncoder().encodeToString(password.getBytes());
-        
+
         return password;
     }
+
+    public static boolean isValidPassword(String password) {
+        return password.matches(PASSWORD_REGEX);
+    }
     
-    public static void decodePassword(String password) {
-        
-        // Decode the Base64 string
-        byte[] decodedBytes = Base64.getDecoder().decode(password);
-        
-        // Convert byte array back to string
-        String decodedString = new String(decodedBytes);
-        
-        password = decodedString;
+    public static boolean isValidUsername(String username) {
+        return username.matches(USERNAME_REGEX);
     }
+    
+    
 
-    public static boolean validatePassword(String password) {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
-
-        // Check password with regex
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(password);
-
-        // If password is valid, return true, else return false
-        return matcher.matches();
-    }
 }

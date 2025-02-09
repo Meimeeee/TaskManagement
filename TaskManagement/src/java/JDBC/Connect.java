@@ -16,20 +16,21 @@ import java.util.logging.Logger;
  * @author ngoct
  */
 public class Connect {
-
-    private static final String username = "sa";
-    private static final String password = "123123123";
-    private static final String databaseName = "TaskManagement";
-    private static final String url = "jdbc:sqlserver://localhost:1433" + ";databaseName=" + databaseName + ";trustServerCertificate=true";
-    
-    public static Connection getConnect() {
-        Connection con = null;
+    public static Connection getConnect() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            con = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException | SQLException ex) {
+            String username = "sa";
+            String pass = "123123123";
+            String DB_NAME = "TaskManagement";
+            String URL = "jdbc:sqlserver://localhost:1433"
+                    + ";databaseName=" + DB_NAME
+                    + ";trustServerCertificate=true";
+
+            Connection connectDriver = DriverManager.getConnection(URL, username, pass);
+            return connectDriver;
+        } catch (SQLException ex) {
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Can't connect DB");
         }
-        return con;
     }
 }

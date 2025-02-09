@@ -4,25 +4,25 @@
  */
 package DTO;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
  * @author DELL
  */
 public class ProfileDTO {
-    private Integer profileId;
+    private Integer accountId;
     private String email;
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private LocalDate dateOfBirth;
+    private Date dateOfBirth;
 
     public ProfileDTO() {
     }
 
-    public ProfileDTO(Integer profileId, String email, String firstName, String lastName, String phoneNumber, LocalDate dateOfBirth) {
-        this.profileId = profileId;
+    public ProfileDTO(Integer accountId, String email, String firstName, String lastName, String phoneNumber, Date dateOfBirth) {
+        this.accountId = accountId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,21 +30,20 @@ public class ProfileDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public ProfileDTO(String email, String firstName, String lastName, String phoneNumber, LocalDate dateOfBirth) {
+    public ProfileDTO(String email, String firstName, String lastName, String phoneNumber, Date dateOfBirth) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
     }
-    
 
-    public Integer getProfileId() {
-        return profileId;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setProfileId(Integer profileId) {
-        this.profileId = profileId;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public String getEmail() {
@@ -79,11 +78,11 @@ public class ProfileDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     

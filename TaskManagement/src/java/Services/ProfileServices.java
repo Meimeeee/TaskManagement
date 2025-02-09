@@ -4,6 +4,8 @@
  */
 package Services;
 
+import DAO.AccountDAO;
+import DAO.ProfileDAO;
 import DTO.ProfileDTO;
 import Exceptions.ProfileException;
 import Utils.ProfileUtils;
@@ -15,35 +17,58 @@ import java.util.Map;
  * @author DELL
  */
 public class ProfileServices {
-    public static boolean createProfileService(ProfileDTO profile, Map<String, String> errors) 
+
+    public static boolean createProfileService(ProfileDTO profile, Map<String, String> errors, String username)
             throws SQLException, ClassNotFoundException, ProfileException {
         boolean result = false;
-        String err = "";
-        
-        // Check email 
-        boolean isValidEmail = ProfileUtils.isValidEmail(profile.getEmail());
-        if(!isValidEmail)
-            errors.put("email", "Invalid email.");
-        
-        // Check first name
-        boolean isValidName = ProfileUtils.isValidName(profile.getFirstName());
-        if(!isValidEmail)
-            errors.put("firstName", "Invalid last name.");
-        
-        // Check last name
-        isValidName = ProfileUtils.isValidName(profile.getLastName());
-        if(!isValidEmail)
-            errors.put("lastName", "Invalid last name.");
-        
-        // Check phone 
-        boolean isValidPhone = ProfileUtils.isValidPhone(profile.getPhoneNumber());
-        if(!isValidPhone)
-            errors.put("phoneNumber", "Invalid phone number.");
+        int count = 0;
 
-        if(!err.equalsIgnoreCase(""))
-            throw new ProfileException(err);
-        
-        result = true;
+        // Validate email
+        if (!ProfileUtils.isValidEmail(profile.getEmail())) {
+            errors.put("email", "Invalid email.");
+            count++;
+        }
+
+        // Validate first name
+        if (!ProfileUtils.isValidName(profile.getFirstName())) {
+            errors.put("firstName", "Invalid first name.");
+            count++;
+        }
+
+        // Validate last name
+        if (!ProfileUtils.isValidName(profile.getLastName())) {
+            errors.put("lastName", "Invalid last name.");
+            count++;
+        }
+
+        // Validate phone number
+        if (!ProfileUtils.isValidPhone(profile.getPhoneNumber())) {
+            errors.put("phoneNumber", "Invalid phone number.");
+            count++;
+        }
+
+        if (!errors.isEmpty()) {
+            return result;
+        }
+
+        // Get account ID
+        try {
+            Integer id = AccountDAO.getIdByUsername(username);
+            profile.setAccountId(id);
+        } catch (SQLException | ClassNotFoundException e) {
+            errors.put("Can not create profile", e.getMessage() + " khi lay ID");
+        }
+
+        // Create profile
+        try {
+            errors.put("Profile srevices", "Before try to create profile");
+            ProfileDAO.create(profile);
+            errors.put("ProfileServices", "Try after to create profile : works");
+            result = true;
+        } catch (ProfileException | ClassNotFoundException | SQLException e) {
+            errors.put("database", "Failed to create profile: " + e.getMessage() + " khi create ");
+            return result;
+        }
         return result;
     }
 }

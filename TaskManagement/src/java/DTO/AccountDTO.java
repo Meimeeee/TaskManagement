@@ -4,7 +4,7 @@
  */
 package DTO;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -15,13 +15,25 @@ public class AccountDTO {
     private String username;
     private String password;
     private String role;
-    private LocalDate createAt;
-    private LocalDate updateAt;
+    private Date createAt;
+    private Date updateAt;
 
     public AccountDTO() {
     }
 
-    public AccountDTO(Integer accountId, String username, String password, String role, LocalDate createAt, LocalDate updateAt) {
+    public AccountDTO(Integer accountId, String username, String password, String role) {
+        this.accountId = accountId;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public AccountDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public AccountDTO(Integer accountId, String username, String password, String role, Date createAt, Date updateAt) {
         this.accountId = accountId;
         this.username = username;
         this.password = password;
@@ -62,19 +74,19 @@ public class AccountDTO {
         this.role = role;
     }
 
-    public LocalDate getCreateAt() {
+    public Date getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDate createAt) {
+    public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 
-    public LocalDate getUpdateAt() {
+    public Date getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(LocalDate updateAt) {
+    public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
     
