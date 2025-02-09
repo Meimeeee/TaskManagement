@@ -57,7 +57,6 @@ public class AccountServices {
         int row = 0;
         try {
             row = AccountDAO.isExistAccount(username);
-            errors.put("Row check exist account", ""+row);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountServices.class.getName()).log(Level.SEVERE, null, ex);
         }

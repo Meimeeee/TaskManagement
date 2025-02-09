@@ -7,6 +7,7 @@ package DAO;
 import DTO.AccountDTO;
 import DAO.AccountDAO;
 import Exceptions.AccountException;
+import Exceptions.LoginExceptions;
 import JDBC.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -82,5 +83,22 @@ public class AccountDAO {
             }
         }
         return result;
+    }
+
+    public static String getPasswordByUsername(String username)
+            throws ClassNotFoundException, SQLException, LoginExceptions {
+        String query = "SELECT password FROM account WHERE username = ?";
+        String ans = "";
+        try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    ans = rs.getString("password");
+                } else {
+                    throw new LoginExceptions("Can not find user by this username");
+                }
+            }
+        }
+        return ans;
     }
 }

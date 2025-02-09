@@ -30,17 +30,6 @@ public class AccountUtils {
         return password;
     }
 
-    public static void decodePassword(String password) {
-
-        // Decode the Base64 string
-        byte[] decodedBytes = Base64.getDecoder().decode(password);
-
-        // Convert byte array back to string
-        String decodedString = new String(decodedBytes);
-
-        password = decodedString;
-    }
-
     public static boolean isValidPassword(String password) {
         return password.matches(PASSWORD_REGEX);
     }

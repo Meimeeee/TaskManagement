@@ -10,14 +10,8 @@
     </head>
     <body>
         <c:set var="errors" value="${requestScope.errors}" />
-        <h3>Session Attributes:</h3>
-        <ul>
-            <c:forEach var="attr" items="${requestScope}">
-                <li><b>${attr.key}</b>: ${attr.value}</li>
-                    </c:forEach>
-        </ul>
         <h2 style="text-align: center;">Sign Up</h2>
-        <form action="signup-servlet" method="post">
+        <form action="${pageContext.request.contextPath}/signup-servlet" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" value="${param.username}" required>
             <c:if test="${not empty errors.username}">

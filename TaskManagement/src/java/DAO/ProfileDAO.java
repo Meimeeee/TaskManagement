@@ -33,6 +33,6 @@ public class ProfileDAO {
             if (row == 0) {
                 throw new ProfileException("Failed to insert profile.");
             }
-        }
+        }                
     }
 }

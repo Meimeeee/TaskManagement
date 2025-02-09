@@ -14,9 +14,7 @@ import Services.ProfileServices;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +41,6 @@ public class Signup extends HttpServlet {
         String phoneNumber = req.getParameter("phone");
         String tmp = req.getParameter("dob");
         Date dob = Date.valueOf(tmp);
-        req.setAttribute("dob", dob);
 
         AccountDTO account = new AccountDTO(username, password);
         ProfileDTO profile = new ProfileDTO(email, firstName, lastName, phoneNumber, dob);
@@ -62,21 +59,21 @@ public class Signup extends HttpServlet {
             } catch (AccountException ex) {
                 Logger.getLogger(Signup.class.getName()).log(Level.WARNING, "Can not create new account.", ex);
             }
-        }
+        }     
         
         if(createdAccount == true) {
             try {
-                createProfile = ProfileServices.createProfileService(profile, errors, account.getUsername());
+                createProfile = ProfileServices.createProfileService(profile, errors, username);
             } catch (SQLException | ClassNotFoundException | ProfileException ex) {
                 errors.put("Can not create profile", ex.getMessage() + " haha");
             } 
-        }sss
+        }
         
         errors.put("isExistAccount", ""+isExistAccount);
         errors.put("createAccount", ""+createdAccount);
         errors.put("createProfile", ""+createProfile);
         if(createProfile && createdAccount) {
-            req.getRequestDispatcher("home").forward(req, resp);
+            req.getRequestDispatcher("Home/home.jsp").forward(req, resp);
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("Identity/signup.jsp").forward(req, resp);
