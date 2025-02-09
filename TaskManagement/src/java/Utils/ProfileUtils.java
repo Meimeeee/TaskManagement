@@ -10,7 +10,7 @@ package Utils;
  */
 public class ProfileUtils {
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    private static final String NAME_REGEX = "^(?:[A-Za-z]{3,})(?: [A-Za-z]{3,})*$";
+    private static final String NAME_REGEX = "^(?:[A-Za-z]{2,})(?: [A-Za-z]{2,})*$";
     private static final String PHONE_REGEX = "^0\\d{9,10}$";
     
     public static boolean isValidEmail(String email) {

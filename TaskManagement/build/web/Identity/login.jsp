@@ -10,12 +10,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <title>Sign up</title>
+        <title>Log In</title>
         <link rel="stylesheet" href="CSS/Login.css">
     </head>
     <body>
         <div class="login-container">
-            <h2>Sign up</h2>
+            <h2>Log In</h2>
             <form action="login-servlet" method="POST">
                 <div class="input-group">
                     <label for="Username">Username</label>
@@ -31,7 +31,7 @@
             </form>
             
             <div class="signup-link">
-                <p>Do you have an account? <a href="signup.jsp">Sign up here</a></p>
+                <p>Do you have an account? <a href="Identity/signup.jsp">Sign up here</a></p>
             </div>
         </div>
     </body>

@@ -9,6 +9,7 @@ import DTO.AccountDTO;
 import Exceptions.AccountException;
 import Utils.AccountUtils;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,22 +18,52 @@ import java.util.logging.Logger;
  * @author DELL
  */
 public class AccountServices {
-    public static boolean createAccountServices(AccountDTO acc) 
+
+    public static boolean createAccountServices(AccountDTO acc, Map<String, String> errors)
             throws SQLException, ClassNotFoundException, AccountException {
         boolean result = false;
-        
+        acc.setRole("TeamMember");
         String encryptPass = "";
+
+        if (AccountUtils.isValidPassword(acc.getPassword())) {
+            try {
+                encryptPass = AccountUtils.EncryptPassword(acc.getPassword());
+                acc.setPassword(encryptPass);
+            } catch (AccountException ex) {
+                errors.put("Catch Account exceptions", ex.getMessage());
+                return result;
+            }
+        } else {
+            errors.put("password", "Password is weak.");
+            return result;
+        }
+        
+        if(!AccountUtils.isValidUsername(acc.getUsername())) {
+            errors.put("username", "Invalid username. Must contains at least 8 characters and dont have space.");
+            return result;
+        }
         try {
-            encryptPass = AccountUtils.EncryptPassword(acc.getPassword());
-        } catch (AccountException ex) {
+            AccountDAO.create(acc);          
+        } catch (AccountException | ClassNotFoundException | SQLException e) {
+            errors.put("Can not create account", e.getMessage());
+            return result;
+        }       
+        result = true;
+        return result;
+    }
+    
+    public static boolean isExistAccount(String username, Map<String, String> errors) {
+        boolean result = true;
+        int row = 0;
+        try {
+            row = AccountDAO.isExistAccount(username);
+            errors.put("Row check exist account", ""+row);
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AccountServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        acc.setPassword(encryptPass);
-        acc.setRole("TeamMember");
-        AccountDAO.create(acc);
-        
-        result = true;
-        
+        if(row == 0) {
+            result = false;
+        } else errors.put("username", "Username is already existed.");
         return result;
     }
 }
