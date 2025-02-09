@@ -16,6 +16,11 @@
     </head>
     <body>
         <div class="login-container">
+            <ul>
+                <c:forEach var="role" items="${errors}">
+                    <li>${role}</li>
+                    </c:forEach>
+            </ul>
             <h2>Log In</h2>
             <c:set var="errors" value="${requestScope.errors}" />
             <form action="login-servlet" method="POST">

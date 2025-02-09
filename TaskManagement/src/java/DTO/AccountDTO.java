@@ -21,6 +21,13 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
+    public AccountDTO(Integer accountId, String username, String password, String role) {
+        this.accountId = accountId;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     public AccountDTO(String username, String password) {
         this.username = username;
         this.password = password;
