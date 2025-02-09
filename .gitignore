@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 /TaskManagement/build/
-=======
 /TaskManagement/dist/
->>>>>>> 7de0696df2c94fe491af9ff903d906786cb78156
-=======
 # Created by https://www.toptal.com/developers/gitignore/api/netbeans,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=netbeans,java
 
@@ -45,4 +40,3 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.toptal.com/developers/gitignore/api/netbeans,java
->>>>>>> 498556c909d62f7aceff0a3144580d501b643395

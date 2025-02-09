@@ -72,7 +72,7 @@ public class Signup extends HttpServlet {
         errors.put("createAccount", ""+createdAccount);
         errors.put("createProfile", ""+createProfile);
         if(createProfile && createdAccount) {
-            req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
+            resp.sendRedirect("project");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("Identity/signup.jsp").forward(req, resp);
