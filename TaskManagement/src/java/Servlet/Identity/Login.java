@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("id", isValidAccount.getAccountId());
             session.setAttribute("role", isValidAccount.getRole());
-            resp.sendRedirect("Home/home.jsp");
+            resp.sendRedirect("project");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("Identity/login.jsp").forward(req, resp);

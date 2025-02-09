@@ -23,7 +23,7 @@ public class ProjectDTO {
     public ProjectDTO() {  
     }
     
-    public ProjectDTO(int projectId, String projectName, String projectDescription, int createBy, LocalDate createAt, LocalDate updateAt, String projectStatus) {
+    public ProjectDTO(int projectId, String projectName, String projectDescription, int createBy,LocalDate createAt, LocalDate updateAt, String projectStatus) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectDescription = projectDescription;

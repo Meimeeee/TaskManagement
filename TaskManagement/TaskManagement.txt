@@ -16,7 +16,7 @@ CREATE TABLE profile (
     date_of_birth DATE,
     create_at DATETIME DEFAULT GETDATE(),
     update_at DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
 );
 
 CREATE TABLE project (
@@ -24,10 +24,10 @@ CREATE TABLE project (
     project_name VARCHAR(255) NOT NULL,
     project_description TEXT,
     project_status VARCHAR(50),
-    create_by INT NOT NULL UNIQUE,
+    create_by INT NOT NULL,
     create_at DATETIME DEFAULT GETDATE(),
     update_at DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (create_by) REFERENCES Account(account_id)
+    FOREIGN KEY (create_by) REFERENCES account(account_id)
 );
 
 CREATE TABLE task (
@@ -41,8 +41,8 @@ CREATE TABLE task (
     update_at DATETIME DEFAULT GETDATE(),
     due_date DATE NULL,
     link_submission VARCHAR(255) NULL,
-    FOREIGN KEY (project_id) REFERENCES Project(project_id),
-    FOREIGN KEY (assigned_to) REFERENCES Account(account_id)
+    FOREIGN KEY (project_id) REFERENCES project(project_id),
+    FOREIGN KEY (assigned_to) REFERENCES account(account_id)
 );
 
 CREATE TABLE project_member (
@@ -50,8 +50,8 @@ CREATE TABLE project_member (
     project_id INT NOT NULL,
     account_id INT NOT NULL,
     role_in_project VARCHAR(50),
-    FOREIGN KEY (project_id) REFERENCES Project(project_id),
-    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+    FOREIGN KEY (project_id) REFERENCES project(project_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
 );
 
 GO

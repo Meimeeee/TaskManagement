@@ -6,11 +6,16 @@
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Identity/login.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/JDBC/Connect.java</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/DAO/ProjectDAO.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Identity/Signup.java</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/DAO/ProjectMemberDAO.java</file>
-            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Home/home.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/DTO/ProjectDTO.java</file>
-            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Project/project.jsp</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Home.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Identity/Login.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Project/AddProject.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Home/home.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Identity/signup.jsp</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Project/ProjectList.java</file>
         </group>
     </open-files>
 </project-private>
