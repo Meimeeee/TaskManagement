@@ -11,26 +11,16 @@
     <title>Home Page</title>
 </head>
 <body>
-    <%--
-    <h1>Welcome, <c:out value="${user.username}" /></h1>
+    <%-- <h1>Welcome, <c:out value="${sessionScope.username}" /></h1> --%>
 
+    <!-- Add Project Button -->
     <c:choose>
-        <c:when test="${user.role == 'ProjectManager'}">
-            <h2>Project Manager Actions</h2>
-            <ul>
-                <li><a href="createProject.jsp">Create Project</a></li>
-                <li><a href="manageTasks.jsp">Manage Tasks</a></li>
-            </ul>
+        <c:when test="${sessionScope.role == 'ProjectManager'}">
+            <form action="add-project" method="get">
+                <button type="submit">Add project</button>
+            </form>
         </c:when>
-        <c:otherwise>
-            <h2>Team Member Actions</h2>
-            <ul>
-                <li><a href="viewTasks.jsp">View Assigned Tasks</a></li>
-                <li><a href="updateTaskStatus.jsp">Update Task Status</a></li>
-            </ul>
-        </c:otherwise>
     </c:choose>
-    --%>
     <!-- Show Project List -->
     <c:choose>
         <c:when test="${not empty projects}">
@@ -38,29 +28,22 @@
             <c:forEach var="project" items="${projects}">
             <tr>
                 <td>${project.projectName}</td>
-                <td>${project.projectStatus}</td>
-                <td>${project.updateAt}</td>
-                <%-- Phan quyen theo role
-                <c:choose>
-                <c:when test="${sessionScope.role == 'ProjectManager'}"> 
-                --%> 
-                    <td>
-                        <form action="edit-project" method="get">
-                          <input type="hidden" name="projectId" value="${project.projectId}">
-                          <button type="submit">Edit</button>
-                        </form>
-                    </td> 
-                    <td>
-                        <form action="delete-project" method="POST">
-                            <input type="hidden" name="projectId" value="${project.projectId}">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                <%-- 
-                </c:when> 
-                </c:choose>
-                --%> 
+                <td>Status: ${project.projectStatus}</td>
+                <td>Last Update: ${project.updateAt}</td>
+                <td>
+                    <form action="project-info" method="get">
+                        <input type="hidden" name="projectId" value="${project.projectId}">
+                    <button type="submit">Info</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="task" method="get">
+                        <input type="hidden" name="projectId" value="${project.projectId}">
+                    <button type="submit">Go to task</button>
+                    </form>
+                </td>
             </tr>
+            
             </c:forEach>
         </table>
         </c:when>
@@ -68,24 +51,5 @@
             <h3>${error}</h3>
         </c:otherwise>
     </c:choose>
-    <!-- Add Project Button -->
-    <%-- Phan quyen theo role
-    <c:choose>
-    <c:when test="${sessionScope.role == 'ProjectManager'}"> 
-    --%>        
-    <c:choose>
-    <c:when test="${not empty sessionScope.id}">
-        <form action="add-project" method="get">
-            <button type="submit">Add Project</button>
-        </form>
-    </c:when>
-    <c:otherwise>
-        <h3>${error}</h3>
-    </c:otherwise>
-    </c:choose>
-    <%-- 
-    <c:/when> 
-    <c:/choose>
-    --%> 
 </body>
 </html>

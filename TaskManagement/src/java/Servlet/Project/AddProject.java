@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddProject", urlPatterns = "/add-project")
 public class AddProject extends HttpServlet {
-    private final ProjectDAO projectDAO = new ProjectDAO();
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,6 +42,7 @@ public class AddProject extends HttpServlet {
             LocalDate createAt = LocalDate.now();
             LocalDate updateAt = LocalDate.now();
 
+            ProjectDAO projectDAO = new ProjectDAO();
             int result = projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "InProgress"));
             if (result == 0) {
                 throw new InvalidDataException("Cannot add project to database!");

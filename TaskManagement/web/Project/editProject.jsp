@@ -12,8 +12,6 @@
 </head>
 <body>
     <h2><c:out value="${project.projectName}"/></h2>
-    <h3>Create by: <c:out value="${project.createBy}"/></h3>
-    <h3>Create at: <c:out value="${project.createAt}"/></h3>
     <c:choose>
         <c:when test="${not empty sessionScope.id}">
             <form action="edit-project" method="post">

@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "DeleteProject", urlPatterns = "/delete-project")
 public class DeleteProject extends HttpServlet {
-    private final ProjectDAO projectDAO = new ProjectDAO();
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,6 +30,7 @@ public class DeleteProject extends HttpServlet {
             String id = req.getParameter("projectId");
             int projectId = Integer.parseInt(id);
 
+            ProjectDAO projectDAO = new ProjectDAO();
             int result = projectDAO.deleteProject(projectId);
             if (result == 0) {
                 throw new InvalidDataException("Cannot delete project in database!");

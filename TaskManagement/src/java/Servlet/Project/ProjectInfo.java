@@ -5,6 +5,7 @@
  */
 package Servlet.Project;
 
+import DAO.AccountDAO;
 import DAO.ProjectDAO;
 import DTO.ProjectDTO;
 import Exceptions.InvalidDataException;
@@ -24,33 +25,43 @@ import javax.servlet.http.HttpSession;
  *
  * @author Huynh Han Dong
  */
-@WebServlet(name = "ProjectList", urlPatterns = "/project")
-public class ProjectList extends HttpServlet {
+@WebServlet(name = "ProjectInfo", urlPatterns = "/project-info")
+public class ProjectInfo extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             HttpSession session = req.getSession(false);
             if (session != null) {
-                int accountId = (Integer) session.getAttribute("id");
+                String id = req.getParameter("projectId");
+                int projectId = Integer.parseInt(id);
                 
                 ProjectDAO projectDAO = new ProjectDAO();
-                List<ProjectDTO> projects = projectDAO.getProjectList(accountId);
-                if (projects != null) {
-                    req.setAttribute("projects", projects);
+                ProjectDTO project = projectDAO.getProjectById(projectId);
+                if (project != null) {
+                    req.setAttribute("project", project);
                 } else {
-                    throw new InvalidDataException("No Project Found!");
+                    throw new InvalidDataException("Cannot get project by id!");
                 }
+                /*AccountDAO accountDAO = new AccountDAO();
+                String name = accountDAO.getAccountNameById(project.getCreateBy());
+                if (name != null) {
+                    req.setAttribute("createdBy", name);
+                } else {
+                // Vien tu dien vao nha
+                }
+                */
             } else {
                 resp.sendRedirect("login-servlet");
                 return;
             }
             
+           
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(ProjectList.class.getName()).log(Level.SEVERE, null, e);
         }
-        req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
+        req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
     }
     
 }
