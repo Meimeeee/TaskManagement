@@ -9,6 +9,7 @@ import DAO.TaskDAO;
 import DTO.TaskDTO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,8 +60,9 @@ public class TaskMemberServlet extends HttpServlet {
                 status = "Done";
             }
 
+            LocalDateTime updateAt = LocalDateTime.now();
             TaskDAO dao = TaskDAO.getInstance();
-            dao.updateStatus(new TaskDTO(id, null, null, 0, null, status, null, null, null, link));
+            dao.updateStatus(new TaskDTO(id, null, null, 0, null, status, null, updateAt, null, link));
 
         } catch (SQLException ex) {
             req.setAttribute("error", ex.getMessage());

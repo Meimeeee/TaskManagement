@@ -39,7 +39,7 @@ public class AccountDAO {
     public static List<AccountDTO> getAllAccounts()
             throws ClassNotFoundException, SQLException {
         List<AccountDTO> list = new ArrayList<>();
-        String query = "SELECT * FROM account";
+        String query = "SELECT * FROM account WHERE role = 'Member'";
         try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 AccountDTO account = new AccountDTO();

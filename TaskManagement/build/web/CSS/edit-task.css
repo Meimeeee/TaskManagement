@@ -125,3 +125,52 @@ textarea {
         transform: translateY(0);
     }
 }
+
+/* Style the label */
+label[for="assignedTo"] {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Dark gray text */
+}
+
+/* Style the select dropdown */
+#assignedTo {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Customize dropdown arrow */
+#assignedTo {
+    appearance: none; /* Removes default styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="black" d="M2 0L0 2h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    padding-right: 30px; /* Space for custom arrow */
+}
+
+/* On hover */
+#assignedTo:hover {
+    border-color: #666;
+}
+
+/* On focus */
+#assignedTo:focus {
+    border-color: #007bff; /* Blue border */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style dropdown options */
+#assignedTo option {
+    padding: 10px;
+    font-size: 14px;
+}

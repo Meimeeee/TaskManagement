@@ -6,12 +6,14 @@
 package DAO;
 
 import DTO.TaskDTO;
+import Exceptions.TaskException;
 import JDBC.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -107,17 +109,17 @@ public class TaskDAO {
     public void updateStatus(TaskDTO t) throws SQLException, ClassNotFoundException {
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("UPDATE task SET link_submission = ?, "
-                + "task_status = ? WHERE task_id = ?");
+                + "task_status = ?, update_at = ? WHERE task_id = ?");
         ps.setString(1, t.getLinkSubmission());
         ps.setString(2, t.getTaskStatus());
-        ps.setInt(3, t.getTaskId());
+        ps.setTimestamp(3, Timestamp.valueOf(t.getUpdateAt()));
+        ps.setInt(4, t.getTaskId());
         ps.execute();
     }
 
     public void add(TaskDTO t, int assignedId) throws SQLException, ClassNotFoundException {
         Connection connect = Connect.getConnect();
         PreparedStatement ps = connect.prepareStatement("INSERT INTO task (\n"
-                + "    task_id, \n"
                 + "    task_name, \n"
                 + "    task_description, \n"
                 + "    project_id, \n"
@@ -127,17 +129,16 @@ public class TaskDAO {
                 + "    update_at, \n"
                 + "    due_date, \n"
                 + "    link_submission\n"
-                + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        ps.setInt(1, t.getTaskId());
-        ps.setString(2, t.getTaskName());
-        ps.setString(3, t.getTaskDescription());
-        ps.setInt(4, t.getProjectId());
-        ps.setInt(5, assignedId);
-        ps.setString(6, t.getTaskStatus());
-        ps.setTimestamp(7, Timestamp.valueOf(t.getCreateAt()));
-        ps.setTimestamp(8, Timestamp.valueOf(t.getUpdateAt()));
-        ps.setDate(9, java.sql.Date.valueOf(t.getDueDate()));
-        ps.setString(10, t.getLinkSubmission());
+                + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        ps.setString(1, t.getTaskName());
+        ps.setString(2, t.getTaskDescription());
+        ps.setInt(3, t.getProjectId());
+        ps.setInt(4, assignedId);
+        ps.setString(5, t.getTaskStatus());
+        ps.setTimestamp(6, Timestamp.valueOf(t.getCreateAt()));
+        ps.setTimestamp(7, Timestamp.valueOf(t.getUpdateAt()));
+        ps.setDate(8, java.sql.Date.valueOf(t.getDueDate()));
+        ps.setString(9, t.getLinkSubmission());
         ps.execute();
     }
 
@@ -148,20 +149,24 @@ public class TaskDAO {
         ps.execute();
     }
 
-    public void edit(TaskDTO t, int assignedId) throws SQLException, ClassNotFoundException {
-        Connection connect = Connect.getConnect();
-        PreparedStatement ps = connect.prepareStatement("UPDATE task SET "
-                + "task_name = ?, task_description = ?, assigned_to = ?, update_at = ?"
-                + ", due_date = ? WHERE task_id = ?");
-        ps.setString(1, t.getTaskName());
-        ps.setString(2, t.getTaskDescription());
-        ps.setInt(3, assignedId);
-        ps.setTimestamp(4, Timestamp.valueOf(t.getUpdateAt()));
-        ps.setDate(5, java.sql.Date.valueOf(t.getDueDate()));
-        ps.setInt(6, t.getTaskId());
-        ps.execute();
+    public void edit(TaskDTO t, int assignedId) throws SQLException, ClassNotFoundException, TaskException {
+        String sql = "UPDATE task SET task_name = ?, task_description = ?, assigned_to = ?, update_at = ?, due_date = ? WHERE task_id = ?";
+        try (Connection connect = Connect.getConnect();
+                PreparedStatement ps = connect.prepareStatement(sql)) {
+            ps.setString(1, t.getTaskName());
+            ps.setString(2, t.getTaskDescription());
+            ps.setInt(3, assignedId);
+            ps.setTimestamp(4, Timestamp.valueOf(t.getUpdateAt()));
+            ps.setDate(5, java.sql.Date.valueOf(t.getDueDate()));
+            ps.setInt(6, t.getTaskId());
+
+            int row = ps.executeUpdate();
+            if (row == 0) {
+                throw new TaskException("No task was updated !!");
+            }
+        }
+
     }
-    
+
     //getAccount 
-     
 }

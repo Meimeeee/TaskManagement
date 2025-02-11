@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="DTO.AccountDTO"%>
 <%@page import="DTO.TaskDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -10,7 +12,9 @@
     </head>
 
     <body>
-        <% TaskDTO t = (TaskDTO) request.getAttribute("t");%>
+        <%
+            TaskDTO t = (TaskDTO) request.getAttribute("t");
+        %>
         <div class="form-container">
             <h1 class="form-title">Edit Task</h1>
             <div class="error-container">
@@ -18,7 +22,8 @@
                     <p class="error-message">${requestScope.error}</p>
                 </c:if>
             </div>
-            <form action="" method="get" class="task-form">
+            <form action="" method="post" class="task-form">
+                <input type="hidden" name="projectId" value="${param.projectId}">
                 <input type="hidden" name="taskId" value="<%= t.getTaskId()%>" />
                 <div class="form-group">
                     <label for="taskName">Task Name</label>
@@ -34,16 +39,19 @@
 
                 <div class="form-group">
                     <label for="assignedTo">Assigned To</label>
-                    <input id="assignedTo" name="assignedTo" type="text" value="<%= t.getAssignedTo()%>"
-                           placeholder="Enter assignee name" required />
+                    <select id="assignedTo" name="assignedTo">
+                        <c:forEach items="${requestScope.accounts}" var="account" varStatus="status">
+                            <option value="${account.accountId}">${account.username}</option>
+                        </c:forEach>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="dueDate">Due Date</label>
-                    <input id="dueDate" name="dueDate" type="date" value="<%= t.getDueDate() %>" required />
+                    <input id="dueDate" name="dueDate" type="date" value="<%= t.getDueDate()%>" required />
                 </div>
 
-                <button class="btn-submit" type="submit">Comfirm</button>
+                <button name="func" value="edit" class="btn-submit" type="submit">Comfirm</button>
 
             </form>
         </div>

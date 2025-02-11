@@ -29,23 +29,20 @@
                 </div>
 
 
-                <!--            <div class="form-group">
-                                <label for="assignedTo">Assigned To</label>
-                                <select  id="assignedTo" name="assignedTo" required>
-                
-            </select>
-        </div>-->
-
                 <div class="form-group">
                     <label for="assignedTo">Assigned To</label>
-                    <input type="text" id="assignedTo" name="assignedTo" required/>
+                    <select id="assignedTo" name="assignedTo">
+                        <c:forEach items="${requestScope.accounts}" var="account" varStatus="status">
+                            <option value="${account.accountId}">${account.username}</option>
+                        </c:forEach>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="dueDate">Due Date</label>
                     <input id="dueDate" name="dueDate" type="date" required />
                 </div>
-                <button class="btn-submit" type="submit">Add Task</button>
+                <button name="func" value="add" class="btn-submit" type="submit">Add Task</button>
             </form>
         </div>
     </body>
