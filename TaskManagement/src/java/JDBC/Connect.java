@@ -16,12 +16,11 @@ import java.util.logging.Logger;
  * @author ngoct
  */
 public class Connect {
-
     public static Connection getConnect() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String username = "sa";
-            String pass = "19112005";
+            String pass = "123123123";
             String DB_NAME = "TaskManagement";
             String URL = "jdbc:sqlserver://localhost:1433"
                     + ";databaseName=" + DB_NAME

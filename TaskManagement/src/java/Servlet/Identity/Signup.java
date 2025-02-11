@@ -4,7 +4,6 @@
  */
 package Servlet.Identity;
 
-import DAO.AccountDAO;
 import DTO.AccountDTO;
 import DTO.ProfileDTO;
 import Exceptions.AccountException;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 /**
  *
@@ -44,7 +42,6 @@ public class Signup extends HttpServlet {
         String tmp = req.getParameter("dob");
         Date dob = Date.valueOf(tmp);
         HttpSession session = req.getSession();
-
 
         AccountDTO account = new AccountDTO(username, password);
         ProfileDTO profile = new ProfileDTO(email, firstName, lastName, phoneNumber, dob);
@@ -80,7 +77,7 @@ public class Signup extends HttpServlet {
             session.setAttribute("username", account.getUsername());
             session.setAttribute("id", profile.getAccountId());
             session.setAttribute("role", account.getRole());
-            req.getRequestDispatcher("Home/home.jsp").forward(req, resp);
+            resp.sendRedirect("project");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("Identity/signup.jsp").forward(req, resp);

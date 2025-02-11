@@ -6,7 +6,6 @@ package Servlet;
 
 import JDBC.Connect;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -41,5 +40,4 @@ public class Home extends HttpServlet{
             response.getWriter().write("Connect failed!");
         }
     }
-    
 }
