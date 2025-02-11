@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Project/projectInfo.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/DAO/ProjectDAO.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Identity/Signup.java</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Identity/Login.java</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/web/Project/addProject.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/Project/AddProject.java</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/ProjectBE3/TaskManagement/src/java/Servlet/TaskServlet.java</file>

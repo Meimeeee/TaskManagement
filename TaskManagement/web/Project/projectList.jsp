@@ -11,7 +11,7 @@
     <title>Home Page</title>
 </head>
 <body>
-    <%-- <h1>Welcome, <c:out value="${sessionScope.username}" /></h1> --%>
+    <h1>Welcome, <c:out value="${sessionScope.username}" /></h1>
 
     <!-- Add Project Button -->
     <c:choose>
