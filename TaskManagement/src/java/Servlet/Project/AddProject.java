@@ -35,17 +35,23 @@ public class AddProject extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            String projectName = req.getParameter("projectName");
-            String projectDescription = req.getParameter("description");
-            String accountId = req.getParameter("createBy");
-            Integer createBy = Integer.parseInt(accountId);
-            LocalDate createAt = LocalDate.now();
-            LocalDate updateAt = LocalDate.now();
+            HttpSession session = req.getSession(false);
+            if (session != null) {
+                String projectName = req.getParameter("projectName");
+                String projectDescription = req.getParameter("description");
+                String accountId = req.getParameter("createBy");
+                Integer createBy = Integer.parseInt(accountId);
+                LocalDate createAt = LocalDate.now();
+                LocalDate updateAt = LocalDate.now();
 
-            ProjectDAO projectDAO = new ProjectDAO();
-            int result = projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "InProgress"));
-            if (result == 0) {
-                throw new InvalidDataException("Cannot add project to database!");
+                ProjectDAO projectDAO = new ProjectDAO();
+                int result = projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "InProgress"));
+                if (result == 0) {
+                    throw new InvalidDataException("Cannot add project to database!");
+                }
+            } else {
+                resp.sendRedirect("login-servlet");
+                return;
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());

@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,15 +31,20 @@ public class EditProject extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            String id = req.getParameter("projectId");
-            int projectId = Integer.parseInt(id);
-            ProjectDTO project = projectDAO.getProjectById(projectId);
-            if (project != null) {
-                req.setAttribute("project", project);
+            HttpSession session = req.getSession(false);
+            if (session != null) {
+                String id = req.getParameter("projectId");
+                int projectId = Integer.parseInt(id);
+                ProjectDTO project = projectDAO.getProjectById(projectId);
+                if (project != null) {
+                    req.setAttribute("project", project);
+                } else {
+                    throw new InvalidDataException("Cannot get project by id!");
+                }
             } else {
-                throw new InvalidDataException("Cannot get project by id!");
+                resp.sendRedirect("login-servlet");
+                return;
             }
-            
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(EditProject.class.getName()).log(Level.SEVERE, null, e);

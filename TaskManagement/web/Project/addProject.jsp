@@ -20,7 +20,7 @@
                 <input type="text" name="projectName" required><br>
                 
                 <label>Project description:</label>
-                <textarea name="projectDescription"></textarea><br>
+                <textarea name="description"></textarea><br>
                 
                 <input type="hidden" name="createBy" value="${sessionScope.id}">
                 <button type="submit">Create</button>
