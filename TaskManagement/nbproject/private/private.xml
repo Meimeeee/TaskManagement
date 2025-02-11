@@ -5,9 +5,12 @@
         <group>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/DTO/TaskDTO.java</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/web/Identity/signup.jsp</file>
+            <file>file:/D:/BE3/TaskManagement/TaskManagement/web/CSS/Signup.css</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/Utils/LoginUtils.java</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/DAO/AccountDAO.java</file>
+            <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/Services/ProfileServices.java</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/Services/LoginServices.java</file>
+            <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/Utils/AccountUtils.java</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/web/Identity/login.jsp</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/build/web/Image/profile.png</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/Services/AccountServices.java</file>
@@ -20,6 +23,8 @@
             <file>file:/D:/BE3/TaskManagement/TaskManagement/web/Home/home.jsp</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/web/CSS/Home.css</file>
             <file>file:/D:/BE3/TaskManagement/TaskManagement/web/WEB-INF/web.xml</file>
+            <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/Utils/ProfileUtils.java</file>
+            <file>file:/D:/BE3/TaskManagement/TaskManagement/src/java/DAO/ProfileDAO.java</file>
         </group>
     </open-files>
 </project-private>

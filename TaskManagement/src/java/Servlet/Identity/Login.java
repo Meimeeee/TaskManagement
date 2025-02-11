@@ -35,6 +35,7 @@ public class Login extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("id", isValidAccount.getAccountId());
             session.setAttribute("role", isValidAccount.getRole());
+            session.setAttribute("username", isValidAccount.getUsername());
             resp.sendRedirect("Home/home.jsp");
         } else {
             req.setAttribute("errors", errors);

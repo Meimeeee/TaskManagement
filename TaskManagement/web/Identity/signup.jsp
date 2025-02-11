@@ -20,9 +20,34 @@
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" value="${param.password}" required>
+
             <c:if test="${not empty errors.password}">
                 <p style="color: red; font-size: 15px">${errors.password}</p>
             </c:if>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let passwordInput = document.getElementById("password");
+                    let showPasswordCheckbox = document.getElementById("showPassword");
+
+                    // Kiểm tra nếu checkbox đã được chọn trước đó
+                    if (localStorage.getItem("showPassword") === "true") {
+                        showPasswordCheckbox.checked = true;
+                        passwordInput.type = "text";
+                    }
+
+                    // Thêm sự kiện thay đổi trạng thái checkbox
+                    showPasswordCheckbox.addEventListener("change", function () {
+                        if (this.checked) {
+                            passwordInput.type = "text";
+                            localStorage.setItem("showPassword", "true");
+                        } else {
+                            passwordInput.type = "password";
+                            localStorage.setItem("showPassword", "false");
+                        }
+                    });
+                });
+            </script>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="${param.email}" required>
@@ -48,16 +73,34 @@
                 <p style="color: red; font-size: 15px">${errors.phoneNumber}</p>
             </c:if>
 
-            <c:if test="${not empty errors.database}">
-                <p style="color: red; font-size: 15px">${errors.database}</p>
-            </c:if>
-
             <label for="dob">Date of Birth:</label>
             <input type="date" id="dob" name="dob" required>
 
-            <button type="submit">Sign Up</button>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let dobInput = document.getElementById("dob");
+                    let dobError = document.getElementById("dobError");
 
+                    let minDate = new Date("1990-01-01");
+                    let maxDate = new Date();
 
+                    dobInput.setAttribute("min", minDate.toISOString().split("T")[0]);
+                    dobInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
+
+                    dobInput.addEventListener("change", function () {
+                        let dobValue = new Date(this.value);
+
+                        if (dobValue < minDate || dobValue > maxDate || isNaN(dobValue.getTime())) {
+                            dobError.textContent = "Ngày sinh phải từ 01/01/1990 đến hôm nay.";
+                            this.value = "";
+                        } else {
+                            dobError.textContent = "";
+                        }
+                    });
+                });
+            </script>
+
+            <button type="submit">SIGN UP</button>
 
         </form>
     </body>
