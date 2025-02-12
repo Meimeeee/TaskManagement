@@ -37,13 +37,14 @@ public class TaskManagerServlet extends HttpServlet {
         String url = TASK_MANAGER;
         try {
             int projectId = Integer.parseInt(req.getParameter("projectId"));
+
             TaskDAO taskDao = TaskDAO.getInstance();
             List<TaskDTO> tasks = taskDao.getTask(projectId);
             String projectName = taskDao.getProjectName(projectId);
             req.setAttribute("projectName", projectName);
             req.setAttribute("tasks", tasks);
 
-            List<AccountDTO> accounts = AccountDAO.getAllAccounts();
+            List<AccountDTO> accounts = AccountDAO.getAllAccounts(projectId);
             req.setAttribute("accounts", accounts);
 
             String func = req.getParameter("func");
@@ -153,7 +154,7 @@ public class TaskManagerServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, e);
 
-            List<AccountDTO> accounts = AccountDAO.getAllAccounts();
+            List<AccountDTO> accounts = AccountDAO.getAllAccounts(projectId);
             req.setAttribute("accounts", accounts);
             int taskId = Integer.parseInt(req.getParameter("taskId"));
             TaskDTO t = taskDao.getTaskByTaskId(projectId, taskId);
