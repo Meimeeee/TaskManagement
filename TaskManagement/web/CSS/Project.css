@@ -19,13 +19,11 @@ h2 {
 }
 button {
     background-color: #f4f4f9;
-    padding: 8px 15px;
-    margin-bottom: 20px; 
+    padding: 8px 15px; 
     font-size: 16px; 
     border-radius: 5px; 
     cursor: pointer; 
 }
-
 button:hover {
     background-color: #999999
 }
@@ -43,10 +41,6 @@ button:hover {
 .main-content {
     flex-grow: 1; /* Phần nội dung sẽ chiếm hết phần còn lại */
     padding: 20px;
-}
-.project-list {
-    display: flex;
-    flex-direction: column;
 }
 .project-item {
     display: flex;
@@ -71,28 +65,51 @@ button:hover {
     color: #cc0000; 
     text-decoration: underline;
 }
+.add-project-button {
+    margin-bottom: 20px;
+}
 .info-button {
     margin-right: 20px;
 }
 .project-info {
+    max-width: 800px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     background: #d8d8d8; 
     padding: 15px;
     border-radius: 5px;
-    margin: 20px;
+    margin-bottom: 20px;
 }
 .project-member {
     display: flex;
-    flex-direction: column;
-    background: #d8d8d8; 
-    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background: #ccc; 
+    padding: 10px;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 .edit-button {
     
 }
 .delete-button {
-    width: 100%;
+    margin-right: 20px;
+}
+.delete-project-container {
+    display: flex;
+    justify-content: center;
+}
+.delete-project-button { 
     background-color: #cc0000;
+    color: white;
+    padding: 15px; 
+    border-radius: 5px; 
+    font-size: 16px;
+    cursor: pointer;
+    width: 850px;
+    margin: auto;
+}
+.delete-project-button:hover {
+    background-color: #990000;
 }
