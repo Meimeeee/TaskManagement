@@ -26,7 +26,8 @@ public class ProjectMemberDTO {
         this.role = role;
     }
     
-    public ProjectMemberDTO(String username, String role) {
+    public ProjectMemberDTO(int accountId, String username, String role) {
+        this.accountId = accountId;
         this.username = username;
         this.role = role;
     }

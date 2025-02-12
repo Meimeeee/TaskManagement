@@ -20,23 +20,52 @@ import java.util.logging.Logger;
  * @author Huynh Han Dong
  */
 public class ProjectMemberDAO {
-    private static final String GET_PROJECT_MEMBER_LIST = "SELECT username, role FROM Project_member m INNER JOIN Account a ON m.project_member_id = a.? WHERE project_id = ?";
+    public int addMember(ProjectMemberDTO projectMember) throws SQLException, ClassNotFoundException {
+        String query = "INSERT INTO Project_member(project_id, account_id, role_in_project) values (?,?,?)";
+        int result = 0;
+        try(Connection conn = Connect.getConnect();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, projectMember.getProjectId());
+            statement.setInt(2, projectMember.getAccountId());
+            statement.setString(3, projectMember.getRole());
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in adding project member.", e);
+        }
+        return result;
+    }
     
-    public ArrayList<ProjectMemberDTO> getProjectList(int accountId, int projectId) throws SQLException, ClassNotFoundException{
+    public int deleteMember(int accountId, int projectId) throws SQLException, ClassNotFoundException {
+        String query = "DELETE FROM Project_member WHERE acountId =?, project_id =?";
+        int result = 0;
+        try(Connection conn = Connect.getConnect();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, projectId);
+            statement.setInt(2, accountId);
+
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in deleting project member.", e);
+        }
+        return result;
+    }
+    
+    public ArrayList<ProjectMemberDTO> getMemberList(int projectId) throws SQLException, ClassNotFoundException{
+        String query = "SELECT m.account_id, username, role_in_project FROM Project_member m INNER JOIN Account a ON m.account_id = a.account_id WHERE project_id = ?";
         ArrayList<ProjectMemberDTO> memberList = new ArrayList<>();
         try(Connection conn = Connect.getConnect();
-                PreparedStatement statement = conn.prepareStatement(GET_PROJECT_MEMBER_LIST)) {
-            statement.setInt(1, accountId);
-            statement.setInt(2, projectId);
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, projectId);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
+                int accountId = result.getInt("account_id");
                 String username = result.getString("username");
-                String role = result.getString("role");
+                String role = result.getString("role_in_project");
                 
-                memberList.add(new ProjectMemberDTO(username, role));
+                memberList.add(new ProjectMemberDTO(accountId, username, role));
             }
         } catch (SQLException e) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in getting project member list.", e);
         }
         return memberList;
     }

@@ -24,8 +24,6 @@ button {
     font-size: 16px; 
     border-radius: 5px; 
     cursor: pointer; 
-    display: flex;
-    justify-content: flex-end;
 }
 
 button:hover {
@@ -73,6 +71,28 @@ button:hover {
     color: #cc0000; 
     text-decoration: underline;
 }
-.edit-button {
+.info-button {
     margin-right: 20px;
+}
+.project-info {
+    display: flex;
+    flex-direction: column;
+    background: #d8d8d8; 
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px;
+}
+.project-member {
+    display: flex;
+    flex-direction: column;
+    background: #d8d8d8; 
+    padding: 15px;
+    border-radius: 5px;
+}
+.edit-button {
+    
+}
+.delete-button {
+    width: 100%;
+    background-color: #cc0000;
 }

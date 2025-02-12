@@ -9,32 +9,73 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="CSS/Project.css"/>
     <title>Project Info</title>
 </head>
 <body>
     <c:choose>
         <c:when test="${not empty project}">
-                <!-- Show Project List -->
-                <p>Project name: <c:out value="${project.projectName}"/></p>
-                <p>Description: <c:out value="${project.projectDescription}"/></p>
-                <p>Status: <c:out value="${project.projectStatus}"/></p>
-                <p>Create by: <c:out value="${project.createBy}"/></p>  <%-- Doi lai thanh ${requestScope.createdBy}--%>
-                <p>Create At: <c:out value="${project.createAt}"/></p>
-                <p>Update at: <c:out value="${project.updateAt}"/></p>
+            <!-- Show Project Info -->
+            <div class="project-info">
+                <p><strong>Project name: </strong><c:out value="${project.projectName}"/></p>
+                <p><strong>Description: </strong><c:out value="${project.projectDescription}"/></p>
+                <p><strong>Status: </strong><c:out value="${project.projectStatus}"/></p>
+                <p><strong>Create by: </strong><c:out value="${project.createBy}"/></p>  <%-- Doi lai thanh ${requestScope.createdBy}--%>
+                <p><strong>Create At: </strong><c:out value="${project.createAt}"/></p>
+                <p><strong>Update at: </strong><c:out value="${project.updateAt}"/></p>
                 
                 <!-- Show Edit And Delete Button -->
                 <c:choose>
-                <c:when test="${sessionScope.role == 'ProjectManager'}"> 
-                        <form action="edit-project" method="get">
-                            <input type="hidden" name="projectId" value="${project.projectId}">
-                            <button type="submit">Edit</button>
-                        </form>
-                        <form action="delete-project" method="POST">
-                            <input type="hidden" name="projectId" value="${project.projectId}">
-                            <button type="submit">Delete</button>
-                        </form>
-                </c:when> 
+                    <c:when test="${sessionScope.role == 'manager'}"> 
+                            <form action="edit-project" method="get">
+                                <input type="hidden" name="projectId" value="${project.projectId}">
+                                <button type="submit">Edit</button>
+                            </form>
+
+                        <div class="delete-button">
+                            <form action="delete-project" method="POST">
+                                <input type="hidden" name="projectId" value="${project.projectId}">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </c:when> 
                 </c:choose>
+            </div>    
+            
+            <!-- Show Project Member List -->
+            <c:choose>
+                <c:when test="${not empty members}">
+                    <div class="project-member">
+                        <c:forEach var="member" items="${members}">
+                            <p><strong>${member.username}</strong></p>
+                            <p>${member.role}</p>
+                        </c:forEach>
+            
+                        <!-- Show Add And Delete Button -->
+                        <c:choose>
+                            <c:when test="${sessionScope.role == 'manager'}"> 
+                                <form action="add-member" method="get">
+                                    <input type="hidden" name="projectId" value="${project.projectId}">
+                                    <input type="hidden" name="acountId" value="${member.accountId}">
+                                    <button type="submit">Add</button>
+                                </form>
+
+                                <div class="delete-button">
+                                    <form action="delete-member" method="POST">
+                                        <input type="hidden" name="projectId" value="${project.projectId}">
+                                        <input type="hidden" name="acountId" value="${member.accountId}">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </c:when>
+                        </c:choose>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <h3>${error}</h3>
+                </c:otherwise>
+            </c:choose>
+                
         </c:when>
         <c:otherwise>
             <h3>${error}</h3>

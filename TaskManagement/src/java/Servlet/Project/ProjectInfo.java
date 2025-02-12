@@ -7,7 +7,9 @@ package Servlet.Project;
 
 import DAO.AccountDAO;
 import DAO.ProjectDAO;
+import DAO.ProjectMemberDAO;
 import DTO.ProjectDTO;
+import DTO.ProjectMemberDTO;
 import Exceptions.InvalidDataException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,19 +46,24 @@ public class ProjectInfo extends HttpServlet {
                     throw new InvalidDataException("Cannot get project by id!");
                 }
                 /*AccountDAO accountDAO = new AccountDAO();
-                String name = accountDAO.getAccountNameById(project.getCreateBy());
+                String name = accountDAO.getUsernameById(project.getCreateBy());
                 if (name != null) {
                     req.setAttribute("createdBy", name);
                 } else {
                 // Vien tu dien vao nha
                 }
                 */
+                ProjectMemberDAO memberDAO = new ProjectMemberDAO();
+                List<ProjectMemberDTO> memberList = memberDAO.getMemberList(projectId);
+                if (memberList != null) {
+                    req.setAttribute("members", memberList);
+                } else {
+                    throw new InvalidDataException("Cannot get project member list!");
+                }
             } else {
                 resp.sendRedirect("login-servlet");
                 return;
             }
-            
-           
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(ProjectList.class.getName()).log(Level.SEVERE, null, e);
