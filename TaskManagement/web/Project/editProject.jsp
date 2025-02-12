@@ -11,9 +11,9 @@
     <title>Edit Project</title>
 </head>
 <body>
-    <h2><c:out value="${project.projectName}"/></h2>
     <c:choose>
-        <c:when test="${not empty sessionScope.id}">
+        <c:when test="${not empty project} && ${not empty sessionScope.id}">
+            <h2><c:out value="${project.projectName}"/></h2>
             <form action="edit-project" method="post">
                 <fieldset>
                     <label>Project name:</label>

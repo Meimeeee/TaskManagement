@@ -32,6 +32,12 @@ public class ProjectMemberDTO {
         this.role = role;
     }
     
+    public ProjectMemberDTO(int projectId, int accountId, String role) {
+        this.projectId = projectId;
+        this.accountId = accountId;
+        this.role = role;
+    }
+    
     public int getProjectMemberId() {
         return projectMemberId;
     }

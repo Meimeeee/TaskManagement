@@ -36,13 +36,12 @@ public class ProjectMemberDAO {
     }
     
     public int deleteMember(int accountId, int projectId) throws SQLException, ClassNotFoundException {
-        String query = "DELETE FROM Project_member WHERE acountId =?, project_id =?";
+        String query = "DELETE FROM Project_member WHERE account_id =? and project_id =?";
         int result = 0;
         try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(query)) {
-            statement.setInt(1, projectId);
-            statement.setInt(2, accountId);
-
+            statement.setInt(1, accountId);
+            statement.setInt(2, projectId);
             result = statement.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in deleting project member.", e);

@@ -71,11 +71,11 @@ public class EditProject extends HttpServlet {
             if (result == 0) {
                 throw new InvalidDataException("Cannot update project in database!");
             }
+            resp.sendRedirect("project-info?projectId=" + projectId);
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(EditProject.class.getName()).log(Level.SEVERE, null, e);
-            req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
+            req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
         }
-        resp.sendRedirect("project");
     }
 }

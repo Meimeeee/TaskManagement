@@ -40,7 +40,7 @@ public class AddProject extends HttpServlet {
                 String projectName = req.getParameter("projectName");
                 String projectDescription = req.getParameter("description");
                 String accountId = req.getParameter("createBy");
-                Integer createBy = Integer.parseInt(accountId);
+                int createBy = Integer.parseInt(accountId);
                 LocalDate createAt = LocalDate.now();
                 LocalDate updateAt = LocalDate.now();
 

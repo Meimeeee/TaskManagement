@@ -36,7 +36,8 @@
                             <c:forEach var="project" items="${projects}">
                                 <div class="project-item">
                                     <div class="project-content">
-                                        <!-- Hyperlink to task -->
+                                        
+                                        <!-- Link To Task -->
                                         <a href="task?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
                                         <p><strong>Status: </strong>${project.projectStatus}</p>
                                         <p><strong>Last Update: </strong>${project.updateAt}</p>
