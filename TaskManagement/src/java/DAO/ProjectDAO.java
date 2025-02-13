@@ -34,11 +34,8 @@ public class ProjectDAO {
             statement.setDate(5, Date.valueOf(project.getCreateAt()));
             statement.setDate(6, Date.valueOf(project.getUpdateAt()));
             result = statement.executeUpdate();
-        } catch (ClassNotFoundException ex) {
-            System.out.println("DBUtils not found.");
         } catch (SQLException e) {
-            System.out.println("SQL Exception in adding project.");
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in adding project.", e);
         }
         return result;
     }
@@ -54,11 +51,8 @@ public class ProjectDAO {
             statement.setDate(4, Date.valueOf(project.getUpdateAt()));
             statement.setInt(5, project.getProjectId());
             result = statement.executeUpdate();
-        } catch (ClassNotFoundException ex) {
-            System.out.println("DBUtils not found.");
         } catch (SQLException e) {
-            System.out.println("SQL Exception in updating project.");
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in updating project.", e);
         }
         return result;
     }
@@ -70,11 +64,8 @@ public class ProjectDAO {
                 PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, projectId);
             result = statement.executeUpdate();
-        } catch (ClassNotFoundException ex) {
-            System.out.println("DBUtils not found.");
         } catch (SQLException e) {
-            System.out.println("SQL Exception in deleting project.");
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in deleting project.", e);
         }
         return result;
     }
@@ -97,13 +88,8 @@ public class ProjectDAO {
                 
                 project = new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus);
             }
-        } catch (ClassNotFoundException ex) {
-            System.out.println("DBUtils not found.");
-            throw ex;
         } catch (SQLException e) {
-            System.out.println("SQL Exception in getting project info.");
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
-            throw e;
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in getting project info.", e);
         }
         return project;
     }
@@ -123,13 +109,8 @@ public class ProjectDAO {
                 
                 projectList.add(new ProjectDTO(projectId, projectName, updateAt, projectStatus));
             }
-        } catch (ClassNotFoundException ex) {
-            System.out.println("DBUtils not found.");
-            throw ex;
         } catch (SQLException e) {
-            System.out.println("SQL Exception in getting project list.");
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, e);
-            throw e;
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in getting project list.", e);
         }
         return projectList;
     }
