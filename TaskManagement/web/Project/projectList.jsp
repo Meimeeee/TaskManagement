@@ -12,48 +12,55 @@
     <title>Home Page</title>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <p>Profile</p>
-        </div>
-        
-        <div class="main-content">
-            <h2>Welcome, <c:out value="${sessionScope.username}"/>!</h2>
+    <c:choose>
+        <c:when test="${not empty sessionScope.id}">
+            <div class="container">
+                <div class="sidebar">
+                    <p>Profile</p>
+                </div>
 
-            <!-- Add Project Button -->
-            <c:choose>
-                <c:when test="${sessionScope.role == 'ProjectManager'}">
-                    <form action="add-project" method="get">
-                        <button type="submit">Add project</button>
-                    </form>
-                </c:when>
-            </c:choose>
-            <!-- Show Project List -->
-            <c:choose>
-                <c:when test="${not empty projects}">
-                    <c:forEach var="project" items="${projects}">
-                        <div class="project-list">
-                            <div class="project-item">
-                                <div class="project-content">
-                                    <!-- Hyperlink to task -->
-                                    <a href="task?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
-                                    <p><strong>Status: </strong>${project.projectStatus}</p>
-                                    <p><strong>Last Update: </strong>${project.updateAt}</p>
-                                </div>
-                                <div class="edit-button">
-                                    <form action="project-info" method="get">
-                                        <input type="hidden" name="projectId" value="${project.projectId}">
-                                        <button type="submit">Info</button>
-                                    </form>
-                                </div>
-                            </div>        
-                        </div>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <h3>${error}</h3>
-                </c:otherwise>
-            </c:choose>
-        </div>
+                <div class="main-content">
+                    <h2>Welcome, <c:out value="${sessionScope.username}"/>!</h2>
+
+                    <!-- Add Project Button -->
+                    <c:choose>
+                        <c:when test="${sessionScope.role == 'manager'}">
+                            <form action="add-project" method="get">
+                                <button class="add-project-button" type="submit">Add project</button>
+                            </form>
+                        </c:when>
+                    </c:choose>
+                    <!-- Show Project List -->
+                    <c:choose>
+                        <c:when test="${not empty projects}">
+                            <c:forEach var="project" items="${projects}">
+                                <div class="project-item">
+                                    <div class="project-content">
+                                        
+                                        <!-- Link To Task -->
+                                        <a href="task?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
+                                        <p><strong>Status: </strong>${project.projectStatus}</p>
+                                        <p><strong>Last Update: </strong>${project.updateAt}</p>
+                                    </div>
+                                    <div class="info-button">
+                                        <form action="project-info" method="get">
+                                            <input type="hidden" name="projectId" value="${project.projectId}">
+                                            <button type="submit">Info</button>
+                                        </form>
+                                    </div>
+                                </div>                     
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <h3>${error}</h3>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <h3>${error}</h3>
+        </c:otherwise>
+    </c:choose>
 </body>
 </html>
