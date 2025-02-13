@@ -16,7 +16,6 @@ import java.util.logging.Logger;
  * @author ngoct
  */
 public class Connect {
-
     public static Connection getConnect() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

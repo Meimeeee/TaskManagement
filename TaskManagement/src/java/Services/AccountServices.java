@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,8 +23,12 @@ public class AccountServices {
     public static boolean createAccountServices(AccountDTO acc, Map<String, String> errors)
             throws SQLException, ClassNotFoundException, AccountException {
         boolean result = false;
-        acc.setRole("TeamMember");
+        acc.setRole("member");
         String encryptPass = "";
+        
+        if(!AccountUtils.isValidUsername(acc.getUsername())) {
+            errors.put("username", "Invalid username. Must contains at least 8 characters and dont have space.");
+        }
 
         if (AccountUtils.isValidPassword(acc.getPassword())) {
             try {
@@ -34,14 +39,14 @@ public class AccountServices {
                 return result;
             }
         } else {
-            errors.put("password", "Password is weak.");
+            errors.put("password", "Password is weak. It must be at least 8 characters contains: "
+                    + "A-Z, "
+                    + "0-9, "
+                    + "A-Z, "
+                    + "@#$%^&+=!");
             return result;
         }
         
-        if(!AccountUtils.isValidUsername(acc.getUsername())) {
-            errors.put("username", "Invalid username. Must contains at least 8 characters and dont have space.");
-            return result;
-        }
         try {
             AccountDAO.create(acc);          
         } catch (AccountException | ClassNotFoundException | SQLException e) {

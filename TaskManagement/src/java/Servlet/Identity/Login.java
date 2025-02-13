@@ -29,12 +29,14 @@ public class Login extends HttpServlet {
         String password = req.getParameter("password");
         Map<String, String> errors = new HashMap<>();
         AccountDTO acc = new AccountDTO(username, password);
-        boolean isVlidAccount = LoginServices.checkForLogin(acc, errors);
+        AccountDTO isValidAccount = LoginServices.checkForLogin(acc, errors);
 
-        if (isVlidAccount) {
+        if (isValidAccount != null) {
             HttpSession session = req.getSession();
-            session.setAttribute("username", username);
-            resp.sendRedirect("Home/home.jsp");
+            session.setAttribute("id", isValidAccount.getAccountId());
+            session.setAttribute("role", isValidAccount.getRole());
+            session.setAttribute("username", isValidAccount.getUsername());
+            resp.sendRedirect("project");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("Identity/login.jsp").forward(req, resp);

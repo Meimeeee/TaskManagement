@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="login-container">
-            <h2>Log In</h2>
+            <h2>LOG IN</h2>
             <c:set var="errors" value="${requestScope.errors}" />
             <form action="login-servlet" method="POST">
                 <div class="input-group">
@@ -35,12 +35,36 @@
                     </c:if>
                 </div>
 
-                <button type="submit" class="login-btn">Log in</button>
+                <button type="submit" class="login-btn">LOG IN</button>
             </form>
 
             <div class="signup-link">
                 <p>Do you have an account? <a href="Identity/signup.jsp">Sign up here</a></p>
             </div>
         </div>
+
+        <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let passwordInput = document.getElementById("password");
+                    let showPasswordCheckbox = document.getElementById("showPassword");
+
+                    // Kiểm tra nếu checkbox đã được chọn trước đó
+                    if (localStorage.getItem("showPassword") === "true") {
+                        showPasswordCheckbox.checked = true;
+                        passwordInput.type = "text";
+                    }
+
+                    // Thêm sự kiện thay đổi trạng thái checkbox
+                    showPasswordCheckbox.addEventListener("change", function () {
+                        if (this.checked) {
+                            passwordInput.type = "text";
+                            localStorage.setItem("showPassword", "true");
+                        } else {
+                            passwordInput.type = "password";
+                            localStorage.setItem("showPassword", "false");
+                        }
+                    });
+                });
+            </script>
     </body>
 </html>

@@ -21,33 +21,33 @@ public class ProfileServices {
     public static boolean createProfileService(ProfileDTO profile, Map<String, String> errors, String username)
             throws SQLException, ClassNotFoundException, ProfileException {
         boolean result = false;
-        int count = 0;
+        boolean flag = false; 
 
         // Validate email
         if (!ProfileUtils.isValidEmail(profile.getEmail())) {
             errors.put("email", "Invalid email.");
-            count++;
+            flag = true;
         }
 
         // Validate first name
         if (!ProfileUtils.isValidName(profile.getFirstName())) {
             errors.put("firstName", "Invalid first name.");
-            count++;
+            flag = true;
         }
 
         // Validate last name
         if (!ProfileUtils.isValidName(profile.getLastName())) {
             errors.put("lastName", "Invalid last name.");
-            count++;
+            flag = true;
         }
 
         // Validate phone number
         if (!ProfileUtils.isValidPhone(profile.getPhoneNumber())) {
             errors.put("phoneNumber", "Invalid phone number.");
-            count++;
+            flag = true;
         }
 
-        if (!errors.isEmpty()) {
+        if (flag) {
             return result;
         }
 
@@ -61,9 +61,7 @@ public class ProfileServices {
 
         // Create profile
         try {
-            errors.put("Profile srevices", "Before try to create profile");
             ProfileDAO.create(profile);
-            errors.put("ProfileServices", "Try after to create profile : works");
             result = true;
         } catch (ProfileException | ClassNotFoundException | SQLException e) {
             errors.put("database", "Failed to create profile: " + e.getMessage() + " khi create ");

@@ -114,15 +114,19 @@ public class AccountDAO {
         return result;
     }
 
-    public static String getPasswordByUsername(String username)
+    public static AccountDTO getAccount(String username)
             throws ClassNotFoundException, SQLException, LoginExceptions {
-        String query = "SELECT password FROM account WHERE username = ?";
-        String ans = "";
+        String query = "SELECT * FROM account WHERE username = ? ";
+        AccountDTO ans = null;
         try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    ans = rs.getString("password");
+                    String name = rs.getString("username");
+                    String pass = rs.getString("password");
+                    Integer id = rs.getInt("account_id");
+                    String role = rs.getString("role");
+                    ans = new AccountDTO(id, username, pass, role);
                 } else {
                     throw new LoginExceptions("Can not find user by this username");
                 }
