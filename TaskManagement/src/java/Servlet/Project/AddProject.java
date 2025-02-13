@@ -49,15 +49,14 @@ public class AddProject extends HttpServlet {
                 if (result == 0) {
                     throw new InvalidDataException("Cannot add project to database!");
                 }
+                resp.sendRedirect("project");
             } else {
                 resp.sendRedirect("login-servlet");
-                return;
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(AddProject.class.getName()).log(Level.SEVERE, null, e);
             req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
         }
-        resp.sendRedirect("project");
     }
 }

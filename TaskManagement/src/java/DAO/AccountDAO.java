@@ -57,7 +57,7 @@ public class AccountDAO {
     public static Integer getIdByUsername(String username)
             throws ClassNotFoundException, SQLException {
         String query = "SELECT account_id FROM account WHERE username = ?";
-        Integer result = null;
+        int result = 0;
         try (Connection con = Connect.getConnect()) {
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, username);

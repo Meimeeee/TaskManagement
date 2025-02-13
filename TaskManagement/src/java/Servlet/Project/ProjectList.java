@@ -41,16 +41,15 @@ public class ProjectList extends HttpServlet {
                 } else {
                     throw new InvalidDataException("No Project Found!");
                 }
+                req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("login-servlet");
-                return;
             }
-            
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(ProjectList.class.getName()).log(Level.SEVERE, null, e);
+            req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
     }
     
 }

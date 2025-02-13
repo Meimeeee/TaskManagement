@@ -60,15 +60,15 @@ public class ProjectInfo extends HttpServlet {
                 } else {
                     throw new InvalidDataException("Cannot get project member list!");
                 }
+                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("login-servlet");
-                return;
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
-            Logger.getLogger(ProjectList.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ProjectInfo.class.getName()).log(Level.SEVERE, null, e);
+            req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
     }
     
 }

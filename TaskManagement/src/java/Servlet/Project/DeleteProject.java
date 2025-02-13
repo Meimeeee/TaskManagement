@@ -35,11 +35,11 @@ public class DeleteProject extends HttpServlet {
             if (result == 0) {
                 throw new InvalidDataException("Cannot delete project in database!");
             }
+            resp.sendRedirect("project");
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(DeleteProject.class.getName()).log(Level.SEVERE, null, e);
             req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
         }
-        resp.sendRedirect("project");
     }
 }

@@ -12,8 +12,7 @@
     <title>Home Page</title>
 </head>
 <body>
-    <c:choose>
-        <c:when test="${not empty sessionScope.id}">
+    <c:if test="${not empty sessionScope.id}">
             <div class="container">
                 <div class="sidebar">
                     <p>Profile</p>
@@ -23,13 +22,11 @@
                     <h2>Welcome, <c:out value="${sessionScope.username}"/>!</h2>
 
                     <!-- Add Project Button -->
-                    <c:choose>
-                        <c:when test="${sessionScope.role == 'manager'}">
-                            <form action="add-project" method="get">
-                                <button class="add-project-button" type="submit">Add project</button>
-                            </form>
-                        </c:when>
-                    </c:choose>
+                    <c:if test="${sessionScope.role == 'manager'}">
+                        <form action="add-project" method="get">
+                             <button class="top-button" type="submit">Add project</button>
+                        </form>
+                    </c:if>
                     <!-- Show Project List -->
                     <c:choose>
                         <c:when test="${not empty projects}">
@@ -42,7 +39,7 @@
                                         <p><strong>Status: </strong>${project.projectStatus}</p>
                                         <p><strong>Last Update: </strong>${project.updateAt}</p>
                                     </div>
-                                    <div class="info-button">
+                                    <div class="right-button">
                                         <form action="project-info" method="get">
                                             <input type="hidden" name="projectId" value="${project.projectId}">
                                             <button type="submit">Info</button>
@@ -57,10 +54,6 @@
                     </c:choose>
                 </div>
             </div>
-        </c:when>
-        <c:otherwise>
-            <h3>${error}</h3>
-        </c:otherwise>
-    </c:choose>
+    </c:if>
 </body>
 </html>
