@@ -96,7 +96,7 @@ public class ProjectDAO {
     
     public ArrayList<ProjectDTO> getProjectList(int accountId) throws SQLException, ClassNotFoundException {
         ArrayList<ProjectDTO> projectList = new ArrayList<>();
-        String query = "SELECT project_id, project_name, update_at, project_status FROM Project WHERE create_by = ?";
+        String query = "SELECT p.project_id, project_name, update_at, project_status FROM Project p INNER JOIN Project_member m ON p.project_id = m.project_id WHERE account_id = ?";
         try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, accountId);

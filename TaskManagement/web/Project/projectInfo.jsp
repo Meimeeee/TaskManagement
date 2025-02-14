@@ -80,14 +80,28 @@
                             </c:when>
                         </c:choose>
                     </div>
-                   
-                    <!-- Show Delete Project Button -->
-                    <div class="delete-project-container">
-                        <form action="delete-project" method="POST">
-                            <input type="hidden" name="projectId" value="${project.projectId}">
-                            <button class="delete-project-button" type="submit">Delete Project</button>
-                        </form>
-                    </div>
+                    
+                    <c:choose>
+                        <c:when test="${sessionScope.role == 'manager'}">
+                            <!-- Show Delete Project Button -->
+                            <div class="delete-project-container">
+                                <form action="delete-project" method="POST">
+                                    <input type="hidden" name="projectId" value="${project.projectId}">
+                                    <button class="delete-project-button" type="submit">Delete Project</button>
+                                </form>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Show Leave Project Button -->
+                            <div class="delete-project-container">
+                                <form action="delete-member" method="POST">
+                                    <input type="hidden" name="projectId" value="${project.projectId}">
+                                    <input type="hidden" name="accountId" value="${sessionScope.id}">
+                                    <button class="delete-project-button" type="submit">Leave Project</button>
+                                </form>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
                     <h3>${error}</h3>
