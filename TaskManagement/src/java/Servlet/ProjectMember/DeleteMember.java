@@ -5,7 +5,6 @@
  */
 package Servlet.ProjectMember;
 
-import DAO.ProjectDAO;
 import DAO.ProjectMemberDAO;
 import Exceptions.InvalidDataException;
 import Servlet.Project.DeleteProject;

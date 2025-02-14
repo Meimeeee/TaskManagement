@@ -38,8 +38,37 @@ public class AccountDAO {
     public static List<AccountDTO> getAllAccounts()
             throws ClassNotFoundException, SQLException {
         List<AccountDTO> list = new ArrayList<>();
-        String query = "SELECT * FROM account";
+        String query = "SELECT * FROM account WHERE role = 'Member'";
         try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                AccountDTO account = new AccountDTO();
+                account.setAccountId(rs.getInt("account_id"));
+                account.setUsername(rs.getString("username"));
+                account.setPassword(rs.getString("password"));
+                account.setRole(rs.getString("role"));
+                account.setCreateAt(rs.getDate("create_at"));
+                account.setUpdateAt(rs.getDate("update_at"));
+                list.add(account);
+            }
+        }
+        return list;
+    }
+
+    public static List<AccountDTO> getAllAccounts(int projectId)
+            throws ClassNotFoundException, SQLException {
+        List<AccountDTO> list = new ArrayList<>();
+
+        String query = "SELECT DISTINCT a.account_id, a.username, a.password, a.role, "
+                + "a.create_at, a.update_at "
+                + "FROM account a "
+                + "JOIN project_member pm ON a.account_id = pm.account_id "
+                + "WHERE pm.project_id = ? AND a.role = 'Member';";
+
+        try (Connection con = Connect.getConnect();) {
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, projectId);
+            ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
                 AccountDTO account = new AccountDTO();
                 account.setAccountId(rs.getInt("account_id"));

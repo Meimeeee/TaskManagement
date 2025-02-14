@@ -7,12 +7,8 @@ package Servlet.ProjectMember;
 
 import DAO.AccountDAO;
 import DAO.ProjectMemberDAO;
-import DTO.AccountDTO;
-import DTO.ProjectDTO;
 import DTO.ProjectMemberDTO;
 import Exceptions.InvalidDataException;
-import Exceptions.LoginExceptions;
-import Servlet.Project.AddProject;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;

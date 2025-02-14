@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/Project.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/project-list.css"/>
     <title>Home Page</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
                 <!-- Add Project Button -->
                 <c:if test="${sessionScope.role == 'manager'}">
                     <form action="add-project" method="get">
-                        <button class="top-button" type="submit">Add project</button>
+                        <button class="add-button" type="submit">Add project</button>
                     </form>
                 </c:if>           
                 
@@ -33,21 +33,24 @@
                     <c:when test="${not empty projects}">
                         <c:forEach var="project" items="${projects}">
                             <div class="project-item">
-                                <div class="project-content">  
-                                        
-                                    <!-- Link To Task -->
-                                    <a href="task?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
+                                <div class="project-content">
+                                    <c:choose>
+                                    <c:when test="${sessionScope.role == 'manager'}">
+                                        <a href="task-manager?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="task-member?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
+                                    </c:otherwise>
+                                    </c:choose>
                                     <p><strong>Status: </strong>${project.projectStatus}</p>
                                     <p><strong>Last Update: </strong>${project.updateAt}</p>
                                 </div>
-                                <div class="right-button">
-                                    
-                                    <!-- Info Button -->
-                                    <form action="project-info" method="get">
-                                        <input type="hidden" name="projectId" value="${project.projectId}">
-                                        <button type="submit">Info</button>
-                                    </form>
-                                </div>
+                                
+                                <!-- Info Button -->
+                                <form action="project-info" method="get">
+                                    <input type="hidden" name="projectId" value="${project.projectId}">
+                                    <button class="info-button" type="submit">Info</button>
+                                </form>
                             </div>                     
                         </c:forEach>
                     </c:when>

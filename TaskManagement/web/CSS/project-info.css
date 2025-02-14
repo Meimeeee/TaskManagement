@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Feb 11, 2025, 4:48:22 PM
+    Created on : Feb 14, 2025, 4:18:18 PM
     Author     : Huynh Han Dong
 */
 body {
@@ -30,49 +30,14 @@ button {
 button:hover {
     background-color: #999999
 }
-.container {
-    display: flex; /* Hiển thị flex để xếp sidebar và nội dung ngang hàng */
-}
-.sidebar {
-    width: 200px; 
-    background-color: #4CAF50;
-    color: white; 
-    padding: 20px;
-    min-height: 100vh;
-    border-radius: 5px;
-}
-.main-content {
-    flex-grow: 1; /* Phần nội dung sẽ chiếm hết phần còn lại */
-    padding: 20px;
-}
-.project-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #d8d8d8;
-    padding: 20px;
-    border-radius: 5px;
-    border-left: 8px solid #4CAF50;
+.go-back-button {
     margin-bottom: 20px;
 }
-.project-link {
-    color: #218838; 
-    font-size: 20px; 
-    font-weight: bold;
-    text-decoration: none;
-    }
-.project-content {
-    flex-grow: 1;
-}
-.project-link:hover {
-    color: #cc0000; 
-    text-decoration: underline;
-}
-.top-button {
-    margin-bottom: 20px;
-}
-.right-button {
+.delete-button {
     margin-right: 20px;
+}
+.edit-button {
+    margin-left: 20px;
 }
 .project-info {
     max-width: 800px;
@@ -125,3 +90,4 @@ button:hover {
 .delete-project-button:hover {
     background-color: #990000;
 }
+

@@ -9,6 +9,7 @@ import DAO.TaskDAO;
 import DTO.TaskDTO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,24 +22,29 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ngoct
  */
-public class TaskServlet extends HttpServlet {
+public class TaskMemberServlet extends HttpServlet {
+
+    private String TASK = "Task/task-member.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            int projectId = Integer.parseInt(req.getParameter("projectId"));
             TaskDAO dao = TaskDAO.getInstance();
-            List<TaskDTO> tasks = dao.getList();
+            List<TaskDTO> tasks = dao.getTask(projectId);
+            String projectName = dao.getProjectName(projectId);
+            req.setAttribute("projectName", projectName);
             req.setAttribute("tasks", tasks);
 
         } catch (SQLException ex) {
             req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        req.getRequestDispatcher("Task/task.jsp").forward(req, resp);
+        req.getRequestDispatcher(TASK).forward(req, resp);
     }
 
     @Override
@@ -54,20 +60,22 @@ public class TaskServlet extends HttpServlet {
                 status = "Done";
             }
 
+            LocalDateTime updateAt = LocalDateTime.now();
             TaskDAO dao = TaskDAO.getInstance();
-            dao.update(new TaskDTO(id, null, null, 0, null, status, null, null, null, link));
+            dao.updateStatus(new TaskDTO(id, null, null, 0, null, status, null, updateAt, null, link));
 
         } catch (SQLException ex) {
             req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
             req.getRequestDispatcher("Task/task.jsp").forward(req, resp);
         } catch (ClassNotFoundException ex) {
             req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(TaskServlet.class.getName()).log(Level.SEVERE, null, ex);
-            req.getRequestDispatcher("Task/task.jsp").forward(req, resp);
+            Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
+            req.getRequestDispatcher(TASK).forward(req, resp);
         }
 
-        resp.sendRedirect("task");
+        int projectId = Integer.parseInt(req.getParameter("projectId"));
+        resp.sendRedirect("task-member?projectId=" + projectId);
     }
 
 }

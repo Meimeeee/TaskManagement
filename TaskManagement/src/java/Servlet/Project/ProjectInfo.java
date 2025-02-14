@@ -5,7 +5,6 @@
  */
 package Servlet.Project;
 
-import DAO.AccountDAO;
 import DAO.ProjectDAO;
 import DAO.ProjectMemberDAO;
 import DTO.ProjectDTO;

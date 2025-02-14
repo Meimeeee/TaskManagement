@@ -9,13 +9,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/Project.css"/>
+    <link rel="stylesheet" type="text/css" href="CSS/project-info.css"/>
     <title>Project Info</title>
 </head>
 <body>
     <c:if test="${not empty sessionScope.id}">
         <form action="project" method="get">
-            <button class="top-button" type="submit">Go back</button>
+            <button class="go-back-button" type="submit">Go back</button>
         </form>
             <c:choose>
                 <c:when test="${not empty project}">
@@ -33,7 +33,7 @@
                         <c:if test="${sessionScope.role == 'manager'}"> 
                             <form action="edit-project" method="get">
                                 <input type="hidden" name="projectId" value="${project.projectId}">
-                                <button type="submit">Edit</button>
+                                <button class="edit-button" type="submit">Edit</button>
                             </form>
                         </c:if> 
                     </div>    
@@ -51,15 +51,13 @@
                                         </div>
 
                                         <!-- Show Delete Member Button -->
-                                        <div class="right-button">
-                                            <c:if test="${sessionScope.role == 'manager'}"> 
-                                                <form action="delete-member" method="POST">
-                                                    <input type="hidden" name="projectId" value="${project.projectId}">
-                                                    <input type="hidden" name="accountId" value="${member.accountId}">
-                                                    <button type="submit">Delete</button>
-                                                </form>
-                                            </c:if>
-                                        </div>
+                                        <c:if test="${sessionScope.role == 'manager'}"> 
+                                            <form action="delete-member" method="POST">
+                                                <input type="hidden" name="projectId" value="${project.projectId}">
+                                                <input type="hidden" name="accountId" value="${member.accountId}">
+                                                <button class="delete-button" type="submit">Delete</button>
+                                            </form>
+                                        </c:if>
                                     </div>        
                                 </c:forEach>
                             </c:when>

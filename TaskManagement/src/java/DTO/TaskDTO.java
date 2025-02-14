@@ -6,6 +6,7 @@
 package DTO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -19,15 +20,15 @@ public class TaskDTO {
     private int projectId;
     private String assignedTo;
     private String taskStatus;
-    private LocalDate createAt;
-    private LocalDate updateAt;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
     private LocalDate dueDate;
     private String linkSubmission;
 
     public TaskDTO() {
     }
 
-    public TaskDTO(int taskId, String taskName, String taskDescription, int projectId, String assignedTo, String taskStatus, LocalDate createAt, LocalDate updateAt, LocalDate dueDate, String linkSubmission) {
+    public TaskDTO(int taskId, String taskName, String taskDescription, int projectId, String assignedTo, String taskStatus, LocalDateTime createAt, LocalDateTime updateAt, LocalDate dueDate, String linkSubmission) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -88,19 +89,19 @@ public class TaskDTO {
         this.taskStatus = taskStatus;
     }
 
-    public LocalDate getCreateAt() {
+    public LocalDateTime getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDate createAt) {
+    public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
     }
 
-    public LocalDate getUpdateAt() {
+    public LocalDateTime getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(LocalDate updateAt) {
+    public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
 
