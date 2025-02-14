@@ -9,7 +9,6 @@ import DAO.ProjectDAO;
 import DAO.ProjectMemberDAO;
 import DTO.ProjectDTO;
 import DTO.ProjectMemberDTO;
-import Exceptions.InvalidDataException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -42,7 +41,7 @@ public class ProjectInfo extends HttpServlet {
                 if (project != null) {
                     req.setAttribute("project", project);
                 } else {
-                    throw new InvalidDataException("Cannot get project by id!");
+                    req.setAttribute("error", "Project not found!");
                 }
                 /*AccountDAO accountDAO = new AccountDAO();
                 String name = accountDAO.getUsernameById(project.getCreateBy());
@@ -57,7 +56,7 @@ public class ProjectInfo extends HttpServlet {
                 if (memberList != null) {
                     req.setAttribute("members", memberList);
                 } else {
-                    throw new InvalidDataException("Cannot get project member list!");
+                    req.setAttribute("error", "Cannot get project member list!");
                 }
                 req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             } else {

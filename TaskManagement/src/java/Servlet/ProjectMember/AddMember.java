@@ -8,7 +8,6 @@ package Servlet.ProjectMember;
 import DAO.AccountDAO;
 import DAO.ProjectMemberDAO;
 import DTO.ProjectMemberDTO;
-import Exceptions.InvalidDataException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -32,21 +31,28 @@ public class AddMember extends HttpServlet {
             HttpSession session = req.getSession(false);
             if (session != null) {
                 String projectRaw = req.getParameter("projectId");
-                int projectId= Integer.parseInt(projectRaw);
+                int projectId = Integer.parseInt(projectRaw);
                 String username = req.getParameter("username");
                 AccountDAO accountDAO = new AccountDAO();
                 int accountId = accountDAO.getIdByUsername(username);  
                 if (accountId > 0) {
                     ProjectMemberDAO memberDAO = new ProjectMemberDAO();
-                    int result = memberDAO.addMember(new ProjectMemberDTO(projectId, accountId, "member"));
-                    if (result == 0) {
-                        throw new InvalidDataException("Cannot add member to project!");
+                    int found = memberDAO.checkProjectMember(projectId, accountId);
+                    if (found == 0) {
+                        int result = memberDAO.addMember(new ProjectMemberDTO(projectId, accountId, "member"));
+                        if (result > 0) {
+                            resp.sendRedirect("project-info?projectId=" + projectId);
+                            return;
+                        } else {
+                            req.setAttribute("error", "Cannot add member to project!");
+                        }
+                    } else {
+                        req.setAttribute("error", "This account is already a member of this project!");
                     }
-                    resp.sendRedirect("project-info?projectId=" + projectId);
                 } else {
-                    req.setAttribute("message", "Account not found!");
-                    resp.sendRedirect("project-info?projectId=" + projectId);
+                    req.setAttribute("error", "Account not found!");
                 }
+                req.getRequestDispatcher("project-info").forward(req, resp);
             } else {
                 resp.sendRedirect("login-servlet");
             }

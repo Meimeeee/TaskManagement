@@ -11,32 +11,34 @@
     <title>Edit Project</title>
 </head>
 <body>
-    <c:choose>
-        <c:when test="${not empty project} && ${not empty sessionScope.id}">
-            <h2><c:out value="${project.projectName}"/></h2>
-            <form action="edit-project" method="post">
-                <fieldset>
-                    <label>Project name:</label>
-                    <input type="text" name="projectName" value="${project.projectName}"/><br><br>
-                
-                    <label>Project description:</label>
-                    <textarea name="description">${project.projectDescription}</textarea><br><br>
-                
-                    <label>Project status:</label>
-                    <label><input type="radio" name="status" value="InProgress" ${project.projectStatus == 'InProgress' ? 'checked' : ''}> InProgress</label>
-                    <label><input type="radio" name="status" value="Done" ${project.projectStatus == 'Done' ? 'checked' : ''}> Done</label>
-                
-                    <input type="hidden" name="projectId" value="${project.projectId}"/>
-                    <input type="hidden" name="accountId" value="${project.createBy}"/>
-                    <input type="hidden" name="createAt" value="${project.createAt}"/>
-                    
-                    <button type="submit">Save</button>
-                </fieldset>
-            </form>
-        </c:when>
-        <c:otherwise>
-            <h3>${error}</h3>
-        </c:otherwise>
-    </c:choose>
+    <c:if test="${not empty sessionScope.id}">
+        <c:choose>
+            <c:when test="${not empty project}">
+                <h2><c:out value="${project.projectName}"/></h2>
+                <form action="edit-project" method="post">
+                    <fieldset>
+                        <label>Project name:</label>
+                        <input type="text" name="projectName" value="${project.projectName}"/><br><br>
+
+                        <label>Project description:</label>
+                        <textarea name="description">${project.projectDescription}</textarea><br><br>
+
+                        <label>Project status:</label>
+                        <label><input type="radio" name="status" value="InProgress" ${project.projectStatus == 'InProgress' ? 'checked' : ''}> InProgress</label>
+                        <label><input type="radio" name="status" value="Done" ${project.projectStatus == 'Done' ? 'checked' : ''}> Done</label>
+
+                        <input type="hidden" name="projectId" value="${project.projectId}"/>
+                        <input type="hidden" name="accountId" value="${project.createBy}"/>
+                        <input type="hidden" name="createAt" value="${project.createAt}"/>
+
+                        <button type="submit">Save</button>
+                    </fieldset>
+                </form>
+            </c:when>
+            <c:otherwise>
+                <h3>${error}</h3>
+            </c:otherwise>
+        </c:choose>
+    </c:if>
 </body>
 </html>

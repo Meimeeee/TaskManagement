@@ -52,11 +52,13 @@
 
                                         <!-- Show Delete Member Button -->
                                         <c:if test="${sessionScope.role == 'manager'}"> 
+                                            <c:if test="${member.role == 'member'}"> 
                                             <form action="delete-member" method="POST">
                                                 <input type="hidden" name="projectId" value="${project.projectId}">
                                                 <input type="hidden" name="accountId" value="${member.accountId}">
                                                 <button class="delete-button" type="submit">Delete</button>
                                             </form>
+                                            </c:if>
                                         </c:if>
                                     </div>        
                                 </c:forEach>
@@ -65,23 +67,30 @@
                                 <h3>${error}</h3>
                             </c:otherwise>
                         </c:choose>
-                        <c:choose>
-                            <c:when test="${sessionScope.role == 'manager'}"> 
+                        <c:if test="${sessionScope.role == 'manager'}"> 
+                                
                                 <!--Add Member FORM-->
                                 <div class="add-member-form">
-                                    <form action="add-member" method="post">
-                                        <label>Username: </label>
-                                        <input type="text" class="input-field" name="username" required placeholder="Enter username">
-                                        <input type="hidden" name="projectId" value="${project.projectId}">
-                                        <button type="submit">Add Member</button>
+                                        <c:if test="${not empty error}">
+                                            <p>${error}</p>
+                                        </c:if>
+                                            <form action="add-member" method="post">
+                                                <label>Username: </label>
+                                                <input type="text" class="input-field" name="username" required placeholder="Enter username">
+                                                <input type="hidden" name="projectId" value="${project.projectId}">
+                                                <button type="submit">Add Member</button>
+                                            </form>
                                 </div>
-                            </c:when>
-                        </c:choose>
+                        </c:if>
                     </div>
                     
                     <c:choose>
                         <c:when test="${sessionScope.role == 'manager'}">
+                            
                             <!-- Show Delete Project Button -->
+                            <c:if test="${not empty error}">
+                                            <p>${error}</p>
+                                        </c:if>
                             <div class="delete-project-container">
                                 <form action="delete-project" method="POST">
                                     <input type="hidden" name="projectId" value="${project.projectId}">
@@ -90,6 +99,7 @@
                             </div>
                         </c:when>
                         <c:otherwise>
+                            
                             <!-- Show Leave Project Button -->
                             <div class="delete-project-container">
                                 <form action="delete-member" method="POST">

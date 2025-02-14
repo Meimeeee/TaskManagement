@@ -114,4 +114,20 @@ public class ProjectDAO {
         }
         return projectList;
     }
+    
+    public int getProjectId() throws SQLException, ClassNotFoundException {
+        int projectId = 0;
+        String query = "SELECT MAX(project_id) AS project_id FROM Project";
+        try(Connection conn = Connect.getConnect();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            ResultSet result = statement.executeQuery();
+            
+            if (result.next()) {
+                projectId = result.getInt("project_id");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in getting newest projectId.", e);
+        }
+        return projectId;
+    }
 }

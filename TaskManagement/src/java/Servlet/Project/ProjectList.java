@@ -7,7 +7,6 @@ package Servlet.Project;
 
 import DAO.ProjectDAO;
 import DTO.ProjectDTO;
-import Exceptions.InvalidDataException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -39,7 +38,7 @@ public class ProjectList extends HttpServlet {
                 if (projects != null) {
                     req.setAttribute("projects", projects);
                 } else {
-                    throw new InvalidDataException("No Project Found!");
+                    req.setAttribute("error", "No Project Found!");
                 }
                 req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
             } else {
