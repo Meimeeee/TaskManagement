@@ -52,7 +52,7 @@ public class Signup extends HttpServlet {
         boolean createProfile = false;
         if (isExistAccount == false) {
             try {
-                createdAccount = AccountServices.createAccountServices(account, errors);
+                createdAccount = AccountServices.createAccountServices(account, errors, 0);
             } catch (SQLException ex) {
                 Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, "Errors from database.", ex);
             } catch (ClassNotFoundException ex) {
@@ -77,7 +77,7 @@ public class Signup extends HttpServlet {
             session.setAttribute("username", account.getUsername());
             session.setAttribute("id", profile.getAccountId());
             session.setAttribute("role", account.getRole());
-            resp.sendRedirect("project");
+            resp.sendRedirect(req.getContextPath() + "/project");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("Identity/signup.jsp").forward(req, resp);
