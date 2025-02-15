@@ -68,4 +68,21 @@ public class ProjectMemberDAO {
         }
         return memberList;
     }
+    
+    public int checkProjectMember(int projectId, int accountId) throws SQLException, ClassNotFoundException {
+        int found = 0;
+        String query = "SELECT COUNT(*) as found FROM Project_member WHERE project_id = ? and account_id = ?";
+        try(Connection conn = Connect.getConnect();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, projectId);
+            statement.setInt(2, accountId);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                found = result.getInt("found");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in checking project member.", e);
+        }
+        return found;
+    }
 }
