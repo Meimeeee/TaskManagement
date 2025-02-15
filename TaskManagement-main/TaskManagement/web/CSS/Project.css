@@ -1,0 +1,115 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 11, 2025, 4:48:22 PM
+    Author     : Huynh Han Dong
+*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+    color: #424242;
+}
+h2 {
+    text-align: center;
+    color: #131313;
+}
+button {
+    background-color: #f4f4f9;
+    padding: 8px 15px; 
+    font-size: 16px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+button:hover {
+    background-color: #999999
+}
+.container {
+    display: flex; /* Hiển thị flex để xếp sidebar và nội dung ngang hàng */
+}
+.sidebar {
+    width: 200px; 
+    background-color: #4CAF50;
+    color: white; 
+    padding: 20px;
+    min-height: 100vh;
+    border-radius: 5px;
+}
+.main-content {
+    flex-grow: 1; /* Phần nội dung sẽ chiếm hết phần còn lại */
+    padding: 20px;
+}
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #d8d8d8;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #4CAF50;
+    margin-bottom: 20px;
+}
+.project-link {
+    color: #218838; 
+    font-size: 20px; 
+    font-weight: bold;
+    text-decoration: none;
+    }
+.project-content {
+    flex-grow: 1;
+}
+.project-link:hover {
+    color: #cc0000; 
+    text-decoration: underline;
+}
+.add-project-button {
+    margin-bottom: 20px;
+}
+.info-button {
+    margin-right: 20px;
+}
+.project-info {
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background: #d8d8d8; 
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.project-member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ccc; 
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.edit-button {
+    
+}
+.delete-button {
+    margin-right: 20px;
+}
+.delete-project-container {
+    display: flex;
+    justify-content: center;
+}
+.delete-project-button { 
+    background-color: #cc0000;
+    color: white;
+    padding: 15px; 
+    border-radius: 5px; 
+    font-size: 16px;
+    cursor: pointer;
+    width: 850px;
+    margin: auto;
+}
+.delete-project-button:hover {
+    background-color: #990000;
+}
