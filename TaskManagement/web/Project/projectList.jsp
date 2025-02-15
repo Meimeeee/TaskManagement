@@ -35,12 +35,12 @@
                             <div class="project-item">
                                 <div class="project-content">
                                     <c:choose>
-                                    <c:when test="${sessionScope.role == 'manager'}">
-                                        <a href="task-manager?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="task-member?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
-                                    </c:otherwise>
+                                        <c:when test="${sessionScope.role == 'manager'}">
+                                            <a href="task-manager?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="task-member?projectId=${project.projectId}" class="project-link">${project.projectName}</a>
+                                        </c:otherwise>
                                     </c:choose>
                                     <p><strong>Status: </strong>${project.projectStatus}</p>
                                     <p><strong>Last Update: </strong>${project.updateAt}</p>

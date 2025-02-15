@@ -52,7 +52,8 @@ public class AddMember extends HttpServlet {
                 } else {
                     req.setAttribute("error", "Account not found!");
                 }
-                req.getRequestDispatcher("project-info").forward(req, resp);
+                req.setAttribute("projectId", projectId);
+                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("login-servlet");
             }

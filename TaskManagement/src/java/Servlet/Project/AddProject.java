@@ -53,7 +53,7 @@ public class AddProject extends HttpServlet {
                         ProjectMemberDAO memberDAO = new ProjectMemberDAO();
                         int added = memberDAO.addMember(new ProjectMemberDTO(projectId, createBy, "manager"));
                         if (added > 0) {
-                            resp.sendRedirect("project");
+                            resp.sendRedirect("project-info?projectId=" + projectId);
                             return;
                         } else {
                             req.setAttribute("error", "Cannot add project member to database!");

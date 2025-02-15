@@ -70,6 +70,7 @@ public class EditProject extends HttpServlet {
                 resp.sendRedirect("project-info?projectId=" + projectId);
             } else{
                 req.setAttribute("error", "Cannot update project!");
+                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());

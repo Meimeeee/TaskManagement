@@ -6,7 +6,6 @@
 package Servlet.ProjectMember;
 
 import DAO.ProjectMemberDAO;
-import Exceptions.InvalidDataException;
 import Servlet.Project.DeleteProject;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -36,9 +35,16 @@ public class DeleteMember extends HttpServlet {
             ProjectMemberDAO memberDAO = new ProjectMemberDAO();
             int result = memberDAO.deleteMember(accountId, projectId);
             if (result == 0) {
-                throw new InvalidDataException("Cannot delete project member in database!");
+                String role = req.getParameter("role");
+                if (role != null) {
+                    resp.sendRedirect("project");
+                } else {
+                    resp.sendRedirect("project-info?projectId=" + projectId);
+                }
+            } else {
+                req.setAttribute("error", "You are not a member of this project anymore!");
+                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             }
-            resp.sendRedirect("project-info?projectId=" + projectId);
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(DeleteProject.class.getName()).log(Level.SEVERE, null, e);

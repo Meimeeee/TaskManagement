@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Feb 14, 2025, 4:18:18 PM
+    Created on : Feb 15, 2025, 5:02:05 PM
     Author     : Huynh Han Dong
 */
 body {
@@ -16,9 +16,6 @@ h2 {
     text-align: center;
     color: #131313;
     margin-top: 10px;
-}
-p {
-    padding-left: 10px;
 }
 button {
     background-color: #f4f4f9;
@@ -33,62 +30,40 @@ button:hover {
 .go-back-button {
     margin-bottom: 20px;
 }
-.delete-button {
-    margin-right: 20px;
-}
-.edit-button {
-    margin-left: 20px;
-}
-.project-info {
+.container {
     max-width: 800px;
     margin: auto;
-    display: flex;
-    flex-direction: column;
     background: #d8d8d8; 
     padding: 30px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
-.project-member {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.info {
     background: #ccc; 
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
-.add-member-form {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-    padding-top: 5px;
-    padding-left: 30px;
-}
 .input-field {
     width: 300px; 
-    height: 20px;
+    height: 16px;
     padding: 10px;
-    margin-right: 5px;
     border: 1.6px solid;
     border-radius: 5px;
     font-size: 16px;
 }
-.delete-project-container {
+textarea {
+    resize: vertical;
+    font-family: Arial, sans-serif; 
+    max-height: 200px;
+}
+.label-container {
     display: flex;
-    justify-content: center;
+    align-items: center; 
+    gap: 10px;
+    margin: 20px 10px;
 }
-.delete-project-button { 
-    background-color: #cc0000;
-    color: white;
-    padding: 15px; 
-    border-radius: 5px; 
-    font-size: 16px;
-    cursor: pointer;
-    width: 850px;
-    margin: auto;
+.label-container label {
+    font-weight: bold;
+    text-align: center; 
 }
-.delete-project-button:hover {
-    background-color: #990000;
-}
-

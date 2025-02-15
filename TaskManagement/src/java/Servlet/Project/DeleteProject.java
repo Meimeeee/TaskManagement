@@ -32,7 +32,7 @@ public class DeleteProject extends HttpServlet {
             ProjectDAO projectDAO = new ProjectDAO();
             int result = projectDAO.deleteProject(projectId);
             if (result == 0) {
-                req.setAttribute("error", "Cannot delete project! There are other members in this project");
+                req.setAttribute("error", "Cannot delete project!");
                 req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("project");
