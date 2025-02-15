@@ -20,10 +20,13 @@ import javax.servlet.http.HttpSession;
  */
 public class AccountServices {
 
-    public static boolean createAccountServices(AccountDTO acc, Map<String, String> errors)
+    public static boolean createAccountServices(AccountDTO acc, Map<String, String> errors, int type)
             throws SQLException, ClassNotFoundException, AccountException {
         boolean result = false;
-        acc.setRole("member");
+        //0 : member, 1 : manager
+        if(type == 0) {
+            acc.setRole("member");
+        } else if(type == 1) acc.setRole("manager");
         String encryptPass = "";
         
         if(!AccountUtils.isValidUsername(acc.getUsername())) {

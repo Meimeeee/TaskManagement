@@ -44,7 +44,7 @@ public class UpdateProfile extends HttpServlet{
         
         boolean updated = false;
         try {
-            updated = ProfileServices.update(profile, errors);
+            updated = ProfileServices.updateProfileServices(profile, errors);
         } catch (SQLException ex) {
             Logger.getLogger(UpdateProfile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

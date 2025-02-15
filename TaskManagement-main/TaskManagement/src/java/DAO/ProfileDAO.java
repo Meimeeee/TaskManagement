@@ -9,6 +9,7 @@ import Exceptions.ProfileException;
 import JDBC.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -54,5 +55,29 @@ public class ProfileDAO {
             }
 
         }
+    }
+
+    public static ProfileDTO show(Integer id)
+            throws SQLException, ProfileException, ClassNotFoundException {
+        String query = "SELECT * FROM profile WHERE account_id = ?";
+        ProfileDTO profile = new ProfileDTO();
+
+        try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    profile.setEmail(rs.getString("email"));
+                    profile.setFirstName(rs.getString("first_name"));
+                    profile.setLastName(rs.getString("last_name"));
+                    profile.setPhoneNumber(rs.getString("phone_number"));
+                    profile.setDateOfBirth(rs.getDate("date_of_birth"));
+                    
+                } else {
+                    profile = null;
+                }
+            }
+        }
+        return profile;
     }
 }

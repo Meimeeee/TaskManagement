@@ -20,7 +20,7 @@
                         <ul>
                             <li><a href="${pageContext.request.contextPath}/Account/EditAccount.jsp">Edit Account</a></li>
                             <li><a href="${pageContext.request.contextPath}/Profile/EditProfile.jsp">Edit Profile</a></li>
-                            <li><a href="${pageContext.request.contextPath}/Profile/ShowProfile.jsp">Show Profile</a></li>
+                            <li><a href="${pageContext.request.contextPath}/show-profile">Show Profile</a></li>
                                 <c:if test="${sessionScope.role eq 'admin'}">
                                 <li><a href="${pageContext.request.contextPath}/Account/CreateManager.jsp">Create Manager Account</a></li>
                                 </c:if>

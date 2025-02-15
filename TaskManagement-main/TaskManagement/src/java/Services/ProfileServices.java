@@ -70,7 +70,7 @@ public class ProfileServices {
         return result;
     }
     
-    public static boolean update(ProfileDTO profile, Map<String, String> errors)
+    public static boolean updateProfileServices(ProfileDTO profile, Map<String, String> errors)
             throws SQLException, ClassNotFoundException, ProfileException {
         boolean result = false;
         boolean flag = false; 
@@ -112,5 +112,11 @@ public class ProfileServices {
             return result;
         }
         return result;
+    }
+    
+     public static ProfileDTO showProfileServices(Integer id)
+            throws SQLException, ClassNotFoundException, ProfileException {
+        ProfileDTO profile = ProfileDAO.show(id);
+        return profile;
     }
 }
