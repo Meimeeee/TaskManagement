@@ -1,0 +1,94 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 14, 2025, 4:18:18 PM
+    Author     : Huynh Han Dong
+*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+}
+h2 {
+    text-align: center;
+    color: #131313;
+    margin-top: 10px;
+}
+p {
+    padding-left: 10px;
+}
+button {
+    background-color: #f4f4f9;
+    padding: 8px 15px; 
+    font-size: 16px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+button:hover {
+    background-color: #999999
+}
+.go-back-button {
+    margin-bottom: 20px;
+}
+.delete-button {
+    margin-right: 20px;
+}
+.edit-button {
+    margin-left: 20px;
+}
+.project-info {
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background: #d8d8d8; 
+    padding: 30px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.project-member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ccc; 
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.add-member-form {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-left: 30px;
+}
+.input-field {
+    width: 300px; 
+    height: 20px;
+    padding: 10px;
+    margin-right: 5px;
+    border: 1.6px solid;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.delete-project-container {
+    display: flex;
+    justify-content: center;
+}
+.delete-project-button { 
+    background-color: #cc0000;
+    color: white;
+    padding: 15px; 
+    border-radius: 5px; 
+    font-size: 16px;
+    cursor: pointer;
+    width: 850px;
+    margin: auto;
+}
+.delete-project-button:hover {
+    background-color: #990000;
+}
+
