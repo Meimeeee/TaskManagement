@@ -21,7 +21,7 @@ public class ProfileServices {
     public static boolean createProfileService(ProfileDTO profile, Map<String, String> errors, String username)
             throws SQLException, ClassNotFoundException, ProfileException {
         boolean result = false;
-        boolean flag = false; 
+        boolean flag = false;
 
         // Validate email
         if (!ProfileUtils.isValidEmail(profile.getEmail())) {
@@ -65,6 +65,75 @@ public class ProfileServices {
             result = true;
         } catch (ProfileException | ClassNotFoundException | SQLException e) {
             errors.put("database", "Failed to create profile: " + e.getMessage() + " khi create ");
+            return result;
+        }
+        return result;
+    }
+
+    public static boolean updateProfileService(ProfileDTO profile, Map<String, String> errors)
+            throws SQLException, ClassNotFoundException, ProfileException {
+        boolean result = false;
+        boolean flag = false;
+
+        // Validate email
+        if (!ProfileUtils.isValidEmail(profile.getEmail())) {
+            errors.put("email", "Invalid email.");
+            flag = true;
+        }
+
+        // Validate first name
+        if (!ProfileUtils.isValidName(profile.getFirstName())) {
+            errors.put("firstName", "Invalid first name.");
+            flag = true;
+        }
+
+        // Validate last name
+        if (!ProfileUtils.isValidName(profile.getLastName())) {
+            errors.put("lastName", "Invalid last name.");
+            flag = true;
+        }
+
+        // Validate phone number
+        if (!ProfileUtils.isValidPhone(profile.getPhoneNumber())) {
+            errors.put("phoneNumber", "Invalid phone number.");
+            flag = true;
+        }
+
+        if (flag) {
+            return result;
+        }
+
+        // Create profile
+        try {
+            ProfileDAO.update(profile);
+            result = true;
+        } catch (ProfileException | ClassNotFoundException | SQLException e) {
+            errors.put("database", "Failed to update profile: " + e.getMessage());
+            return result;
+        }
+        return result;
+    }
+
+    public static ProfileDTO showProfileServices(Integer id)
+            throws SQLException, ClassNotFoundException, ProfileException {
+        ProfileDTO profile = ProfileDAO.show(id);
+        return profile;
+    }
+    
+    public static boolean createManagerAccountServices(String username) {
+        boolean result = false;
+        ProfileDTO profile = new ProfileDTO();
+        try {
+            Integer id = AccountDAO.getIdByUsername(username);
+            profile.setAccountId(id);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            ProfileDAO.create(profile);
+            result = true;
+        } catch (ProfileException | ClassNotFoundException | SQLException e) {
             return result;
         }
         return result;

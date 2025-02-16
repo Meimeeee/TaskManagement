@@ -18,23 +18,26 @@ import java.util.logging.Logger;
  * @author DELL
  */
 public class LoginServices {
+
     public static AccountDTO checkForLogin(AccountDTO acc, Map<String, String> errors) {
-        AccountDTO tmp = null;
+        AccountDTO tmp = new AccountDTO();
         try {
             tmp = AccountDAO.getAccount(acc.getUsername());
         } catch (ClassNotFoundException | SQLException | LoginExceptions ex) {
-            errors.put("Database", ex.getMessage());
             return null;
         }
-        if(tmp == null) {
-            errors.put("username", "Can not find user with this username.");
+
+        if (tmp != null) {
+            String decodePassword = LoginUtils.decodePassword(tmp.getPassword());
+            if (decodePassword.equals(acc.getPassword())) {
+                return tmp;
+            } else {
+                errors.put("password", "Wrong password");
+                return null;
+            }
+        } else {
+            errors.put("username", "Username is not exist.");
             return null;
         }
-        
-        String decodePassword = LoginUtils.decodePassword(tmp.getPassword());
-        if(decodePassword.equals(acc.getPassword())) {
-            return tmp;
-        } else errors.put("password", "Wrong password");
-        return null;
     }
 }
