@@ -91,7 +91,7 @@
                         let dobValue = new Date(this.value);
 
                         if (dobValue < minDate || dobValue > maxDate || isNaN(dobValue.getTime())) {
-                            dobError.textContent = "Ngày sinh phải từ 01/01/1990 đến hôm nay.";
+                            dobError.textContent = "Invalid date.";
                             this.value = "";
                         } else {
                             dobError.textContent = "";

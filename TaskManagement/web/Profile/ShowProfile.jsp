@@ -25,7 +25,7 @@
                 <label>Date of Birth:</label> ${requestScope.dob}
             </div>
             <div class="buttons">
-                <button type="button" class="back-btn" onclick="window.location.href = '<%= request.getContextPath()%>/home'">Back</button>
+                <button type="button" class="back-btn" onclick="window.location.href = '<%= request.getContextPath()%>/project'">Back</button>
             </div>
         </div>
     </body>
