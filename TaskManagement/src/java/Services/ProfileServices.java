@@ -119,4 +119,23 @@ public class ProfileServices {
         ProfileDTO profile = ProfileDAO.show(id);
         return profile;
     }
+    
+    public static boolean createManagerAccountServices(String username) {
+        boolean result = false;
+        ProfileDTO profile = new ProfileDTO();
+        try {
+            Integer id = AccountDAO.getIdByUsername(username);
+            profile.setAccountId(id);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            ProfileDAO.create(profile);
+            result = true;
+        } catch (ProfileException | ClassNotFoundException | SQLException e) {
+            return result;
+        }
+        return result;
+    }
 }

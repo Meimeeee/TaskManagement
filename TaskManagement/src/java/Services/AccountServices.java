@@ -25,8 +25,9 @@ public class AccountServices {
         boolean result = false;
         if(type.equalsIgnoreCase("member"))
             acc.setRole("member");
-        else if(type.equalsIgnoreCase("admin"))
+        else if(type.equalsIgnoreCase("admin")) {
             acc.setRole("admin");
+        }
         String encryptPass = "";
 
         if (!AccountUtils.isValidUsername(acc.getUsername())) {

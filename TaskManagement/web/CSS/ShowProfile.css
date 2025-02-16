@@ -1,54 +1,65 @@
+/* Định dạng chung */
 body {
     font-family: Arial, sans-serif;
-    background-color: #cce7e8;
+    background-color: #eafbea; /* Màu xanh lá pastel */
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
+
+/* Hộp chứa nội dung */
 .container {
-    background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
-    box-sizing: border-box;
     text-align: left;
+    border: 2px solid #a3d9a5; /* Viền xanh pastel */
 }
+
+/* Tiêu đề */
 h2 {
+    color: #3c8d3c;
     text-align: center;
 }
+
+/* Căn chỉnh thông tin */
 .profile-info {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #a3d9a5;
 }
+
 .profile-info label {
     font-weight: bold;
-    width: 40%;
+    color: #3c8d3c;
+    width: 35%;
+    text-align: left;
 }
-.profile-info span {
-    width: 58%;
-    padding: 8px;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    display: inline-block;
-    box-sizing: border-box;
-}
+
+
+/* Nút Back */
 .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-.buttons button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    margin-top: 20px;
     text-align: center;
 }
+
 .back-btn {
-    background-color: red;
+    background: #77dd77;
     color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #5cb85c;
 }

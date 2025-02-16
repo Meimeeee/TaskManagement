@@ -5,6 +5,7 @@
 package Servlet.Identity;
 
 import DTO.AccountDTO;
+import Services.AccountServices;
 import Services.LoginServices;
 import java.io.IOException;
 import java.util.HashMap;
@@ -29,6 +30,14 @@ public class Login extends HttpServlet {
         String password = req.getParameter("password");
         Map<String, String> errors = new HashMap<>();
         AccountDTO acc = new AccountDTO(username, password);
+       
+        boolean isExist = AccountServices.isExistAccount(username, errors);
+        if(isExist == false) {
+            errors.put("username", "Username is not exist.");
+            req.setAttribute("errors", errors);
+            req.getRequestDispatcher("Identity/login.jsp").forward(req, resp);
+        } else errors.remove("username");
+        
         AccountDTO isValidAccount = LoginServices.checkForLogin(acc, errors);
 
         if (isValidAccount != null) {
