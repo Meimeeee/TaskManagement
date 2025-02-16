@@ -38,6 +38,30 @@
             <label for="dob">Date of Birth</label>
             <input type="date" id="dob" name="dob" required>
             
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let dobInput = document.getElementById("dob");
+                    let dobError = document.getElementById("dobError");
+
+                    let minDate = new Date("1990-01-01");
+                    let maxDate = new Date();
+
+                    dobInput.setAttribute("min", minDate.toISOString().split("T")[0]);
+                    dobInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
+
+                    dobInput.addEventListener("change", function () {
+                        let dobValue = new Date(this.value);
+
+                        if (dobValue < minDate || dobValue > maxDate || isNaN(dobValue.getTime())) {
+                            dobError.textContent = "Invalid date.";
+                            this.value = "";
+                        } else {
+                            dobError.textContent = "";
+                        }
+                    });
+                });
+            </script>
+            
             <div class="buttons">
                 <button type="submit" class="save-btn">Save Changes</button>
                 <button type="button" class="back-btn" onclick="window.location.href='<%= request.getContextPath()%>/project'">Back</button>
