@@ -26,7 +26,7 @@
                     <p><strong>Project name: </strong><c:out value="${project.projectName}"/></p>
                     <p><strong>Description: </strong><c:out value="${project.projectDescription}"/></p>
                     <p><strong>Status: </strong><c:out value="${project.projectStatus}"/></p>
-                    <p><strong>Create by: </strong><c:out value="${project.createBy}"/></p>  <%-- Doi lai thanh ${requestScope.createdBy}--%>
+                    <p><strong>Create by: </strong><c:out value="${createdBy}"/></p>
                     <p><strong>Create At: </strong><c:out value="${project.createAt}"/></p>
                     <p><strong>Update at: </strong><c:out value="${project.updateAt}"/></p>
 
@@ -57,6 +57,7 @@
                                         <form action="delete-member" method="POST">
                                             <input type="hidden" name="projectId" value="${project.projectId}">
                                             <input type="hidden" name="accountId" value="${member.accountId}">
+                                            <input type="hidden" name="role" value="manager">
                                             <button class="delete-button" type="submit">Delete</button>
                                         </form>
                                     </c:if>
