@@ -5,6 +5,7 @@
  */
 package Servlet.Project;
 
+import DAO.AccountDAO;
 import DAO.ProjectDAO;
 import DAO.ProjectMemberDAO;
 import DTO.ProjectDTO;
@@ -43,14 +44,13 @@ public class ProjectInfo extends HttpServlet {
                 } else {
                     req.setAttribute("error", "Project not found!");
                 }
-                /*AccountDAO accountDAO = new AccountDAO();
+                AccountDAO accountDAO = new AccountDAO();
                 String name = accountDAO.getUsernameById(project.getCreateBy());
                 if (name != null) {
                     req.setAttribute("createdBy", name);
                 } else {
-                // Vien tu dien vao nha
+                    req.setAttribute("error", "Cannot get create by from database!");
                 }
-                */
                 ProjectMemberDAO memberDAO = new ProjectMemberDAO();
                 List<ProjectMemberDTO> memberList = memberDAO.getMemberList(projectId);
                 if (memberList != null) {

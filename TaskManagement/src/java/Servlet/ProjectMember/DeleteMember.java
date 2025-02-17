@@ -34,15 +34,15 @@ public class DeleteMember extends HttpServlet {
 
             ProjectMemberDAO memberDAO = new ProjectMemberDAO();
             int result = memberDAO.deleteMember(accountId, projectId);
-            if (result == 0) {
+            if (result > 0) {
                 String role = req.getParameter("role");
-                if (role != null) {
+                if ("member".equals(role)) {
                     resp.sendRedirect("project");
                 } else {
                     resp.sendRedirect("project-info?projectId=" + projectId);
                 }
             } else {
-                req.setAttribute("error", "You are not a member of this project anymore!");
+                req.setAttribute("error", "Cannot delete this account from project!");
                 req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             }
         } catch (SQLException | ClassNotFoundException e) {
