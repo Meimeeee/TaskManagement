@@ -1,0 +1,65 @@
+/* Định dạng chung */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eafbea; /* Màu xanh lá pastel */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Hộp chứa nội dung */
+.container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: left;
+    border: 2px solid #a3d9a5; /* Viền xanh pastel */
+}
+
+/* Tiêu đề */
+h2 {
+    color: #3c8d3c;
+    text-align: center;
+}
+
+/* Căn chỉnh thông tin */
+.profile-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #a3d9a5;
+}
+
+.profile-info label {
+    font-weight: bold;
+    color: #3c8d3c;
+    width: 35%;
+    text-align: left;
+}
+
+
+/* Nút Back */
+.buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.back-btn {
+    background: #77dd77;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #5cb85c;
+}

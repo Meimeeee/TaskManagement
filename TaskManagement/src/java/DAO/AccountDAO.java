@@ -98,6 +98,23 @@ public class AccountDAO {
         return result;
     }
 
+    public static String getUsernameById(Integer id)
+            throws ClassNotFoundException, SQLException {
+        String query = "SELECT username FROM account WHERE account_id = ?";
+        String result = null;
+
+        try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query)) {
+
+            stmt.setInt(1, id); // Set ID instead of undefined username
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    result = rs.getString("username");
+                }
+            }
+        }
+        return result;
+    }
+
     public static int isExistAccount(String username)
             throws ClassNotFoundException, SQLException {
         String query = "SELECT COUNT(*) FROM account WHERE username = ?";
@@ -132,5 +149,22 @@ public class AccountDAO {
             }
         }
         return ans;
+    }
+
+    public static void update(AccountDTO acc) throws
+            SQLException, ClassNotFoundException, AccountException {
+        String query = "UPDATE account SET username = ?, password = ? WHERE account_id = ?";
+
+        try (Connection con = Connect.getConnect(); PreparedStatement stmt = con.prepareStatement(query)) {
+
+            stmt.setString(1, acc.getUsername());
+            stmt.setString(2, acc.getPassword());
+            stmt.setInt(3, acc.getAccountId()); 
+
+            int row = stmt.executeUpdate();
+            if (row == 0) {
+                throw new AccountException("Failed to update account.");
+            }
+        }
     }
 }
