@@ -96,7 +96,7 @@ public class ProjectDAO {
     
     public ArrayList<ProjectDTO> getProjectList(int accountId) throws SQLException, ClassNotFoundException {
         ArrayList<ProjectDTO> projectList = new ArrayList<>();
-        String query = "SELECT project_id, project_name, update_at, project_status FROM Project WHERE create_by = ?";
+        String query = "SELECT p.project_id, project_name, update_at, project_status FROM Project p INNER JOIN Project_member m ON p.project_id = m.project_id WHERE account_id = ?";
         try(Connection conn = Connect.getConnect();
                 PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, accountId);
@@ -113,5 +113,21 @@ public class ProjectDAO {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in getting project list.", e);
         }
         return projectList;
+    }
+    
+    public int getProjectId() throws SQLException, ClassNotFoundException {
+        int projectId = 0;
+        String query = "SELECT MAX(project_id) AS project_id FROM Project";
+        try(Connection conn = Connect.getConnect();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            ResultSet result = statement.executeQuery();
+            
+            if (result.next()) {
+                projectId = result.getInt("project_id");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in getting newest projectId.", e);
+        }
+        return projectId;
     }
 }

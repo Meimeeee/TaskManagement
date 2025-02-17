@@ -7,7 +7,6 @@ package Servlet.Project;
 
 import DAO.ProjectDAO;
 import DTO.ProjectDTO;
-import Exceptions.InvalidDataException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -39,18 +38,17 @@ public class EditProject extends HttpServlet {
                 if (project != null) {
                     req.setAttribute("project", project);
                 } else {
-                    throw new InvalidDataException("Cannot get project by id!");
+                    req.setAttribute("error", "Project not found!");
                 }
+                req.getRequestDispatcher("Project/editProject.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("login-servlet");
-                return;
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(EditProject.class.getName()).log(Level.SEVERE, null, e);
             req.getRequestDispatcher("Project/editProject.jsp").forward(req, resp);
         }
-        req.getRequestDispatcher("Project/editProject.jsp").forward(req, resp);
     }
     
     @Override
@@ -68,10 +66,12 @@ public class EditProject extends HttpServlet {
             String projectStatus = req.getParameter("status");
 
             int result = projectDAO.updateProject(new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus));
-            if (result == 0) {
-                throw new InvalidDataException("Cannot update project in database!");
+            if (result > 0) {
+                resp.sendRedirect("project-info?projectId=" + projectId);
+            } else{
+                req.setAttribute("error", "Cannot update project!");
+                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
             }
-            resp.sendRedirect("project-info?projectId=" + projectId);
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(EditProject.class.getName()).log(Level.SEVERE, null, e);

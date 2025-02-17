@@ -6,8 +6,9 @@
 package Servlet.Project;
 
 import DAO.ProjectDAO;
+import DAO.ProjectMemberDAO;
 import DTO.ProjectDTO;
-import Exceptions.InvalidDataException;
+import DTO.ProjectMemberDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -39,25 +40,38 @@ public class AddProject extends HttpServlet {
             if (session != null) {
                 String projectName = req.getParameter("projectName");
                 String projectDescription = req.getParameter("description");
-                String accountId = req.getParameter("createBy");
-                int createBy = Integer.parseInt(accountId);
+                String createByRaw = req.getParameter("createBy");
+                int createBy = Integer.parseInt(createByRaw);
                 LocalDate createAt = LocalDate.now();
                 LocalDate updateAt = LocalDate.now();
-
+                
                 ProjectDAO projectDAO = new ProjectDAO();
                 int result = projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "InProgress"));
-                if (result == 0) {
-                    throw new InvalidDataException("Cannot add project to database!");
+                if (result > 0) {
+                    int projectId = projectDAO.getProjectId();
+                    if (projectId > 0) {
+                        ProjectMemberDAO memberDAO = new ProjectMemberDAO();
+                        int added = memberDAO.addMember(new ProjectMemberDTO(projectId, createBy, "manager"));
+                        if (added > 0) {
+                            resp.sendRedirect("project-info?projectId=" + projectId);
+                            return;
+                        } else {
+                            req.setAttribute("error", "Cannot add project member to database!");
+                        }
+                    } else {
+                        req.setAttribute("error", "Cannot get the newest projectId!");
+                    }
+                } else {
+                    req.setAttribute("error", "Cannot add project member to database!");
                 }
+                req.getRequestDispatcher("Project/AddProject.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect("login-servlet");
-                return;
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
             Logger.getLogger(AddProject.class.getName()).log(Level.SEVERE, null, e);
-            req.getRequestDispatcher("Project/projectList.jsp").forward(req, resp);
+            req.getRequestDispatcher("Project/AddProject.jsp").forward(req, resp);
         }
-        resp.sendRedirect("project");
     }
 }

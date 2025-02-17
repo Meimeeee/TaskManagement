@@ -20,7 +20,7 @@ public class Connect {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String username = "sa";
-            String pass = "12345";
+            String pass = "19112005";
             String DB_NAME = "TaskManagement";
             String URL = "jdbc:sqlserver://localhost:1433"
                     + ";databaseName=" + DB_NAME

@@ -68,3 +68,18 @@ BEGIN
     INNER JOIN inserted i ON a.account_id = i.account_id;
 END;
 GO
+
+GO
+CREATE TRIGGER trg_UpdateProfileTimestamp
+ON profile
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    UPDATE profile
+    SET update_at = GETDATE()
+    FROM profile p
+    INNER JOIN inserted i ON p.account_id = i.account_id;
+END;
+GO
