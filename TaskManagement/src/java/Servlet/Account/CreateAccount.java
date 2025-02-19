@@ -57,7 +57,6 @@ public class CreateAccount extends HttpServlet {
         }
 
         if (createdAccount && createdProfile) {
-
             resp.sendRedirect("project");
         } else {
             req.setAttribute("errors", errors);

@@ -15,12 +15,14 @@
         <c:if test="${not empty sessionScope.id}">
             <div class="container">
                 <div class="sidebar">
-                    <p>Profile</p>
+                    <p><b>PROFILE</b></p>
                     <ul>
                         <li><a href="<%= request.getContextPath()%>/Account/EditAccount.jsp">Edit Account</a></li>
                         <li><a href="<%= request.getContextPath()%>/Profile/EditProfile.jsp">Edit Profile</a></li>
                         <li><a href="<%= request.getContextPath()%>/show-profile">Show Profile</a></li>
-                        <li><a href="<%= request.getContextPath()%>/Account/CreateAccount.jsp">Create Manage Account</a></li>
+                            <c:if test="${sessionScope.role eq 'admin'}">
+                            <li><a href="<%= request.getContextPath()%>/Account/CreateAccount.jsp">Create Manage Account</a></li>
+                            </c:if>
                     </ul>
                 </div>
 

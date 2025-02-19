@@ -19,8 +19,10 @@
             
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value="${param.password}" required>
+
             <c:if test="${not empty errors.password}">
-                <p style="color: red; font-size: 15px">${errors.username}</p>
+                <p style="color: red; font-size: 15px">${errors.password}</p>
+
             </c:if>
             
             <div class="buttons">
