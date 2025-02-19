@@ -26,7 +26,7 @@ public class AccountServices {
         if(type.equalsIgnoreCase("member"))
             acc.setRole("member");
         else if(type.equalsIgnoreCase("admin")) {
-            acc.setRole("admin");
+            acc.setRole("manager");
         }
         String encryptPass = "";
 
@@ -88,9 +88,9 @@ public class AccountServices {
 
         boolean flag = isExistAccount(acc.getUsername(), errors);
 
-        if (flag) {
-            return result;
-        }
+//        if (flag) {
+//            return result;
+//        }
         if (AccountUtils.isValidPassword(acc.getPassword())) {
             try {
                 encryptPass = AccountUtils.EncryptPassword(acc.getPassword());
