@@ -64,11 +64,11 @@ public class ProfileDAO {
             stmt.setInt(1, id); 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    profile.setEmail(rs.getString("email"));
-                    profile.setFirstName(rs.getString("first_name"));
-                    profile.setLastName(rs.getString("last_name"));
-                    profile.setPhoneNumber(rs.getString("phone_number"));
-                    profile.setDateOfBirth(rs.getDate("date_of_birth"));
+                    profile.setEmail(rs.getString("email") != null ? rs.getString("email") : "Not yet. Please insert!");
+                    profile.setFirstName(rs.getString("first_name") != null ? rs.getString("first_name") : "Not yet. Please insert!");
+                    profile.setLastName(rs.getString("last_name") != null ? rs.getString("last_name") : "Not yet. Please insert!");
+                    profile.setPhoneNumber(rs.getString("phone_number") != null ? rs.getString("phone_number") : "Not yet. Please insert!");
+                    profile.setDateOfBirth(rs.getDate("date_of_birth") != null ? rs.getDate("date_of_birth") : new java.sql.Date(System.currentTimeMillis()));
                 } else {
                     throw new ProfileException("Profile not found for account_id: " + profile.getAccountId());
                 }
