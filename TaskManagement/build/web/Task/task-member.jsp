@@ -1,22 +1,27 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="CSS/task-member.css"/>
+        <link rel="stylesheet" href="CSS/task-member.css" />
     </head>
+
     <body>
-        <c:if test="${requestScope.error != null}">
-            <p style="color: #cc0000"> ${requestScope.error} </p>
-        </c:if>
+
+        <form action="project" method="get">
+            <button class="go-back-button" type="submit">Go back</button>
+        </form>
         <form method="post" action="">
             <div class="container">
                 <h1>${requestScope.projectName}</h1>
+                <c:if test="${requestScope.error != null}">
+                    <p style="color: #cc0000"> ${requestScope.error} </p>
+                </c:if>
                 <c:forEach items="${requestScope.tasks}" var="tasks" varStatus="status">
                     <div class="accordion">
-                        <label class="accordion-label" for="task-${tasks.taskId}">                                
+                        <label class="accordion-label" for="task-${tasks.taskId}">
                             <div class="task-header">
                                 <span class="task-name">${tasks.taskName}</span>
                             </div>
@@ -35,8 +40,11 @@
                             <form method="post" action="">
                                 <div class="link-submission">
                                     <input type="hidden" name="taskId" value="${tasks.taskId}">
-                                    <label for="linkSubmission${tasks.taskId}"><p><strong>Link Submission</strong></p></label> 
-                                    <input type="url" id="linkSubmission${tasks.taskId}" name="link" value="${tasks.linkSubmission}" placeholder="Enter link here">
+                                    <label for="linkSubmission${tasks.taskId}">
+                                        <p><strong>Link Submission</strong></p>
+                                    </label>
+                                    <input type="url" id="linkSubmission${tasks.taskId}" name="link"
+                                        value="${tasks.linkSubmission}" placeholder="Enter link here">
                                     <button type="submit">Update</button>
                                 </div>
                             </form>
@@ -44,10 +52,13 @@
                             <div class="task-actions">
                                 <c:choose>
                                     <c:when test="${tasks.linkSubmission != null && tasks.linkSubmission != ''}">
-                                        <button class="button-submit" onclick="window.open('${tasks.linkSubmission}', '_blank')">View Submission</button>
+                                        <button class="button-submit"
+                                            onclick="window.open('${tasks.linkSubmission}', '_blank')">View
+                                            Submission</button>
                                     </c:when>
                                     <c:otherwise>
-                                        <button disabled style="cursor: not-allowed; background-color: #999999;">No Submission</button>
+                                        <button disabled style="cursor: not-allowed; background-color: #999999;">No
+                                            Submission</button>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -58,4 +69,5 @@
             </div>
         </form>
     </body>
-</html>
+
+    </html>

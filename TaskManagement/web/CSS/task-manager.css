@@ -1,31 +1,48 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
-    background-color: #dbd8d8;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #d8f8e144;
     padding: 20px;
 }
+
 .container {
     background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(27, 94, 57, 0.842);
     max-width: 600px;
     margin: auto;
 }
+
 .add-task-button {
-    text-align:  right;
+    text-align: right;
     margin: 12px;
 
 }
+
 h1 {
     font-size: 24px;
     text-align: center;
-    color: #333;
+    color: #0d5029e3;
 }
+
+p {
+    color: #000000f6;
+}
+
 .accordion {
-    background-color: rgb(206, 205, 205);
-    border-bottom: 1px solid #ddd;
-    border-radius:  12px;
+    background-color: #b8d1c094;
+    border-bottom: 1px solid #139e4d81;
+    border-radius: 12px;
     margin-top: 8px;
+}
+
+.accordion-label {
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #57bb81c0;
 }
 .task-header {
     border-radius: 8px;
@@ -35,30 +52,26 @@ h1 {
     cursor: pointer;
 }
 
-.accordion-label {
-    border-radius: 8px;
-    padding: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #505050;
-}
-.task-id, .task-name {
+
+
+.task-id,
+.task-name {
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
+    color: #2c5035;
 }
+
 .accordion-content {
     display: none;
     padding: 12px 12px;
-    
+
 }
 
 .accordion .accordion-input-checkbox {
     display: none;
 }
 
-.accordion-input-checkbox:checked + .accordion-content {
+.accordion-input-checkbox:checked+.accordion-content {
     display: block;
 }
 
@@ -67,27 +80,29 @@ h1 {
     align-items: center;
     gap: 10px;
 }
+
 input[type="url"] {
     flex: 1;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 button.button-submit {
     padding: 8px 16px;
-    background-color: #3d9e55;
+    background-color: #2e8a47e8;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.button-submit:hover{
-background-color: #065e1c;
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  opacity: 0.8;
+.button-submit:hover {
+    background-color: #0c4e1d98;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 button:disabled {
@@ -119,8 +134,10 @@ button:hover {
 
 .button-header {
     display: flex;
-    gap: 10px; /* Tạo khoảng cách giữa 2 nút */
-    justify-content: flex-end; /* Đẩy nút sang bên phải */
+    gap: 10px;
+    /* Tạo khoảng cách giữa 2 nút */
+    justify-content: flex-end;
+    /* Đẩy nút sang bên phải */
     align-items: center;
 }
 
@@ -144,18 +161,21 @@ button:hover {
 
 /* Edit Button */
 .btn-edit {
-    background-color: #28c535b9; /* Xanh lá */
+    border: 2px solid #4a819ba6 !important;
+    background-color: #509cce;
     color: rgb(253, 253, 253);
+    /* border: 2px solid; */
 }
 
 .btn-edit:hover {
     background-color: #237a27;
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
 }
 
 /* Delete Button */
 .btn-delete {
-    background-color: #cc4d44; /* Đỏ */
+    border: 2px solid #7a232388 !important;
+    background-color: #d86a62e1;
     color: white;
 }
 
@@ -164,11 +184,38 @@ button:hover {
     transform: scale(1.05);
 }
 
+.add-button {
+    color: #2d5340cc;
+    font-weight: bold;
+    border: 2px solid #408a5fc0 !important;
+    background-color: #57bb81c0;
+}
+
+.add-button:hover {
+    background-color: #0e4e35e8;
+}
+
 /* Hover Effect (Chung) */
 .button-header button:active {
     transform: scale(0.95);
 }
 
-.add-button {
-    background-color: #505050;
+.go-back-button {
+    background-color: #93b6939d;
+    color: #435f4f;
+    border: 2px solid #3a5c3aa2;
+    transition: background-color 0.3 ease, transform 0.2s ease;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.go-back-button:hover {
+    background-color: #3d7041a9;
 }

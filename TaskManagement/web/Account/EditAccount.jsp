@@ -22,6 +22,7 @@
 
             <c:if test="${not empty errors.password}">
                 <p style="color: red; font-size: 15px">${errors.password}</p>
+
             </c:if>
             
             <div class="buttons">
