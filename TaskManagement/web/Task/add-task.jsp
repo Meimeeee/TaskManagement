@@ -9,13 +9,15 @@
     </head>
 
     <body>
-        <form action="project" method="get">
+        <form action="task-manager" method="get">
+            <input type="hidden" name="projectId" value="${param.projectId}">
             <button class="go-back-button" type="submit">Go back</button>
         </form>
         <div class="form-container">
             <div class="title-comtainer">
                 <h1 class="form-title">Add New Task</h1>
             </div>
+
 
             <div class="error-container">
                 <c:if test="${requestScope.error != null}">
@@ -53,17 +55,21 @@
                             let dueDateError = document.getElementById("dueDateError");
 
                             let today = new Date();
-                            today.setHours(0, 0, 0, 0); 
-                            let minDate = today.toISOString().split("T")[0];
+                            today.setHours(0, 0, 0, 0);
 
-                            dueDateInput.setAttribute("min", minDate);
+                            let maxDate = new Date();
+                            maxDate.setDate(today.getDate() + 30);
+
+
+                            dueDateInput.setAttribute("min", today.toISOString().split("T")[0]);
+                            dueDateInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
 
                             dueDateInput.addEventListener("change", function () {
-                                let selectedDate = new Date(this.value);
-                                selectedDate.setHours(0, 0, 0, 0); 
+                                let selectDate = new Date(this.value);
+                                selectDate.setHours(0, 0, 0, 0);
 
-                                if (selectedDate < today || isNaN(selectedDate.getTime())) {
-                                    dueDateError.textContent = "Please select today or a future date.";
+                                if (selectDate < today || selectDate > maxDate || isNaN(selectDate.getTime())) {
+                                    dueDateError.textContent = "Invalid date.";
                                     this.value = "";
                                 } else {
                                     dueDateError.textContent = "";
