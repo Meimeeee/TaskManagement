@@ -17,6 +17,69 @@ h2 {
     color: #131313;
     margin-top: 10px;
 }
+
+/* Định dạng container chính */
+.container {
+    display: flex; /* Bố cục flex giúp sidebar và nội dung chính ngang hàng */
+    align-items: stretch; /* Đảm bảo các phần có chiều cao đồng đều */
+    min-height: 100vh; /* Đảm bảo sidebar cao tối đa */
+}
+
+/* Sidebar màu xanh lá */
+.sidebar {
+    width: 250px; /* Điều chỉnh lại độ rộng */
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
+    align-items: center; /* Căn giữa danh sách */
+}
+
+ul {
+    list-style-type: none;
+    padding: 10px;
+    width: 150px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    text-align: center;
+}
+
+ul li {
+    width: 100%;
+    padding: 15px 0;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+ul li a:hover {
+    background-color: #ddd;
+    border-radius: 0;
+    transform: translateY(-3px); /* Di chuyển lên 3px khi hover */
+    transition: transform 0.3s ease, background 0.3s ease;
+    width: 85%;
+}
+
 p {
     padding-left: 10px;
 }
