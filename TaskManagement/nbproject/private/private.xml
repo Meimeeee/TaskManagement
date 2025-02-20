@@ -3,32 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Project/projectInfo.jsp</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/DAO/TaskDAO.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/CreateAccount.css</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Profile/ShowProfile.jsp</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Account/CreateAccount.jsp</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Project/addProject.jsp</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/EditAccount.css</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/add-task.css</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/task-manager.css</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Services/AccountServices.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Services/ProfileServices.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/EditProfile.css</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/DAO/ProfileDAO.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Account/EditAccount.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Identity/Login.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Project/editProject.jsp</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Identity/Signup.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Account/CreateAccount.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Project/projectList.jsp</file>
             <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Utils/AccountUtils.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/project-list.css</file>
             <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Account/EditAccount.jsp</file>
+            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Services/AccountServices.java</file>
+            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Account/EditAccount.java</file>
+            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Task/add-task.jsp</file>
+            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Identity/Login.java</file>
+            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Task/task-member.jsp</file>
             <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/Profile/EditProfile.jsp</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/web/CSS/project-info.css</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Profile/ShowProfile.java</file>
-            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/DAO/AccountDAO.java</file>
+            <file>file:/D:/TaskManagement/TaskManagement/TaskManagement/src/java/Servlet/Identity/Signup.java</file>
         </group>
     </open-files>
 </project-private>
