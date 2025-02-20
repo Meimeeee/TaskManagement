@@ -13,7 +13,8 @@
 
                 <body>
                     <% TaskDTO t=(TaskDTO) request.getAttribute("t"); %>
-                        <form action="project" method="get">
+                        <form action="task-manager" method="get">
+                            <input type="hidden" name="projectId" value="${param.projectId}">
                             <button class="go-back-button" type="submit">Go back</button>
                         </form>
                         <div class="form-container">
@@ -55,20 +56,25 @@
                                         required />
                                     <script>
                                         document.addEventListener("DOMContentLoaded", function () {
-                                            let dobInput = document.getElementById("dob");
-                                            let dobError = document.getElementById("dobError");
+                                            let dueDateInput = document.getElementById("dueDate");
+                                            let dueDateError = document.getElementById("dueDateError");
 
-                                            let minDate = new Date("1990-01-01");
+                                            let today = new Date();
+                                            today.setHours(0, 0, 0, 0);
+
                                             let maxDate = new Date();
+                                            maxDate.setDate(today.getDate() + 30);
 
-                                            dobInput.setAttribute("min", minDate.toISOString().split("T")[0]);
-                                            dobInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
 
-                                            dobInput.addEventListener("change", function () {
-                                                let dobValue = new Date(this.value);
+                                            dueDateInput.setAttribute("min", today.toISOString().split("T")[0]);
+                                            dueDateInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
 
-                                                if (dobValue < minDate || dobValue > maxDate || isNaN(dobValue.getTime())) {
-                                                    dobError.textContent = "Invalid date.";
+                                            dueDateInput.addEventListener("change", function () {
+                                                let selectDate = new Date(this.value);
+                                                selectDate.setHours(0, 0, 0, 0);
+
+                                                if (selectDate < today || selectDate > maxDate || isNaN(selectDate.getTime())) {
+                                                    dueDateError.textContent = "Invalid date.";
                                                     this.value = "";
                                                 } else {
                                                     dobError.textContent = "";
