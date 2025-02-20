@@ -54,7 +54,7 @@
                                 <!-- Show Delete Member Button -->
                                 <c:if test="${sessionScope.role == 'manager'}"> 
                                     <c:if test="${member.role == 'member'}"> 
-                                        <form action="delete-member" method="POST">
+                                        <form action="delete-member" method="POST" onsubmit="return confirm('Are you sure you want to delete this member?');">
                                             <input type="hidden" name="projectId" value="${project.projectId}">
                                             <input type="hidden" name="accountId" value="${member.accountId}">
                                             <input type="hidden" name="role" value="manager">

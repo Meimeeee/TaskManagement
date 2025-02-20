@@ -1,7 +1,7 @@
 /* Định dạng chung */
 body {
     font-family: Arial, sans-serif;
-    background-color: #eafbea; /* Màu xanh lá pastel */
+    background-color: #d4f7d4; /* Màu xanh lá pastel */
     margin: 0;
     padding: 0;
     display: flex;
@@ -23,7 +23,6 @@ body {
 
 /* Tiêu đề */
 h2 {
-    color: #3c8d3c;
     text-align: center;
 }
 
@@ -38,7 +37,6 @@ h2 {
 
 .profile-info label {
     font-weight: bold;
-    color: #3c8d3c;
     width: 35%;
     text-align: left;
 }
@@ -51,15 +49,11 @@ h2 {
 }
 
 .back-btn {
-    background: #77dd77;
+    background: green;
     color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.back-btn:hover {
-    background: #5cb85c;
 }

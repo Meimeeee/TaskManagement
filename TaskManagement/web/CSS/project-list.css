@@ -10,7 +10,7 @@ and open the template in the editor.
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #f4f4f9;
+    background-color: #d4f7d4;
 }
 h2 {
     text-align: center;
@@ -28,10 +28,11 @@ h2 {
 /* Sidebar màu xanh lá */
 .sidebar {
     width: 250px; /* Điều chỉnh lại độ rộng */
-    background-color: #4CAF50;
-    color: white;
+    background-color: #f2f2f2;
+    color: black;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 2px solid #a3d9a5;
     display: flex;
     flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
     align-items: center; /* Căn giữa danh sách */
@@ -40,10 +41,7 @@ h2 {
 ul {
     list-style-type: none;
     padding: 10px;
-    width: 150px;
-    border: 2px solid #333;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center; /* Căn giữa theo chiều dọc */
@@ -80,29 +78,15 @@ ul li a:hover {
     width: 85%;
 }
 
-p {
-    padding-left: 10px;
-}
 button {
-    background-color: #f4f4f9;
+    background-color: #f2f2f2;
     padding: 8px 15px; 
     font-size: 16px; 
     border-radius: 5px; 
     cursor: pointer; 
 }
-button:hover {
-    background-color: #999999
-}
 .container {
     display: flex; /* Hiển thị flex để xếp sidebar và nội dung ngang hàng */
-}
-.sidebar {
-    width: 200px; 
-    background-color: #4CAF50;
-    color: white; 
-    padding: 20px;
-    min-height: 100vh;
-    border-radius: 5px;
 }
 .main-content {
     flex-grow: 1; /* Phần nội dung sẽ chiếm hết phần còn lại */
@@ -112,27 +96,29 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #d8d8d8;
+    background: #f2f2f2;
     padding: 20px;
-    border-radius: 5px;
-    border-left: 8px solid #4CAF50;
+    border-radius: 10px;
+    border: 2px solid #a3d9a5;
     margin-bottom: 20px;
 }
 .project-link {
-    color: #218838; 
+    color: green; 
     font-size: 20px; 
     font-weight: bold;
     text-decoration: none;
     }
+.project-link:hover { 
+    text-decoration: underline;
+}
 .project-content {
     flex-grow: 1;
 }
-.project-link:hover {
-    color: #cc0000; 
-    text-decoration: underline;
-}
 .add-button {
     margin-bottom: 20px;
+    background-color: green;
+    color: white;
+    border: none;
 }
 .info-button {
     margin-right: 20px;
