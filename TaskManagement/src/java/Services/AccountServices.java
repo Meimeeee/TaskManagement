@@ -88,9 +88,6 @@ public class AccountServices {
 
         boolean flag = isExistAccount(acc.getUsername(), errors);
 
-//        if (flag) {
-//            return result;
-//        }
         if (AccountUtils.isValidPassword(acc.getPassword())) {
             try {
                 encryptPass = AccountUtils.EncryptPassword(acc.getPassword());
@@ -107,6 +104,9 @@ public class AccountServices {
                     + "@#$%^&+=!");
             return result;
         }
+        
+        if(flag)
+            return result;
 
         try {
             AccountDAO.update(acc);
