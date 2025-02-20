@@ -1,176 +1,121 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-/* Body Styling */
+/* General Styles */
 body {
-    background: linear-gradient(135deg, #131313bb, #d0d0d1);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;
+    background-color: #d8f8e1a1;
+    font-family: Arial, sans-serif;
+    margin: 0;
 }
 
 /* Form Container */
 .form-container {
-    background-color: #e3e3e4a1;
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    animation: slideIn 0.5s ease-in-out;
-}
-
-/* Edit error */
-.error-container {
-    text-align: center;
-}
-
-.error-message {
-    color: #c90000f6;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 8px;
+    background-color: white;
+    /* padding: 20px; */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(38, 94, 59, 0.459);
+    width: 400px;
 }
 
 /* Title Styling */
-.form-title {
+.title-comtainer {
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
+    background-color: #56a358e7;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
 }
 
-/* Form Group */
+.form-title {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+}
+
+/* Form Elements */
 .form-group {
-    margin-bottom: 20px;
+    margin: 15px 0;
 }
 
-/* Label Styling */
 label {
     display: block;
-    margin-bottom: 8px;
-    color: #444;
     font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     font-size: 14px;
 }
 
-/* Input & Textarea Styling */
-input[type="text"],
-input[type="date"],
 textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-/* Focus Effects */
-input:focus,
-textarea:focus {
-    border-color: #494949;
-    background-color: #fff;
-    box-shadow: 0 0 8px rgba(207, 207, 207, 0.5);
-}
-
-/* Textarea Adjustments */
-textarea {
+    height: 60px;
     resize: none;
-    min-height: 80px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #48a04c;
+    box-shadow: 0px 0px 8px rgba(71, 165, 76, 0.5);
+    outline: none;
+    /* Loại bỏ viền mặc định của trình duyệt */
+}
+
+.go-back-button {
+    background-color: #93b6939d;
+    color: #435f4f;
+    border: 2px solid #3a5c3aa2;
+    transition: background-color 0.3 ease, transform 0.2s ease;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.go-back-button:hover {
+    background-color: #3d7041a9;
 }
 
 /* Submit Button */
 .btn-submit {
-    background: linear-gradient(135deg, #272727, #8d8d8d);
-    color: rgb(255, 255, 255);
+    width: 100%;
+    background-color: #56a358e7;
+    color: white;
     padding: 12px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-size: 16px;
-    transition: background 0.3s ease, transform 0.2s;
-    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s;
     font-weight: bold;
 }
 
-/* Hover & Active Effects */
 .btn-submit:hover {
-    background: linear-gradient(135deg, #35b181c5, #044222);
-    transform: scale(1.05);
+    background-color: #2e6b31;
+    transform: scale(1.02);
 }
 
-.btn-submit:active {
-    transform: scale(0.98);
-}
-
-/* Animation */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Style the label */
-label[for="assignedTo"] {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333; /* Dark gray text */
-}
-
-/* Style the select dropdown */
-#assignedTo {
-    width: 200px;
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #333;
-    cursor: pointer;
-}
-
-/* Customize dropdown arrow */
-#assignedTo {
-    appearance: none; /* Removes default styling */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="black" d="M2 0L0 2h4z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px;
-    padding-right: 30px; /* Space for custom arrow */
-}
-
-/* On hover */
-#assignedTo:hover {
-    border-color: #666;
-}
-
-/* On focus */
-#assignedTo:focus {
-    border-color: #007bff; /* Blue border */
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Style dropdown options */
-#assignedTo option {
-    padding: 10px;
+/* Error Message */
+.error-container {
+    text-align: center;
+    color: red;
     font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.task-form {
+    padding: 0px 20px 20px 20px;
+
 }

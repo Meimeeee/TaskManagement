@@ -9,8 +9,14 @@
     </head>
 
     <body>
+        <form action="project" method="get">
+            <button class="go-back-button" type="submit">Go back</button>
+        </form>
         <div class="form-container">
-            <h1 class="form-title">Add New Task</h1>
+            <div class="title-comtainer">
+                <h1 class="form-title">Add New Task</h1>
+            </div>
+
             <div class="error-container">
                 <c:if test="${requestScope.error != null}">
                     <p class="error-message">${requestScope.error}</p>
@@ -41,6 +47,30 @@
                 <div class="form-group">
                     <label for="dueDate">Due Date</label>
                     <input id="dueDate" name="dueDate" type="date" required />
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            let dueDateInput = document.getElementById("dueDate");
+                            let dueDateError = document.getElementById("dueDateError");
+
+                            let today = new Date();
+                            today.setHours(0, 0, 0, 0); 
+                            let minDate = today.toISOString().split("T")[0];
+
+                            dueDateInput.setAttribute("min", minDate);
+
+                            dueDateInput.addEventListener("change", function () {
+                                let selectedDate = new Date(this.value);
+                                selectedDate.setHours(0, 0, 0, 0); 
+
+                                if (selectedDate < today || isNaN(selectedDate.getTime())) {
+                                    dueDateError.textContent = "Please select today or a future date.";
+                                    this.value = "";
+                                } else {
+                                    dueDateError.textContent = "";
+                                }
+                            });
+                        });
+                    </script>
                 </div>
                 <button name="func" value="add" class="btn-submit" type="submit">Add Task</button>
             </form>
