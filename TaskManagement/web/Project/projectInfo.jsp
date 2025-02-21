@@ -94,8 +94,9 @@
                             <p>${error}</p>
                         </c:if>
                         <div class="delete-project-container">
-                            <form action="delete-project" method="POST">
+                            <form action="delete-project" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?');">
                                 <input type="hidden" name="projectId" value="${project.projectId}">
+                                <input type="hidden" name="accountId" value="${sessionScope.id}">
                                 <button class="delete-project-button" type="submit">Delete Project</button>
                             </form>
                         </div>
