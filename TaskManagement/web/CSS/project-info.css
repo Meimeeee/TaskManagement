@@ -10,25 +10,22 @@ and open the template in the editor.
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #f4f4f9;
+    background-color: #d4f7d4;
 }
 h2 {
     text-align: center;
     color: #131313;
-    margin-top: 10px;
+    margin: 10px 0px;
 }
 p {
     padding-left: 10px;
 }
 button {
-    background-color: #f4f4f9;
+    background-color: #f2f2f2;
     padding: 8px 15px; 
     font-size: 16px; 
     border-radius: 5px; 
     cursor: pointer; 
-}
-button:hover {
-    background-color: #999999
 }
 .go-back-button {
     margin-bottom: 20px;
@@ -44,18 +41,18 @@ button:hover {
     margin: auto;
     display: flex;
     flex-direction: column;
-    background: #d8d8d8; 
+    background: #f2f2f2; 
     padding: 30px;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 2px solid #a3d9a5;
     margin-bottom: 20px;
 }
 .project-member {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ccc; 
     padding: 20px;
-    border-radius: 5px;
+    border-bottom: 2px solid #a3d9a5;
     margin-bottom: 10px;
 }
 .add-member-form {
@@ -79,7 +76,7 @@ button:hover {
     justify-content: center;
 }
 .delete-project-button { 
-    background-color: #cc0000;
+    background-color: #ff0000;
     color: white;
     padding: 15px; 
     border-radius: 5px; 
@@ -87,8 +84,6 @@ button:hover {
     cursor: pointer;
     width: 850px;
     margin: auto;
-}
-.delete-project-button:hover {
-    background-color: #990000;
+    border: none;
 }
 

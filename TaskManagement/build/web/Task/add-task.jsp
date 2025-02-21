@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -18,6 +18,7 @@
                 <h1 class="form-title">Add New Task</h1>
             </div>
 
+
             <div class="error-container">
                 <c:if test="${requestScope.error != null}">
                     <p class="error-message">${requestScope.error}</p>
@@ -32,7 +33,7 @@
                 <div class="form-group">
                     <label for="taskDescription">Task Description</label>
                     <textarea id="taskDescription" name="taskDescription" placeholder="Describe the task"
-                        required></textarea>
+                              required></textarea>
                 </div>
 
 
@@ -71,7 +72,7 @@
                                     dueDateError.textContent = "Invalid date.";
                                     this.value = "";
                                 } else {
-                                    dobError.textContent = "";
+                                    dueDateError.textContent = "";
                                 }
                             });
                         });
@@ -82,4 +83,4 @@
         </div>
     </body>
 
-    </html>
+</html>
