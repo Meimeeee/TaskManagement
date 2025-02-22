@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+package Servlet.Task;
 
 import DAO.AccountDAO;
 import DAO.TaskDAO;
@@ -124,7 +124,7 @@ public class TaskManagerServlet extends HttpServlet {
             resp.sendRedirect("task-manager?projectId=" + projectId);
 
         } catch (NumberFormatException e) {
-            req.setAttribute("error", "Wrong number format");
+            req.setAttribute("error", "Assigned to: null");
             Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, e);
             req.getRequestDispatcher(TASK_ADD).forward(req, resp);
         } catch (SQLException ex) {
@@ -151,7 +151,7 @@ public class TaskManagerServlet extends HttpServlet {
             resp.sendRedirect("task-manager?projectId=" + projectId);
 
         } catch (NumberFormatException e) {
-            req.setAttribute("error", e.getMessage());
+            req.setAttribute("error", "Assigned to: null");
             Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, e);
 
             List<AccountDTO> accounts = AccountDAO.getAllAccounts(projectId);
