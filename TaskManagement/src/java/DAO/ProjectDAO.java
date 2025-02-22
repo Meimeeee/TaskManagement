@@ -8,11 +8,10 @@ package DAO;
 import DTO.ProjectDTO;
 import JDBC.Connect;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,8 +30,8 @@ public class ProjectDAO {
             statement.setString(2, project.getProjectDescription());
             statement.setString(3, project.getProjectStatus());
             statement.setInt(4, project.getCreateBy());
-            statement.setDate(5, Date.valueOf(project.getCreateAt()));
-            statement.setDate(6, Date.valueOf(project.getUpdateAt()));
+            statement.setTimestamp(5, project.getCreateAt());
+            statement.setTimestamp(6, project.getUpdateAt());
             result = statement.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, "SQL Exception in adding project.", e);
@@ -48,7 +47,7 @@ public class ProjectDAO {
             statement.setString(1, project.getProjectName());
             statement.setString(2, project.getProjectDescription());
             statement.setString(3, project.getProjectStatus());
-            statement.setDate(4, Date.valueOf(project.getUpdateAt()));
+            statement.setTimestamp(4, project.getUpdateAt());
             statement.setInt(5, project.getProjectId());
             result = statement.executeUpdate();
         } catch (SQLException e) {
@@ -83,8 +82,8 @@ public class ProjectDAO {
                 String projectDescription = result.getString("project_description");
                 String projectStatus = result.getString("project_status");
                 int createBy = result.getInt("create_by");
-                LocalDate createAt = result.getDate("create_at").toLocalDate();
-                LocalDate updateAt = result.getDate("update_at").toLocalDate();
+                Timestamp createAt = result.getTimestamp("create_at");
+                Timestamp updateAt = result.getTimestamp("update_at");
                 
                 project = new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus);
             }
@@ -104,7 +103,7 @@ public class ProjectDAO {
             while (result.next()) {
                 int projectId = result.getInt("project_id");
                 String projectName = result.getString("project_name");
-                LocalDate updateAt = result.getDate("update_at").toLocalDate();
+                Timestamp updateAt = result.getTimestamp("update_at");
                 String projectStatus = result.getString("project_status");
                 
                 projectList.add(new ProjectDTO(projectId, projectName, updateAt, projectStatus));

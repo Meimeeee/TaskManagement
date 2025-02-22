@@ -5,8 +5,7 @@
  */
 package DTO;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  *
@@ -20,15 +19,15 @@ public class TaskDTO {
     private int projectId;
     private String assignedTo;
     private String taskStatus;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-    private LocalDate dueDate;
+    private Timestamp createAt;
+    private Timestamp updateAt;
+    private Timestamp dueDate;
     private String linkSubmission;
 
     public TaskDTO() {
     }
 
-    public TaskDTO(int taskId, String taskName, String taskDescription, int projectId, String assignedTo, String taskStatus, LocalDateTime createAt, LocalDateTime updateAt, LocalDate dueDate, String linkSubmission) {
+    public TaskDTO(int taskId, String taskName, String taskDescription, int projectId, String assignedTo, String taskStatus, Timestamp createAt, Timestamp updateAt, Timestamp dueDate, String linkSubmission) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -89,27 +88,27 @@ public class TaskDTO {
         this.taskStatus = taskStatus;
     }
 
-    public LocalDateTime getCreateAt() {
+    public Timestamp getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDateTime createAt) {
+    public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
 
-    public LocalDateTime getUpdateAt() {
+    public Timestamp getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(LocalDateTime updateAt) {
+    public void setUpdateAt(Timestamp updateAt) {
         this.updateAt = updateAt;
     }
 
-    public LocalDate getDueDate() {
+    public Timestamp getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(Timestamp dueDate) {
         this.dueDate = dueDate;
     }
 

@@ -5,11 +5,13 @@
         <group>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/web/Task/task-member.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/web/Task/task-manager.jsp</file>
-            <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/src/java/Servlet/TaskManagerServlet.java</file>
-            <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/src/java/Servlet/TaskMemberServlet.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/web/Project/projectList.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/src/java/DAO/TaskDAO.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/web/Project/editProject.jsp</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/src/java/Servlet/Task/TaskManagerServlet.java</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/web/Project/projectInfo.jsp</file>
             <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/src/java/DTO/TaskDTO.java</file>
+            <file>file:/C:/Users/HanDong/Documents/BE%20crew/Task-Management/TaskManagement/web/Project/addProject.jsp</file>
         </group>
     </open-files>
 </project-private>

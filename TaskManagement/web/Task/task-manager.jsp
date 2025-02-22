@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -52,10 +53,10 @@
                 <div class="accordion-content">
                     <p><strong>Description: </strong>${tasks.taskDescription}</p>
                     <p><strong>Status: </strong>${tasks.taskStatus}</p>
-                    <p><strong>Due Date: </strong>${tasks.dueDate}</p>
+                    <p><strong>Due Date: </strong><fmt:formatDate value="${tasks.dueDate}" pattern="yyyy-MM-dd"/></p>
                     <p><strong>Assigned Members: </strong>${tasks.assignedTo}</p>
-                    <p><strong>Create At: </strong> ${tasks.createAt}</p>
-                    <p><strong>Update At: </strong> ${tasks.updateAt}</p>
+                    <p><strong>Create At: </strong><fmt:formatDate value="${tasks.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+                    <p><strong>Update At: </strong><fmt:formatDate value="${tasks.updateAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
                     <p><strong>Link Submission: </strong> ${tasks.linkSubmission}</p>
                     <div class="task-actions">
                         <c:choose>

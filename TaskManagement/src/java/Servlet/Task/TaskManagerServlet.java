@@ -12,6 +12,7 @@ import DTO.TaskDTO;
 import Exceptions.TaskException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,9 +29,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TaskManagerServlet extends HttpServlet {
 
-    private String TASK_MANAGER = "Task/task-manager.jsp";
-    private String TASK_EDIT = "Task/edit-task.jsp";
-    private String TASK_ADD = "Task/add-task.jsp";
+    private final String TASK_MANAGER = "Task/task-manager.jsp";
+    private final String TASK_EDIT = "Task/edit-task.jsp";
+    private final String TASK_ADD = "Task/add-task.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -64,14 +65,10 @@ public class TaskManagerServlet extends HttpServlet {
                 }
             }
 
-        } catch (SQLException ex) {
-            req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             req.setAttribute("error", ex.getMessage());
             Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         req.getRequestDispatcher(url).forward(req, resp);
     }
 
@@ -113,9 +110,11 @@ public class TaskManagerServlet extends HttpServlet {
             String taskName = req.getParameter("taskName");
             String taskDescription = req.getParameter("taskDescription");
             int assigned = Integer.parseInt(req.getParameter("assignedTo"));
-            LocalDate dueDate = LocalDate.parse(req.getParameter("dueDate"));
-            LocalDateTime createAt = LocalDateTime.now();
-            LocalDateTime updateAt = LocalDateTime.now();
+            LocalDate date = LocalDate.parse(req.getParameter("dueDate"));
+            Timestamp dueDate = Timestamp.valueOf(date.atStartOfDay());
+            LocalDateTime dateTime = LocalDateTime.now();
+            Timestamp createAt = Timestamp.valueOf(dateTime);
+            Timestamp updateAt = Timestamp.valueOf(dateTime);
 
             TaskDTO task = new TaskDTO(0, taskName, taskDescription, projectId, null, null, createAt, updateAt, dueDate, null);
             TaskDAO dao = TaskDAO.getInstance();
@@ -143,8 +142,10 @@ public class TaskManagerServlet extends HttpServlet {
             String taskName = req.getParameter("taskName");
             String taskDescription = req.getParameter("taskDescription");
             int assigned = Integer.parseInt(req.getParameter("assignedTo"));
-            LocalDate dueDate = LocalDate.parse(req.getParameter("dueDate"));
-            LocalDateTime updateAt = LocalDateTime.now();
+            LocalDate date = LocalDate.parse(req.getParameter("dueDate"));
+            Timestamp dueDate = Timestamp.valueOf(date.atStartOfDay());
+            LocalDateTime dateTime = LocalDateTime.now();
+            Timestamp updateAt = Timestamp.valueOf(dateTime);
             TaskDTO task = new TaskDTO(taskId, taskName, taskDescription, projectId, null, null, null, updateAt, dueDate, null);
             taskDao.edit(task, assigned);
 

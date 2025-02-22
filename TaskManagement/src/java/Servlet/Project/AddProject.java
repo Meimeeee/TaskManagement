@@ -11,7 +11,8 @@ import DTO.ProjectDTO;
 import DTO.ProjectMemberDTO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -42,8 +43,9 @@ public class AddProject extends HttpServlet {
                 String projectDescription = req.getParameter("description");
                 String createByRaw = req.getParameter("createBy");
                 int createBy = Integer.parseInt(createByRaw);
-                LocalDate createAt = LocalDate.now();
-                LocalDate updateAt = LocalDate.now();
+                LocalDateTime dateTime = LocalDateTime.now();
+                Timestamp createAt = Timestamp.valueOf(dateTime);
+                Timestamp updateAt = Timestamp.valueOf(dateTime);
                 
                 ProjectDAO projectDAO = new ProjectDAO();
                 int result = projectDAO.addProject(new ProjectDTO(projectName, projectDescription, createBy, createAt, updateAt, "InProgress"));
