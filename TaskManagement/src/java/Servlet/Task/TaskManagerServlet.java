@@ -42,6 +42,21 @@ public class TaskManagerServlet extends HttpServlet {
             TaskDAO taskDao = TaskDAO.getInstance();
             List<TaskDTO> tasks = taskDao.getTask(projectId);
             String projectName = taskDao.getProjectName(projectId);
+
+            String userSearch = req.getParameter("search");
+            if (userSearch != null) {
+                tasks = dao.search(projectId, userSearch);
+            }
+
+            String sort = (String) req.getParameter("sort");
+            if (sort != null) {
+                if (sort.equals("date")) {
+                    tasks = dao.sortByDate(projectId);
+                } else if (sort.equals("status")) {
+                    tasks = dao.sortByStatus(projectId);
+                }
+            }
+
             req.setAttribute("projectName", projectName);
             req.setAttribute("tasks", tasks);
 
@@ -105,7 +120,6 @@ public class TaskManagerServlet extends HttpServlet {
 
     private void addTask(HttpServletRequest req, HttpServletResponse resp) throws ClassNotFoundException, IOException, ServletException {
         try {
-//            int taskId = Integer.parseInt(req.getParameter("taskId"));
             int projectId = Integer.parseInt(req.getParameter("projectId"));
             String taskName = req.getParameter("taskName");
             String taskDescription = req.getParameter("taskDescription");
@@ -115,8 +129,9 @@ public class TaskManagerServlet extends HttpServlet {
             LocalDateTime dateTime = LocalDateTime.now();
             Timestamp createAt = Timestamp.valueOf(dateTime);
             Timestamp updateAt = Timestamp.valueOf(dateTime);
+            String status = "In Progress";
 
-            TaskDTO task = new TaskDTO(0, taskName, taskDescription, projectId, null, null, createAt, updateAt, dueDate, null);
+            TaskDTO task = new TaskDTO(0, taskName, taskDescription, projectId, null, status, createAt, updateAt, dueDate, null);
             TaskDAO dao = TaskDAO.getInstance();
             dao.add(task, assigned);
 
@@ -178,5 +193,7 @@ public class TaskManagerServlet extends HttpServlet {
         }
         resp.sendRedirect("task-manager?projectId=" + projectId);
     }
+    
+    
 
 }
