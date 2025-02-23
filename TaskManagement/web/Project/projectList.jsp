@@ -23,6 +23,7 @@
                             <c:if test="${sessionScope.role eq 'admin'}">
                             <li><a href="<%= request.getContextPath()%>/Account/CreateAccount.jsp">Create Manage Account</a></li>
                             </c:if>
+                            <li><a href="<%= request.getContextPath()%>/log-out">Log Out</a></li>
                     </ul>
                 </div>
 

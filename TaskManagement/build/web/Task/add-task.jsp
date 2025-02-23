@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -16,7 +16,7 @@
             <div class="title-comtainer">
                 <h1 class="form-title">Add New Task</h1>
             </div>
-            
+
             <div class="error-container">
                 <c:if test="${requestScope.error != null}">
                     <p class="error-message">${requestScope.error}</p>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="taskDescription">Task Description</label>
                     <textarea id="taskDescription" name="taskDescription" placeholder="Describe the task"
-                        required></textarea>
+                              required></textarea>
                 </div>
 
 
@@ -49,23 +49,24 @@
                     <input id="dueDate" name="dueDate" type="date" required />
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
-                            let dobInput = document.getElementById("dob");
-                            let dobError = document.getElementById("dobError");
+                            let dueDateInput = document.getElementById("dueDate");
+                            let dueDateError = document.getElementById("dueDateError");
 
-                            let minDate = new Date("1990-01-01");
-                            let maxDate = new Date();
+                            let today = new Date();
+                            today.setHours(0, 0, 0, 0); 
+                            let minDate = today.toISOString().split("T")[0];
 
-                            dobInput.setAttribute("min", minDate.toISOString().split("T")[0]);
-                            dobInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
+                            dueDateInput.setAttribute("min", minDate);
 
-                            dobInput.addEventListener("change", function () {
-                                let dobValue = new Date(this.value);
+                            dueDateInput.addEventListener("change", function () {
+                                let selectedDate = new Date(this.value);
+                                selectedDate.setHours(0, 0, 0, 0); 
 
-                                if (dobValue < minDate || dobValue > maxDate || isNaN(dobValue.getTime())) {
-                                    dobError.textContent = "Invalid date.";
+                                if (selectedDate < today || isNaN(selectedDate.getTime())) {
+                                    dueDateError.textContent = "Please select today or a future date.";
                                     this.value = "";
                                 } else {
-                                    dobError.textContent = "";
+                                    dueDateError.textContent = "";
                                 }
                             });
                         });
@@ -76,4 +77,4 @@
         </div>
     </body>
 
-    </html>
+</html>
