@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlet;
+package Servlet.Task;
 
 import DAO.TaskDAO;
 import DTO.TaskDTO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TaskMemberServlet extends HttpServlet {
 
-    private String TASK = "Task/task-member.jsp";
+    private final String TASK = "Task/task-member.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,10 +37,7 @@ public class TaskMemberServlet extends HttpServlet {
             req.setAttribute("projectName", projectName);
             req.setAttribute("tasks", tasks);
 
-        } catch (SQLException ex) {
-            req.setAttribute("error", ex.getMessage());
-            Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             req.setAttribute("error", ex.getMessage());
             Logger.getLogger(TaskMemberServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,7 +58,8 @@ public class TaskMemberServlet extends HttpServlet {
                 status = "Done";
             }
 
-            LocalDateTime updateAt = LocalDateTime.now();
+            LocalDateTime dateTime = LocalDateTime.now();
+            Timestamp updateAt = Timestamp.valueOf(dateTime);
             TaskDAO dao = TaskDAO.getInstance();
             dao.updateStatus(new TaskDTO(id, null, null, 0, null, status, null, updateAt, null, link));
 

@@ -9,7 +9,8 @@ import DAO.ProjectDAO;
 import DTO.ProjectDTO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -61,8 +62,9 @@ public class EditProject extends HttpServlet {
             String accountId = req.getParameter("accountId");
             int createBy = Integer.parseInt(accountId);
             String creatAtString = req.getParameter("createAt");
-            LocalDate createAt = LocalDate.parse(creatAtString);
-            LocalDate updateAt = LocalDate.now();
+            Timestamp createAt = Timestamp.valueOf(creatAtString);
+            LocalDateTime dateTime = LocalDateTime.now();
+            Timestamp updateAt = Timestamp.valueOf(dateTime);
             String projectStatus = req.getParameter("status");
 
             int result = projectDAO.updateProject(new ProjectDTO(projectId, projectName, projectDescription, createBy, createAt, updateAt, projectStatus));

@@ -5,7 +5,7 @@
  */
 package DTO;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 /**
  *
@@ -16,14 +16,14 @@ public class ProjectDTO {
     private String projectName;
     private String projectDescription;
     private int createBy;
-    private LocalDate createAt;
-    private LocalDate updateAt;
+    private Timestamp createAt;
+    private Timestamp updateAt;
     private String projectStatus;
     
     public ProjectDTO() {  
     }
     
-    public ProjectDTO(int projectId, String projectName, String projectDescription, int createBy,LocalDate createAt, LocalDate updateAt, String projectStatus) {
+    public ProjectDTO(int projectId, String projectName, String projectDescription, int createBy, Timestamp createAt, Timestamp updateAt, String projectStatus) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectDescription = projectDescription;
@@ -33,7 +33,7 @@ public class ProjectDTO {
         this.projectStatus = projectStatus;
     }
     
-    public ProjectDTO(String projectName, String projectDescription, int createBy, LocalDate createAt, LocalDate updateAt, String projectStatus) {
+    public ProjectDTO(String projectName, String projectDescription, int createBy, Timestamp createAt, Timestamp updateAt, String projectStatus) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.createBy = createBy;
@@ -42,7 +42,7 @@ public class ProjectDTO {
         this.projectStatus = projectStatus;
     }
     
-    public ProjectDTO(int projectId, String projectName, LocalDate updateAt, String projectStatus) {
+    public ProjectDTO(int projectId, String projectName, Timestamp updateAt, String projectStatus) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.updateAt = updateAt;
@@ -80,19 +80,19 @@ public class ProjectDTO {
         this.createBy = createBy;
     }
     
-    public LocalDate getCreateAt() {
+    public Timestamp getCreateAt() {
         return createAt;
     }
     
-    public void setCreateAt(LocalDate createAt) {
+    public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
     
-    public LocalDate getUpdateAt() {
+    public Timestamp getUpdateAt() {
         return updateAt;
     }
     
-    public void setUpdateAt(LocalDate updateAt) {
+    public void setUpdateAt(Timestamp updateAt) {
         this.updateAt = updateAt;
     }
     
