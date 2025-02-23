@@ -162,6 +162,109 @@ public class TaskDAO {
                 throw new TaskException("No task was updated !!");
             }
         }
-
     }
+
+    public List<TaskDTO> sortByDate(int projectID) throws SQLException, SQLException, ClassNotFoundException {
+        List<TaskDTO> tasks = new ArrayList<>();
+        Connection connect = Connect.getConnect();
+        PreparedStatement ps = connect.prepareStatement("SELECT \n"
+                + "    t.*, \n"
+                + "    a.username AS assigned_username\n"
+                + "FROM \n"
+                + "    task t\n"
+                + "JOIN \n"
+                + "    account a \n"
+                + "ON \n"
+                + "    t.assigned_to = a.account_id "
+                + "WHERE project_id = ? "
+                + "ORDER BY due_date ASC;");
+        ps.setInt(1, projectID);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            TaskDTO t = new TaskDTO(rs.getInt("task_id"),
+                    rs.getString("task_name"),
+                    rs.getString("task_description"),
+                    rs.getInt("project_id"),
+                    rs.getString("assigned_username"),
+                    rs.getString("task_status"),
+                    rs.getTimestamp("create_at"),
+                    rs.getTimestamp("update_at"),
+                    rs.getTimestamp("due_date") != null ? rs.getTimestamp("due_date") : null,
+                    rs.getString("link_submission"));
+            tasks.add(t);
+        }
+        return tasks;
+    }
+
+    public List<TaskDTO> sortByStatus(int projectID) throws SQLException, SQLException, ClassNotFoundException {
+        List<TaskDTO> tasks = new ArrayList<>();
+        Connection connect = Connect.getConnect();
+        PreparedStatement ps = connect.prepareStatement("SELECT \n"
+                + "    t.*, \n"
+                + "    a.username AS assigned_username\n"
+                + "FROM \n"
+                + "    task t\n"
+                + "JOIN \n"
+                + "    account a \n"
+                + "ON \n"
+                + "    t.assigned_to = a.account_id "
+                + "WHERE project_id = ? "
+                + "ORDER BY \n"
+                + "    CASE \n"
+                + "        WHEN task_status = 'Completed' THEN 1\n"
+                + "        WHEN task_status = 'In Progress' THEN 2\n"
+                + "        ELSE 3\n"
+                + "    END");
+        ps.setInt(1, projectID);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            TaskDTO t = new TaskDTO(rs.getInt("task_id"),
+                    rs.getString("task_name"),
+                    rs.getString("task_description"),
+                    rs.getInt("project_id"),
+                    rs.getString("assigned_username"),
+                    rs.getString("task_status"),
+                    rs.getTimestamp("create_at"),
+                    rs.getTimestamp("update_at"),
+                    rs.getTimestamp("due_date") != null ? rs.getTimestamp("due_date") : null,
+                    rs.getString("link_submission"));
+            tasks.add(t);
+        }
+        return tasks;
+    }
+    
+    public List<TaskDTO> search(int projectID, String userSearch) throws SQLException, SQLException, ClassNotFoundException {
+        List<TaskDTO> tasks = new ArrayList<>();
+        Connection connect = Connect.getConnect();
+        PreparedStatement ps = connect.prepareStatement("SELECT \n"
+                + "    t.*, \n"
+                + "    a.username AS assigned_username\n"
+                + "FROM \n"
+                + "    task t\n"
+                + "JOIN \n"
+                + "    account a \n"
+                + "ON \n"
+                + "    t.assigned_to = a.account_id "
+                + "WHERE project_id = ? "
+                + "AND (task_name LIKE ? OR task_description LIKE ?)");
+        ps.setInt(1, projectID);
+        ps.setString(2, "%" + userSearch + "%");
+        ps.setString(3, "%" + userSearch + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            TaskDTO t = new TaskDTO(rs.getInt("task_id"),
+                    rs.getString("task_name"),
+                    rs.getString("task_description"),
+                    rs.getInt("project_id"),
+                    rs.getString("assigned_username"),
+                    rs.getString("task_status"),
+                    rs.getTimestamp("create_at"),
+                    rs.getTimestamp("update_at"),
+                    rs.getTimestamp("due_date") != null ? rs.getTimestamp("due_date") : null,
+                    rs.getString("link_submission"));
+            tasks.add(t);
+        }
+        return tasks;
+    }
+
 }

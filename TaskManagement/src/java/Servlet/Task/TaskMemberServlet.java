@@ -34,6 +34,21 @@ public class TaskMemberServlet extends HttpServlet {
             TaskDAO dao = TaskDAO.getInstance();
             List<TaskDTO> tasks = dao.getTask(projectId);
             String projectName = dao.getProjectName(projectId);
+
+            String userSearch = req.getParameter("search");
+            if (userSearch != null) {
+                tasks = dao.search(projectId, userSearch);
+            }
+
+            String sort = (String) req.getParameter("sort");
+            if (sort != null) {
+                if (sort.equals("date")) {
+                    tasks = dao.sortByDate(projectId);
+                } else if (sort.equals("status")) {
+                    tasks = dao.sortByStatus(projectId);
+                }
+            }
+
             req.setAttribute("projectName", projectName);
             req.setAttribute("tasks", tasks);
 
