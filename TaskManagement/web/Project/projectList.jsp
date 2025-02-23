@@ -4,6 +4,7 @@
     Author     : Huynh Han Dong
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +52,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                         <p><strong>Status: </strong>${project.projectStatus}</p>
-                                        <p><strong>Last Update: </strong>${project.updateAt}</p>
+                                        <p><strong>Last Update: </strong><fmt:formatDate value="${project.updateAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p></p>
                                     </div>
 
                                     <!-- Info Button -->

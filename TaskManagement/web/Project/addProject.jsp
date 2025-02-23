@@ -22,17 +22,21 @@
             <h2>Add Project</h2>
             <form action="add-project" method="post">
                 <div class="info">
-                    <div class="label-container">
-                        <label><strong>Project name:</strong></label>
-                        <input type="text" class="input-field" name="projectName" required placeholder="Enter project name"><br>
-                    </div>
-                    <div class="label-container">
-                        <label><strong>Description:</strong></label>
-                        <textarea class="input-field" name="description" placeholder="Write some description"></textarea><br>
-                        </div>
+                    <label><strong>Project name</strong></label>
+                </div>
+                <div class="info">
+                    <input type="text" class="input-field" name="projectName" required placeholder="Enter project name"><br>
+                </div>
+                <div class="info">
+                   <label><strong>Description</strong></label>
+                </div>
+                <div class="info">
+                    <textarea class="input-field" name="description" placeholder="Write some description"></textarea><br>
                 </div>
                 <input type="hidden" name="createBy" value="${sessionScope.id}">
-                <button type="submit">Create</button>
+                <div class="info">
+                <button class="save-button" type="submit">Create</button>
+                </div>
             </form>
         </div>
     </c:if>

@@ -12,10 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,9 +52,9 @@ public class TaskDAO {
                     rs.getInt("project_id"),
                     rs.getString("assigned_username"),
                     rs.getString("task_status"),
-                    rs.getTimestamp("create_at").toLocalDateTime(),
-                    rs.getTimestamp("update_at").toLocalDateTime(),
-                    rs.getDate("due_date") != null ? rs.getDate("due_date").toLocalDate() : null,
+                    rs.getTimestamp("create_at"),
+                    rs.getTimestamp("update_at"),
+                    rs.getTimestamp("due_date") != null ? rs.getTimestamp("due_date") : null,
                     rs.getString("link_submission"));
             tasks.add(t);
         }
@@ -86,9 +83,9 @@ public class TaskDAO {
                     rs.getInt("project_id"),
                     rs.getString("assigned_username"),
                     rs.getString("task_status"),
-                    rs.getTimestamp("create_at").toLocalDateTime(),
-                    rs.getTimestamp("update_at").toLocalDateTime(),
-                    rs.getDate("due_date") != null ? rs.getDate("due_date").toLocalDate() : null,
+                    rs.getTimestamp("create_at"),
+                    rs.getTimestamp("update_at"),
+                    rs.getTimestamp("due_date") != null ? rs.getTimestamp("due_date") : null,
                     rs.getString("link_submission"));
             return t;
         }
@@ -112,7 +109,7 @@ public class TaskDAO {
                 + "task_status = ?, update_at = ? WHERE task_id = ?");
         ps.setString(1, t.getLinkSubmission());
         ps.setString(2, t.getTaskStatus());
-        ps.setTimestamp(3, Timestamp.valueOf(t.getUpdateAt()));
+        ps.setTimestamp(3, t.getUpdateAt());
         ps.setInt(4, t.getTaskId());
         ps.execute();
     }
@@ -135,9 +132,9 @@ public class TaskDAO {
         ps.setInt(3, t.getProjectId());
         ps.setInt(4, assignedId);
         ps.setString(5, t.getTaskStatus());
-        ps.setTimestamp(6, Timestamp.valueOf(t.getCreateAt()));
-        ps.setTimestamp(7, Timestamp.valueOf(t.getUpdateAt()));
-        ps.setDate(8, java.sql.Date.valueOf(t.getDueDate()));
+        ps.setTimestamp(6, t.getCreateAt());
+        ps.setTimestamp(7, t.getUpdateAt());
+        ps.setTimestamp(8, t.getDueDate());
         ps.setString(9, t.getLinkSubmission());
         ps.execute();
     }
@@ -156,8 +153,8 @@ public class TaskDAO {
             ps.setString(1, t.getTaskName());
             ps.setString(2, t.getTaskDescription());
             ps.setInt(3, assignedId);
-            ps.setTimestamp(4, Timestamp.valueOf(t.getUpdateAt()));
-            ps.setDate(5, java.sql.Date.valueOf(t.getDueDate()));
+            ps.setTimestamp(4, t.getUpdateAt());
+            ps.setTimestamp(5, t.getDueDate());
             ps.setInt(6, t.getTaskId());
 
             int row = ps.executeUpdate();
@@ -167,6 +164,4 @@ public class TaskDAO {
         }
 
     }
-
-    //getAccount 
 }

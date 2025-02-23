@@ -6,6 +6,7 @@
 package Servlet.Project;
 
 import DAO.ProjectDAO;
+import DAO.ProjectMemberDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -26,16 +27,38 @@ public class DeleteProject extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            String id = req.getParameter("projectId");
-            int projectId = Integer.parseInt(id);
-
-            ProjectDAO projectDAO = new ProjectDAO();
-            int result = projectDAO.deleteProject(projectId);
-            if (result == 0) {
-                req.setAttribute("error", "Cannot delete project!");
-                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
-            } else {
-                resp.sendRedirect("project");
+            String projectRaw = req.getParameter("projectId");
+            int projectId = Integer.parseInt(projectRaw);
+            
+            ProjectMemberDAO memberDAO = new ProjectMemberDAO();
+            int count = memberDAO.countProjectMember(projectId);
+            switch (count) {
+                case 0:
+                    req.setAttribute("error", "Cannot count project member!");
+                    req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
+                    break;
+                case 1:
+                    String accountRaw = req.getParameter("accountId");
+                    int accountId = Integer.parseInt(accountRaw);
+                    int isOk = memberDAO.deleteMember(accountId, projectId);
+                    if (isOk > 0) {
+                        ProjectDAO projectDAO = new ProjectDAO();
+                        int result = projectDAO.deleteProject(projectId);
+                        if (result > 0) {
+                            resp.sendRedirect("project");
+                        } else {
+                            req.setAttribute("error", "Cannot delete this project!");
+                            req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
+                        }
+                    } else {
+                        req.setAttribute("error", "Cannot delete manager from this project!");
+                        req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
+                    }
+                    break;
+                default:
+                    req.setAttribute("error", "Cannot delete project! There are other members in this project.");
+                    req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
+                    break;
             }
         } catch (SQLException | ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());

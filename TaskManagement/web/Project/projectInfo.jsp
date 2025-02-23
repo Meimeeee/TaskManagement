@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,12 +24,12 @@
                 <!-- Show Project Info -->
                 <div class="project-info">
                     <h2>About Project</h2>
-                    <p><strong>Project name: </strong><c:out value="${project.projectName}"/></p>
-                    <p><strong>Description: </strong><c:out value="${project.projectDescription}"/></p>
-                    <p><strong>Status: </strong><c:out value="${project.projectStatus}"/></p>
-                    <p><strong>Create by: </strong><c:out value="${createdBy}"/></p>
-                    <p><strong>Create At: </strong><c:out value="${project.createAt}"/></p>
-                    <p><strong>Update at: </strong><c:out value="${project.updateAt}"/></p>
+                    <p><strong>Project name: </strong>${project.projectName}</p>
+                    <p><strong>Description: </strong>${project.projectDescription}</p>
+                    <p><strong>Status: </strong>${project.projectStatus}</p>
+                    <p><strong>Create by: </strong>${createdBy}</p>
+                    <p><strong>Create At: </strong><fmt:formatDate value="${project.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+                    <p><strong>Update at: </strong><fmt:formatDate value="${project.updateAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
 
                     <!-- Show Edit Button -->
                     <c:if test="${sessionScope.role == 'manager'}"> 
@@ -54,7 +55,7 @@
                                 <!-- Show Delete Member Button -->
                                 <c:if test="${sessionScope.role == 'manager'}"> 
                                     <c:if test="${member.role == 'member'}"> 
-                                        <form action="delete-member" method="POST">
+                                        <form action="delete-member" method="POST" onsubmit="return confirm('Are you sure you want to delete this member?');">
                                             <input type="hidden" name="projectId" value="${project.projectId}">
                                             <input type="hidden" name="accountId" value="${member.accountId}">
                                             <input type="hidden" name="role" value="manager">
@@ -94,8 +95,9 @@
                             <p>${error}</p>
                         </c:if>
                         <div class="delete-project-container">
-                            <form action="delete-project" method="POST">
+                            <form action="delete-project" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?');">
                                 <input type="hidden" name="projectId" value="${project.projectId}">
+                                <input type="hidden" name="accountId" value="${sessionScope.id}">
                                 <button class="delete-project-button" type="submit">Delete Project</button>
                             </form>
                         </div>
@@ -107,7 +109,7 @@
                         <p>${error}</p>
                     </c:if>
                     <div class="delete-project-container">
-                        <form action="delete-member" method="POST">
+                        <form action="delete-member" method="POST" onsubmit="return confirm('Are you sure you want to leave this project?');">
                             <input type="hidden" name="projectId" value="${project.projectId}">
                             <input type="hidden" name="accountId" value="${sessionScope.id}">
                             <input type="hidden" name="role" value="member">
