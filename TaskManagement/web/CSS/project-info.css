@@ -86,4 +86,9 @@ button {
     margin: auto;
     border: none;
 }
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
 

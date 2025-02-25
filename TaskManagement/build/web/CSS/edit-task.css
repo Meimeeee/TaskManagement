@@ -21,7 +21,7 @@ body {
 /* Title Styling */
 .title-comtainer {
     text-align: center;
-    background-color: #56a358e7;
+    background-color: #3da342ea;
     padding: 15px;
     border-radius: 10px 10px 0 0;
 }
@@ -69,19 +69,16 @@ select:focus {
 }
 
 .go-back-button {
-    background-color: #93b6939d;
-    color: #435f4f;
-    border: 2px solid #3a5c3aa2;
-    transition: background-color 0.3 ease, transform 0.2s ease;
+    background-color:#ffffff;
+    padding: 8px 15px; 
+    font-size: 16px; 
+    border-radius: 5px; 
+    cursor: pointer;
+    color: black;
+    border: 2px solid black;
     position: absolute;
     top: 30px;
     left: 30px;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    white-space: nowrap;
-    font-weight: bold;
 }
 
 .go-back-button:hover {
@@ -91,7 +88,7 @@ select:focus {
 /* Submit Button */
 .btn-submit {
     width: 100%;
-    background-color: #56a358e7;
+    background-color: #3da342ea;
     color: white;
     padding: 12px;
     border: none;
@@ -103,7 +100,7 @@ select:focus {
 }
 
 .btn-submit:hover {
-    background-color: #2e6b31;
+    background-color: #6ab374;
     transform: scale(1.02);
 }
 
