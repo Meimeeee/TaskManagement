@@ -44,16 +44,15 @@ public class AddMember extends HttpServlet {
                             resp.sendRedirect("project-info?projectId=" + projectId);
                             return;
                         } else {
-                            req.setAttribute("error", "Cannot add member to project!");
+                            session.setAttribute("addError", "Cannot add member to project!");
                         }
                     } else {
-                        req.setAttribute("error", "This account is already a member of this project!");
+                        session.setAttribute("addError", "This account is already a member of this project!");
                     }
                 } else {
-                    req.setAttribute("error", "Account not found!");
+                    session.setAttribute("addError", "Account not found!");
                 }
-                req.setAttribute("projectId", projectId);
-                req.getRequestDispatcher("Project/projectInfo.jsp").forward(req, resp);
+                resp.sendRedirect("project-info?projectId=" + projectId);
             } else {
                 resp.sendRedirect("login-servlet");
             }

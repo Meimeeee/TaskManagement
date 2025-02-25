@@ -73,10 +73,11 @@
 
                     <!--Add Member FORM-->
                     <c:if test="${sessionScope.role == 'manager'}"> 
+                    <c:if test="${not empty sessionScope.addError}">
+                        <p class="error-message">${sessionScope.addError}</p>
+                        <c:remove var="addError" scope="session"/>
+                    </c:if>
                     <div class="add-member-form">
-                        <c:if test="${not empty error}">
-                            <p>${error}</p>
-                        </c:if>
                         <form action="add-member" method="post">
                             <label>Username: </label>
                             <input type="text" class="input-field" name="username" required placeholder="Enter username">
@@ -91,8 +92,9 @@
                     <c:when test="${sessionScope.role == 'manager'}">
 
                         <!-- Show Delete Project Button -->
-                        <c:if test="${not empty error}">
-                            <p>${error}</p>
+                        <c:if test="${not empty sessionScope.deleteError}">
+                            <p class="error-message">${sessionScope.deleteError}</p>
+                            <c:remove var="deleteError" scope="session"/>
                         </c:if>
                         <div class="delete-project-container">
                             <form action="delete-project" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?');">
@@ -105,9 +107,6 @@
                     <c:otherwise>
 
                     <!-- Show Leave Project Button -->
-                    <c:if test="${not empty error}">
-                        <p>${error}</p>
-                    </c:if>
                     <div class="delete-project-container">
                         <form action="delete-member" method="POST" onsubmit="return confirm('Are you sure you want to leave this project?');">
                             <input type="hidden" name="projectId" value="${project.projectId}">
