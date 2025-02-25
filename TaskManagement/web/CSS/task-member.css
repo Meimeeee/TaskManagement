@@ -5,16 +5,12 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.842);
+    background: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 2px solid #a3d9a5;
     max-width: 600px;
     margin: auto;
-}
-
-.add-task-button {
-    text-align: right;
-    margin: 12px;
 }
 
 h1 {
@@ -44,14 +40,14 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #c2e6c7;
+    background-color: #3da342ea;
 }
 
 .task-id,
 .task-name {
     font-size: 16px;
     font-weight: bold;
-    color: #488350e3;
+    color: white;
 }
 
 .accordion-content {
@@ -81,7 +77,6 @@ input[type="url"] {
     border-radius: 5px;
     font-size: 14px;
     margin-bottom: 10px;
-}
 }
 
 button.button-submit {
@@ -116,30 +111,19 @@ button {
 }
 
 button:hover {
-    background-color: #368d3aea;
+    background-color: #6ab374;
     box-shadow: #ffffff;
     cursor: pointer;
 }
 
 .go-back-button {
-    background-color: #ffffff00;
-    color: #5ea55e;
-    border: 1px solid #65b365;
-    transition: background-color 0.3 ease, transform 0.2s ease;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 14px;
+    background-color:#ffffff;
+    padding: 8px 15px; 
+    font-size: 16px; 
+    border-radius: 5px; 
     cursor: pointer;
-    white-space: nowrap;
-    font-weight: bold;
-}
-
-.go-back-button:hover {
-    background-color: #478f50;
-    color: #ffffff;
+    color: black;
+    border: 2px solid black;
 }
 
 search-container {

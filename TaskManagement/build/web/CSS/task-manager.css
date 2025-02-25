@@ -5,9 +5,10 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.842);
+    background: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 2px solid #a3d9a5;
     max-width: 600px;
     margin: auto;
 }
@@ -15,7 +16,6 @@ body {
 .add-task-button {
     text-align: right;
     margin: 12px;
-
 }
 
 h1 {
@@ -37,7 +37,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #c2e6c7c5;
+    background-color: #3da342ea;
 }
 .task-header {
     border-radius: 8px;
@@ -51,7 +51,7 @@ h1 {
 .task-name {
     font-size: 16px;
     font-weight: bold;
-    color: #488350e3;
+    color: white;
 }
 
 .accordion-content {
@@ -68,10 +68,9 @@ h1 {
     display: block;
 }
 
-button.button-submit {
+.button-submit {
     padding: 8px 16px;
     margin-top: 4px;
-    background-color: #6ab374;
     color: white;
     border: none;
     border-radius: 4px;
@@ -79,8 +78,7 @@ button.button-submit {
 }
 
 .button-submit:hover {
-    background-color: #37858f;
-    cursor: pointer;
+    background-color: #6ab374;
 }
 
 p {
@@ -99,7 +97,7 @@ button {
 }
 
 button:hover {
-    background-color: #368d3aea;
+    background-color: #6ab374;
     box-shadow: #ffffff;
     cursor: pointer;
 }
@@ -128,8 +126,8 @@ button:hover {
 
 .btn-edit {
     padding: 8px 20px !important;
-    background-color: #3da342ea;
-    color: rgb(253, 253, 253);
+    background-color: #0033cc;
+    color: white;
 }
 
 .btn-edit:hover {
@@ -138,7 +136,7 @@ button:hover {
 
 .btn-delete {
     padding: 8px 20px !important;
-    background-color: #3da342ea;
+    background-color: red;
     color: white;
 }
 
@@ -155,28 +153,17 @@ button:hover {
 }
 
 .add-button:hover {
-    background-color: #368d3aea;
+    background-color: #6ab374;
 }
 
 .go-back-button {
-    background-color: #ffffff00;
-    color: #5ea55e;
-    border: 1px solid #65b365;
-    transition: background-color 0.3 ease, transform 0.2s ease;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 14px;
+    background-color:#ffffff;
+    padding: 8px 15px; 
+    font-size: 16px; 
+    border-radius: 5px; 
     cursor: pointer;
-    white-space: nowrap;
-    font-weight: bold;
-}
-
-.go-back-button:hover {
-    background-color: #478f50;
-    color: #ffffff;
+    color: black;
+    border: 2px solid black;
 }
 
 search-container {
