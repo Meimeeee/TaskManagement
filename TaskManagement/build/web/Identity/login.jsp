@@ -39,7 +39,7 @@
             </form>
 
             <div class="signup-link">
-                <p>Do you have an account? <a href="Identity/signup.jsp">Sign up here</a></p>
+                <p>Do you have an account? <a href="${pageContext.request.contextPath}/Identity/signup.jsp">Sign up here</a></p>
             </div>
         </div>
 
