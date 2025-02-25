@@ -45,15 +45,15 @@ public class TaskManagerServlet extends HttpServlet {
 
             String userSearch = req.getParameter("search");
             if (userSearch != null) {
-                tasks = dao.search(projectId, userSearch);
+                tasks = taskDao.search(projectId, userSearch);
             }
 
             String sort = (String) req.getParameter("sort");
             if (sort != null) {
                 if (sort.equals("date")) {
-                    tasks = dao.sortByDate(projectId);
+                    tasks = taskDao.sortByDate(projectId);
                 } else if (sort.equals("status")) {
-                    tasks = dao.sortByStatus(projectId);
+                    tasks = taskDao.sortByStatus(projectId);
                 }
             }
 

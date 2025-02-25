@@ -19,6 +19,22 @@
         <c:if test="${requestScope.error != null}">
             <p style="color: #cc0000"> ${requestScope.error} </p>
         </c:if>
+
+        <form method="get" class="sort-container">
+            <input type="hidden" name="projectId" value="${param.projectId}" />
+            <select id="sortInput" name="sort">
+                <option value="date">Sort By Date</option>
+                <option value="status">Sort By Status</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+
+        <form method="get" class="search-container">
+            <input type="hidden" name="projectId" value="${param.projectId}" />
+            <input id="searchInput" type="text" name="search" placeholder="Search" />
+            <button type="submit">Search</button>
+        </form>
+
         <div class="add-task-button">
             <form action="task-manager" method="get">
                 <input type="hidden" name="projectId" value="${param.projectId}">
@@ -53,10 +69,16 @@
                 <div class="accordion-content">
                     <p><strong>Description: </strong>${tasks.taskDescription}</p>
                     <p><strong>Status: </strong>${tasks.taskStatus}</p>
-                    <p><strong>Due Date: </strong><fmt:formatDate value="${tasks.dueDate}" pattern="yyyy-MM-dd"/></p>
+                    <p><strong>Due Date: </strong>
+                        <fmt:formatDate value="${tasks.dueDate}" pattern="yyyy-MM-dd" />
+                    </p>
                     <p><strong>Assigned Members: </strong>${tasks.assignedTo}</p>
-                    <p><strong>Create At: </strong><fmt:formatDate value="${tasks.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-                    <p><strong>Update At: </strong><fmt:formatDate value="${tasks.updateAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+                    <p><strong>Create At: </strong>
+                        <fmt:formatDate value="${tasks.createAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+                    </p>
+                    <p><strong>Update At: </strong>
+                        <fmt:formatDate value="${tasks.updateAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+                    </p>
                     <p><strong>Link Submission: </strong> ${tasks.linkSubmission}</p>
                     <div class="task-actions">
                         <c:choose>
@@ -66,7 +88,7 @@
                                     Submission</button>
                             </c:when>
                             <c:otherwise>
-                                <button disabled style="cursor: not-allowed; background-color: #999999;">No
+                                <button disabled style="cursor: not-allowed; background-color: #b4b4b4;">No
                                     Submission</button>
                             </c:otherwise>
                         </c:choose>

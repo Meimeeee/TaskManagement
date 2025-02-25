@@ -1,14 +1,13 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #d8f8e144;
+    background-color: #d4f7d4;
     padding: 20px;
 }
 
 .container {
-    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.842);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(63, 117, 87, 0.842);
     max-width: 600px;
     margin: auto;
 }
@@ -21,7 +20,7 @@ body {
 h1 {
     font-size: 24px;
     text-align: center;
-    color: #0d5029e3;
+    color: #488350e3;
 }
 
 .accordion {
@@ -40,19 +39,19 @@ h1 {
 }
 
 .accordion-label {
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #57bb81c0;
+    background-color: #c2e6c7;
 }
 
 .task-id,
 .task-name {
     font-size: 16px;
     font-weight: bold;
-    color: #2c5035;
+    color: #488350e3;
 }
 
 .accordion-content {
@@ -72,18 +71,23 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
+    display: block;
 }
 
 input[type="url"] {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #4ab34a;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
 }
 
 button.button-submit {
     padding: 8px 16px;
-    background-color: #467fb4;
+    margin-top: 4px;
+    background-color: #6ab374;
     color: white;
     border: none;
     border-radius: 4px;
@@ -91,26 +95,20 @@ button.button-submit {
 }
 
 .button-submit:hover {
-    background-color: #06545e;
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #37858f;
     cursor: pointer;
-    opacity: 0.8;
 }
 
-button:disabled {
-    background-color: #999;
-    cursor: not-allowed;
-}
 
 p {
     margin: 5px 0;
+    margin-bottom: 10px;
     font-size: 14px;
 }
 
 button {
-    padding: 8px 16px;
-    background-color: #3c9654ea;
+    padding: 10px 16px;
+    background-color: #3da342ea;
     color: white;
     border: none;
     border-radius: 4px;
@@ -118,17 +116,15 @@ button {
 }
 
 button:hover {
-    background-color: #0c4e1cd3;
-    transform: scale(1.1);
+    background-color: #368d3aea;
     box-shadow: #ffffff;
     cursor: pointer;
-    opacity: 0.8;
 }
 
 .go-back-button {
-    background-color: #93b6939d;
-    color: #435f4f;
-    border: 2px solid #3a5c3aa2;
+    background-color: #ffffff00;
+    color: #5ea55e;
+    border: 1px solid #65b365;
     transition: background-color 0.3 ease, transform 0.2s ease;
     position: absolute;
     top: 30px;
@@ -142,5 +138,38 @@ button:hover {
 }
 
 .go-back-button:hover {
-    background-color: #3d7041a9;
+    background-color: #478f50;
+    color: #ffffff;
+}
+
+search-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-container input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #4ab34a;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    
+}
+
+.sort-container {
+    margin-top: 15px;
+    display: block;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.sort-container select {
+    padding: 8px;
+    border: 1px solid #4ab34a;
+    border-radius: 5px;
+    font-size: 14px;
 }
